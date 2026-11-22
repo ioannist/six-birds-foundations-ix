@@ -1,0 +1,178 @@
+\section{Audited Markov instruments and lawful edits}\label{sec:model}
+
+\subsection{The native transition law}
+
+Fix nonempty finite sets \(M,X,R\) of marks, base states and register cells.
+The source state is \((g,u)\in X\times R\). Fix a finite family
+\(\chi_i:X\to\{-1,1\}\), indexed by \(I\), with
+\[
+ \sum_{g\in X}\chi_i(g)=0,\qquad
+ \sum_{g\in X}\chi_i(g)\chi_j(g)=|X|\,\mathbf 1_{i=j}.
+\]
+The nontrivial characters of a finite binary abelian group give examples,
+and the proof uses only the displayed identities. Fix a mark reversal
+\(m\mapsto\bar m\) of order at most two and a full-support rational
+register law \(\nu\). A law consists of rational mark rates \(\theta_m\),
+responses \(\alpha_{mi}\), and conditional register tables \(L_m(g,h;u,v)\).
+Fix rational \(\delta>0\) and \(0\leq\kappa<1\).
+Require
+\begin{equation}\label{eq:guards}
+ \theta_m\ge\delta,\quad \sum_m\theta_m=1,\qquad
+ \sum_i|\alpha_{mi}|\le\kappa,\quad
+ \alpha_{\bar m,i}=\alpha_{mi}.
+\end{equation}
+Write
+\begin{equation}\label{eq:native}
+ Q_m(g,h)=\frac{1+\sum_i\alpha_{mi}\chi_i(g)\chi_i(h)}{|X|},
+ \qquad
+ P_m((g,u),(h,v))=\theta_m Q_m(g,h)L_m(g,h;u,v).
+\end{equation}
+The tables \(L_m(g,h)\) have nonnegative entries, unit row sums and
+stationary margin \(\nu\). Their reciprocal pairing is
+\[
+ \nu(u)L_m(g,h;u,v)=\nu(v)L_{\bar m}(h,g;v,u).
+\]
+There is one such table for each \(m,g,h\), so the register dynamics may
+depend on the base transition.
+
+The positive uniform term in \(Q_m\) has a probabilistic implementation.
+Refresh the base uniformly with probability \(1-\sum_i|\alpha_{mi}|\).
+With probability \(|\alpha_{mi}|\), choose a uniform endpoint with
+\(\chi_i(h)=\sgn(\alpha_{mi})\chi_i(g)\), omitting zero-weight choices.
+Balance gives exactly \eqref{eq:native}. In particular
+\(Q_m(g,h)\ge(1-\kappa)/|X|>0\).
+The unmarked kernel obtained by summing the marked entries is stationary
+under \(\mu(g,u)=\nu(u)/|X|\). Indeed the conditional stationary margins
+sum out the incoming register, after which the symmetric base kernel
+preserves the uniform base law. The reciprocal identity is
+\[
+ \mu(g,u)P_m((g,u),(h,v))\,\theta_{\bar m}
+ =
+ \mu(h,v)P_{\bar m}((h,v),(g,u))\,\theta_m .
+\]
+This fixes the marked reversal relation even when the rates of reversed marks
+differ.
+
+\subsection{Held tests and their compiled equations}\label{sec:tests}
+
+A timed word \(w\) is a nonempty finite sequence of marks of length at most
+a fixed horizon. Let \(n_m(w)\) be the multiplicity of \(m\) in \(w\).
+Its probability from a prepared state is
+\(\pi_\theta(w)=\prod_m\theta_m^{n_m(w)}\).
+After summation over the final register, its measured probability with
+projected endpoint \(h\), from a preparation \((g,u)\), is
+\begin{equation}\label{eq:word-return}
+ \pi_\theta(w)\,(Q_{w_1}\cdots Q_{w_{|w|}})(g,h).
+\end{equation}
+This follows by iterative use of the register row sums. The base matrices
+share the uniform projection and the orthogonal rank-one projections onto
+the probes \(\chi_i\). Multiplying the base matrices multiplies the
+eigenvalue on each probe, giving
+\[
+ \lambda_i(w)=\prod_m\alpha_{mi}^{n_m(w)}.
+\]
+These coordinates determine the word matrix, since the uniform term is
+fixed and the other projections vanish on the orthogonal complement.
+
+A \emph{license} names a comparison of two timed words of equal length.
+The held comparison asks for equal word probabilities and equal conditional
+projected endpoint laws. By \eqref{eq:word-return} it is also equivalent
+to equality of the summed native word probabilities for all preparations
+and all projected endpoints. Summing over endpoints recovers each
+positive word mass, so the equality can be divided by that mass.
+A fixed policy on subsets of the finite license catalogue specifies which
+sets may be held.
+
+The distinction between current and continuation tests also arises in
+the study of predictive quotients for fixed-support route
+transport~\citep{routeholonomy}. Here the licenses require specified
+pairs of timed experiments to agree as the transition law changes.
+
+A \emph{publication} is a named query with a stated rational value
+that can be checked on the law. The catalogue consists of positive
+word-mass ratios for equal-duration pairs and calibrations of the
+form \(\alpha_{mi}=c\). For the latter, from any prepared native state
+\((g,u)\),
+\begin{equation}\label{eq:signal}
+ \chi_i(g)\sum_{h,v} P_m((g,u),(h,v))\chi_i(h)=\theta_m\alpha_{mi}.
+\end{equation}
+This is a signed measurement. Dividing by the observed mark mass verifies the
+calibration. Thus the held numerical tests on the rates are positive
+homogeneous monomial equations, since the two degrees in a word comparison
+equal the two lengths. The spectral tests are signed monomial equations on
+\(\alpha\). They include the reversal equalities in \eqref{eq:guards}.
+These two systems share the catalogue names and have separate numerical
+variables.
+
+\subsection{Capabilities and the edit relation}\label{sec:capabilities}
+
+A profile \(p=(S,F,\Lambda,\mathcal A)\) records the positive native
+proposal support \(S\), a schedule \(F=(F_0,\ldots,F_n)\) of partitions
+of \(R\), the held licenses \(\Lambda\), and the publications \(\mathcal A\).
+A decision at grade \(j\) is a function \(R\to\{0,1\}\) constant on the
+classes of \(F_j\). As grades advance, the partitions may only refine.
+For each available decision \(d\), require
+\begin{equation}\label{eq:decision-mass}
+ \sum_{v:\,d(v)=1} L_m(g,h;u,v)=\sum_{v:\,d(v)=1}\nu(v)
+ \qquad\text{for all }m,g,h,u .
+\end{equation}
+These conditional tests are measured from the prepared transition table
+because \(\theta_m Q_m(g,h)>0\). Equivalently it suffices to check
+the terminal partition. Its block masses add to the masses of every
+coarser disclosed block.
+
+A state \(A\) is a profile \(p_A\) with a law that passes its tests,
+has exactly its support, and respects the license policy. A profile is
+\emph{attained} when some lawful rational state has that profile.
+For profiles use the order
+\begin{equation}\label{eq:profile-order}
+ p\Refines q\quad\Longleftrightarrow\quad
+ S_q\subseteq S_p,\quad
+ F_j(q)\text{ refines }F_j(p)\text{ for all }j,\quad
+ \Lambda_p\subseteq\Lambda_q,\quad \mathcal A_p\subseteq\mathcal A_q .
+\end{equation}
+The support is observable as the positive entries of \(P\). The
+partitions are also observable from the available decisions.
+Two cells lie in the same class precisely when every available
+decision gives them the same value. Indicators of classes distinguish
+different classes.
+
+For a positive rational tolerance \(\varepsilon\), define elementary
+edits on lawful states without using role labels. At fixed profile,
+a local edit satisfies
+\[
+ \Norm{P_A-P_B}
+ =\max_{m,s,t}|P^A_m(s,t)-P^B_m(s,t)|<\varepsilon .
+\]
+The other edits follow a cover of the finite order of attained profiles.
+A cover is a strict increase with no attained profile strictly between
+its endpoints. If the support is unchanged, the prepared transition
+table stays fixed. If the support contracts, the projected marked
+probabilities \(\theta_m Q_m(g,h)\) stay fixed. The conditional register may
+change in that discrete edit. A chain means finite composition of
+elementary edits, including the empty chain. We write \(A\leadsto_\varepsilon B\)
+and call \(B\) \emph{factorable from \(A\)} if \(A\leadsto_\varepsilon B\)
+for every positive rational \(\varepsilon\).
+
+This definition keeps the numerical tolerance on the prepared law,
+where it can be tested directly. Every step is directed in the
+profile order, so an inherited license or publication remains held
+at each later state.
+
+\begin{theorem}[Audited Markov reachability]\label{thm:native}
+Fix an instrument as above and let \(A,B\) be lawful rational states. Let
+\(\SCore_{p_A}\) denote the signed core of \Cref{def:signed-core} for the
+spectral equations compiled from the initial profile \(p_A\), including
+the fixed reversal tests. Then
+\[
+ \bigl(\forall \varepsilon\in\QQ_{>0},\ A\leadsto_\varepsilon B\bigr)
+ \quad\Longleftrightarrow\quad
+ p_A\Refines p_B\quad\text{and}\quad
+ \SCore_{p_A}(\alpha_A)=\SCore_{p_A}(\alpha_B).
+\]
+The criterion can be recovered from the measured experiments.
+\end{theorem}
+
+The next section gives the signed-core construction and proves its
+rational completeness. Section~\ref{sec:native} proves the transfer
+to native laws and capability changes.

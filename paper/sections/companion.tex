@@ -1,0 +1,327 @@
+\section{Fixed-projection edits and finite-event tests}\label{sec:companion}
+
+This appendix gives three results about the choice of instrument and
+tests. With fixed projected kernels, a conformal normal form factors
+edits by conditional-flux circuits and prime-valuation moves. The
+held tests determine precisely which rate ratios and cycle affinities
+are invariant. Allowing finite-event comparisons gives a separate
+obstruction to fine reachability, even with a single native state.
+
+\subsection{A conformal normal form at fixed projection}
+
+Fix a finite native state space \(X\), a positive rational stationary
+distribution \(\mu\), a finite set \(M\) of marks with an involution
+\(m\mapsto\bar m\), and a surjection \(b:X\to B\) onto a finite set.
+For each mark fix a rational stochastic matrix \(Q_m\) on \(B\).
+A native law has positive rational rates \(\theta_m\) summing to one
+and rational conditional stochastic kernels \(K_m\) on \(X\). Its
+marked transition probabilities are \(P_m(x,y)=\theta_m K_m(x,y)\). Set
+\(C_m(x,y)=\mu(x)K_m(x,y)\) and require
+\begin{equation}\label{eq:fixed-flux}
+ C_{\bar m}=C_m^{\mathsf T},\qquad
+ \sum_{y:\,b(y)=v}C_m(x,y)=\mu(x)Q_m(b(x),v).
+\end{equation}
+The transpose condition makes both margins of every \(C_m\) equal to
+\(\mu\). A positive marked edge has stationary flux ratio
+\begin{equation}\label{eq:fixed-flux-ratio}
+ \frac{\mu(x)P_m(x,y)}{\mu(y)P_{\bar m}(y,x)}
+ =\frac{\theta_m}{\theta_{\bar m}}.
+\end{equation}
+The prepared marked rows recover \(\theta_m\) by summation and recover
+\(C_m\) by division and multiplication by \(\mu(x)\).
+
+A profile records the positive marked support, a nested schedule of
+partitions \(F_0,\ldots,F_T\) of \(X\) with fixed initial partition
+\(F_0\), a route license, and a set of citeable checks from a fixed
+finite catalogue. At step \(t\) the probability of each mark and next
+block of \(F_{t+1}\) must be constant on each current block of \(F_t\).
+Decisions at grade \(t\) are binary functions on the blocks of \(F_t\).
+The route license is a congruence on the monoid of mark words up to
+a fixed length, with an absorbing overflow element. An identified
+pair must have equal length, equal probability, and equal conditional
+projected endpoint laws. A live check specifies a positive rational
+ratio of probabilities of two words of equal length. Each law
+holding the check supplies an exact executed replay bound to that
+law. Historical checks refer to immutable source records.
+Profiles are attained if some lawful rational law
+realizes them. The order on attained profiles contracts support,
+refines partitions, and enlarges the congruence and check set.
+
+Let \(H_F\) be the subspace of \(L^2(\mu)\) of functions constant on
+the blocks of \(F\). The stepwise disclosure tests are equivalent to
+\begin{equation}\label{eq:fixed-terminal}
+ K_m H_{F_T}\subseteq H_{F_0}\qquad(m\in M).
+\end{equation}
+Indeed, the stepwise conditions are \(K_m H_{F_{t+1}}\subseteq H_{F_t}\).
+By nesting, \(H_{F_t}\) is invariant under every \(K_m\) for \(t<T\).
+Since \(K_m^*=K_{\bar m}\) by \eqref{eq:fixed-flux}, its orthogonal
+complement is also invariant. Hence \(K_m\) annihilates
+\(H_{F_{t+1}}\cap H_{F_t}^{\perp}\). Summing these orthogonal increments
+gives \eqref{eq:fixed-terminal}, which in turn implies each stepwise
+condition by nesting. The observed marked paths preserve the full
+stationary path-reversal likelihood ratio. The micro path ratio is
+the product of \eqref{eq:fixed-flux-ratio} over its marks, hence is
+constant on each observed path class. Summing over that class gives
+the same ratio against the reversed path with reversed observation
+schedule and marks.
+
+For a word \(w\) with count vector \(a(w)\), its probability from any
+preparation is \(\theta^{a(w)}\) and its conditional projected kernel
+is the product of the \(Q_m\) in word order. Equal summaries stay
+equal in common contexts by multiplication of probabilities and
+kernels, and equal lengths overflow together. Thus on an attained
+profile the nontrivial rate constraints from the licenses and live
+checks have the form
+\begin{equation}\label{eq:fixed-rate-rows}
+ \theta^{d_i}=c_i,\qquad
+ d_i\in\mathbb Z^M,\quad \sum_{m\in M}(d_i)_m=0,\quad c_i\in\QQ_{>0}.
+\end{equation}
+Write \(D\) for their exponent matrix. The conditional-flux tests
+are rational affine equations by \eqref{eq:fixed-flux} and
+\eqref{eq:fixed-terminal}, with positivity on the profile support
+and zero elsewhere. The law fiber therefore separates into
+conditional-flux and rate factors.
+
+An elementary capability edit is a cover of attained profiles.
+A support cover keeps the rates fixed, and the other covers keep
+the full law fixed. Numerical edits hold the profile fixed. For
+fluxes, irreducible numerical directions are circuits of the
+homogeneous equations on the fixed support, meaning nonzero
+directions of inclusion-minimal support, with collinear
+subdivisions counted as one direction. These are the flux changes
+that admit no noncollinear conformal splitting. For rates, use
+the additive coordinates
+\(v_p(\theta_m/\theta_n)\) for primes \(p\) and ordered pairs
+\((m,n)\), where \(v_p\) is the prime exponent of a positive
+rational. An irreducible rate change is supported at one prime and
+its difference cannot be split into two nonzero lawful differences
+conformal to it. A difference is conformal to another if each
+nonzero entry has the same sign and no greater magnitude.
+
+\begin{theorem}[Fixed-projection normal form]\label{thm:fixed-normal-form}
+Two lawful rational endpoints are connected by these edits exactly
+when their profiles are ordered in the direction of the edit.
+The capability covers each change a single capability. Disclosure
+covers split one block at one grade, route covers adjoin one pair
+and take congruence closure, and publication covers add one check.
+Together with the numerical changes, the effects are the six
+in \Cref{tab:effects}, distinguished by the same fields and clock
+grades. Test-preserving relabelings preserve the effect types and
+the elementary numerical directions. One coupled instrument has
+a pair whose connection requires all six effects.
+\end{theorem}
+
+\begin{proof}
+For a feasible support contraction from \(C\) to a retained mask
+\(N\), optimize over the closed polytope of conditional-flux tables
+\(Z\) satisfying the old affine tests and vanishing off \(N\).
+Maximize \(\eta\geq0\) with \(Z_e\geq\eta C_e\) for every \(e\in N\).
+A feasible table positive on \(N\) implies a positive optimum.
+The objective is bounded by \(|M|/\sum_{e\in N}C_e\), and a rational
+vertex attains it. On its optimal face minimize
+\(\sum_{e\in N}(Z_e-C_e)^2/C_e\). On the smallest face containing
+the minimizer, the affine equations of the face and the linear
+gradient conditions along its tangent space have rational
+coefficients. They determine the minimizer uniquely by strict
+convexity, hence it is rational. Its support is \(N\). Keeping the
+rates fixed preserves every old rate test.
+
+At a fixed profile let \(u\) be the target conditional-flux
+displacement. Choose a rational homogeneous direction \(v\ne0\)
+with signs compatible with \(u\), supported in \(\supp u\), and
+with inclusion-minimal support among such choices. If a nonzero
+homogeneous direction were supported on a proper subset of
+\(\supp v\), one could add a rational multiple in one of its two
+directions up to the first zero of \(v\), keeping the signs and
+leaving a nonzero result. This contradicts minimality. Thus \(v\)
+is a circuit. The direction space on its support is one-dimensional
+because two independent directions on that support would have a
+nonzero linear combination canceling a coordinate. Thus any
+conformal splitting of a circuit is collinear. Scale \(v\) by
+\(\min_{e\in\supp v}|u_e/v_e|\) and subtract that step from the
+residual \(u\). At least one more entry is at its target and every
+entry stays between its original and final values. The affine
+tests and positivity on the support are preserved. For a
+displacement of nonminimal support the first step is supported on
+a proper subset of \(\supp u\), giving a noncollinear splitting.
+Iteration terminates because the residual support strictly decreases.
+
+For the rate factor, a pair of lawful rate vectors
+\(\theta,\widehat\theta\) has
+\(z_p(m)=v_p(\widehat\theta_m/\theta_m)\) in \(\ker D\) at each prime,
+by unique factorization in \eqref{eq:fixed-rate-rows}. Only finitely
+many primes occur. The possible displacements at a prime are the
+integer lattice
+\[
+ \{(z_m-z_n)_{m,n\in M}:z\in\mathbb Z^M,\ Dz=0\}.
+\]
+Choose a nonzero lattice element of least \(\ell^1\)-norm among
+those conformal to the residual at that prime. It is irreducible,
+since any conformal splitting would give a smaller such element.
+Subtract and repeat until the integer norm is zero. The element
+with lift \(z\) is realized by
+\begin{equation}\label{eq:fixed-prime-move}
+ \theta'_m=\frac{\theta_m p^{z_m}}{\sum_{n\in M}\theta_n p^{z_n}}.
+\end{equation}
+Normalization cancels in the homogeneous tests and pairwise rate
+ratios. This jump changes only the prescribed prime
+in the ratio coordinates. Matching all pairwise ratios gives the
+target normalized rates.
+
+If the endpoint profiles are ordered, the target law also attains
+the profile with the target mask and the source's other fields.
+This follows from block summation in \eqref{eq:fixed-terminal} and
+inclusion of the held tests. Every support-changing cover therefore
+changes only the support. If the support agrees, the upper law
+attains each intermediate choice of nested partitions, congruence
+and checks between the two profiles. Thus a cover can change only
+one of those fields. Among different grades, advancing the latest
+differing one preserves nesting. Its blocks can be split one at a
+time into two unions of upper blocks, so a cover makes just one
+binary split. For a congruence cover, adjoining any new pair and
+taking its congruence closure stays below the upper congruence.
+The cover forces equality. A check cover adds one name.
+
+Take successive support covers first, preserving the earlier tests.
+Apply the circuit and prime decompositions on the final mask, then
+take the remaining capability covers at the final law. The attained
+order is finite and the numerical decompositions terminate. Every
+allowed step is monotone in the profile order, proving the converse.
+The readouts recover the masks, partitions, congruences, inventories,
+conditional fluxes and rate ratios used in these tests. Relabeling
+preserves the homogeneous spaces and support of flux differences,
+and permutes the pairwise rate coordinates, so it preserves the
+elementary numerical directions and capability effects. The example
+below supplies the joint lower bound.
+\end{proof}
+
+\paragraph{A coupled edit with a changing affinity.}
+Take \(B=\mathbb Z/4\) and \(X=B\times\{0,1,2,3\}\) with uniform
+\(\mu\). The marks \(+,-,c,h\) translate the base by \(1,-1,2,0\),
+respectively, with \(+\) and \(-\) reversed and the other marks
+self-reversing. Initially every conditional register table resets
+uniformly and the partitions at grades \(0,1,2\) are indiscrete.
+Use the length-two route horizon. Normalize the initial rate weights
+\((4,1,3,2)\), hold \(+-\sim hh\), and hold
+\(\theta_c/\theta_-=3\). Both licensed words have zero displacement
+and equal probability, and all nonempty contexts for them overflow.
+
+At base point \(0\) for mark \(h\), delete the two register
+transitions between \(0\) and \(1\) and add the deleted entries to
+the two corresponding diagonals. This is a support cover because
+the deleted proposals form one reversal pair. For the rational
+gate in the proof, untouched rows bound the optimum by \(\eta=1\).
+The stated table attains this bound. At equality the row and
+column sums leave only the indicated diagonal increases. In the
+clockwise table from base point \(0\), change the conditional register fluxes at
+\((0,2),(1,3),(0,3),(1,2)\) by
+\((1,1,-1,-1)/32\), with transposed changes in its reverse table.
+Here conditional register flux uses the uniform register weight
+\(1/4\). The zero-margin space on these entries and their reverses
+is one-dimensional and any nonzero direction uses all of them.
+This is a circuit and makes the register law depend on base position.
+
+Apply \eqref{eq:fixed-prime-move} with lifts \((-2,0,0,-1)\) at
+\(2\) and \((2,0,0,1)\) at \(3\). The successive rate weights are
+proportional to \((1,1,3,1)\) and \((9,1,3,3)\). The equations
+\(\theta_+\theta_-=\theta_h^2\) and \(\theta_c/\theta_-=3\) hold
+throughout. The relative lattice has rank one and each move
+changes \(v_p(\theta_h/\theta_-)\) by one in magnitude, so both are
+irreducible. The clockwise four-cycle affinity changes from \(4^4\)
+to \(9^4\).
+
+Every conditional register row sends mass \(1/2\) into each of
+\(\{0,1\}\) and \(\{2,3\}\). Disclose this split at grade \(2\)
+and then at grade \(1\). At the new rates, \(cc\) and \(hh\) have
+equal probabilities and the same projected law, so adjoin
+\(cc\sim hh\), adding one word to the old length-two class. Then
+publish the live check \(\theta_+/\theta_-=9\).
+The initial and final states differ in support, an observable
+rate ratio, both disclosure grades, licensed routes, and citeable
+checks. Each of the six effects is the only one that can change its
+respective observable along a chain, so omitting it rules out the
+connection.
+
+\subsection{Which affinities the held tests determine}
+
+\begin{theorem}[Affinity row-space criterion]\label{thm:fixed-affinity}
+At a fixed attained profile, a zero-sum integer exponent
+\(d\in\mathbb Z^M\) gives an invariant relative monomial
+\(\theta^d\) under lawful numerical edits exactly when \(d\) is in
+the rational row space of \(D\). Outside that space an exact rational
+edit chain starting at any lawful rate vector changes \(\theta^d\).
+The real rate fiber in the open positive simplex is smooth of
+dimension \(|M|-1-\operatorname{rank}D\). For a fixed supported
+closed marked walk, its multiplicative affinity is the monomial
+with \(d=\sum_j(e_{m_j}-e_{\bar m_j})\).
+\end{theorem}
+
+\begin{proof}
+The centered log coordinates
+\(u_m=\log\theta_m-|M|^{-1}\sum_n\log\theta_n\)
+identify the open positive simplex with the zero-sum hyperplane.
+The inverse exponentiates and normalizes. The held equations are
+\(Du=\log c\), with all rows in the zero-sum hyperplane, giving the
+dimension. A row combination makes \(d\cdot u\) constant. Otherwise
+rational elimination and clearing denominators give an integer
+\(z\) with \(Dz=0\) and \(d\cdot z\ne0\). For any prime \(p\),
+\eqref{eq:fixed-prime-move} preserves the held equations and changes
+the monomial by \(p^{d\cdot z}\). The normal form realizes this
+change by lawful rational numerical steps with the conditional
+tables fixed. Multiplying \eqref{eq:fixed-flux-ratio} along the walk
+gives the affinity formula.
+\end{proof}
+
+In the real fixed-profile fiber the rate factors are connected by
+centered log segments and the conditional-flux factors by affine
+segments on the fixed support. The proof below changes the permitted
+probability tests and exhibits fixed profiles with isolated laws.
+
+\subsection{Finite-event comparisons and failure of locality}
+
+\begin{theorem}[Finite-event expressivity]\label{thm:finite-event}
+For every rational polynomial on a positive rate simplex there are
+two fixed events of the same finite duration in a one-state marked
+Markov instrument whose probabilities agree exactly on the
+polynomial's zero set. In particular, for any \(k\geq2\) one such
+test gives a fixed-profile real law fiber consisting of exactly
+\(k\) isolated rational laws. Below a positive native tolerance,
+no numerical edit chain connects distinct laws in this fiber.
+\end{theorem}
+
+\begin{proof}
+Clear denominators and homogenize to degree \(d\) using
+\(\sum_m\theta_m=1\). The polynomial on the simplex is then
+\(\sum_a n_a\theta^a\) for integers \(n_a\). Use a one-state
+instrument with independent marks of rates \(\theta_m\), all
+self-reversing. A constant truth value can be realized with two
+identical events or with an empty and a full event, including on
+a one-point simplex.
+
+For at least two marks, choose distinct \(i,j\) and an integer
+\(r\geq1\) with \(\binom{2r}{r}\geq\max_a |n_a|\).
+There are that many words containing \(r\) copies each of \(i,j\),
+all of probability \((\theta_i\theta_j)^r\). For each \(a\) with
+\(n_a\ne0\), choose one length-\(d\) prefix with multiplicities \(a\)
+and append \(|n_a|\) distinct such suffixes. The resulting words
+are all distinct and have length \(d+2r\). Put the words for
+positive coefficients in one event and those for negative
+coefficients in the other. Their probability difference is
+\[
+ (\theta_i\theta_j)^r\sum_a n_a\theta^a.
+\]
+The prefactor is strictly positive. Common prefix and suffix
+contexts multiply both event probabilities by the same factor
+by independence, so the comparison also supports substitution
+in those contexts.
+
+With two rates \(t,1-t\), take the polynomial
+\(\prod_{i=1}^k(t-a_i)\) for distinct rational
+\(a_i\in(0,1)\). The support, disclosure schedule and held test
+are identical at the \(k\) resulting laws. They are all the lawful
+rates at this profile. The least distance \(\min_{i\ne j}|a_i-a_j|\)
+in the native probability metric is positive, so smaller steps
+cannot move between them. The same construction works under a
+common rate floor \(0<\delta<1/2\) by choosing the roots in
+\((\delta,1-\delta)\).
+\end{proof}

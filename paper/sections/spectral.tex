@@ -1,0 +1,190 @@
+\section{Rational reachability and the signed core}\label{sec:spectral}
+
+Let \(J\) be a finite set of response coordinates. A held test has the form
+\begin{equation}\label{eq:binomial}
+ x^{u}=c x^{v},\qquad u,v\in\NN^J,\quad c\in\QQ,
+ \qquad x^u=\prod_{j\in J}x_j^{u_j}.
+\end{equation}
+We use \(x_j^0=1\), including at \(x_j=0\). The guards are finitely many
+absolute-sum budgets \(\sum_{j\in J_b}|x_j|\le b\), with rational
+bounds and coordinate sets \(J_b\subseteq J\). Write
+\(\mathcal F_{\QQ}\) for the lawful rational points. Assume that
+\(\mathcal F_{\QQ}\) is bounded in \(\RR^J\). Covering \(J\) by
+the budget sets suffices, as for the mark budgets in \eqref{eq:guards}.
+The real lawful set is closed since the tests are polynomial equalities
+and the guards are closed inequalities.
+Two lawful rational points are \emph{finely connected} when for every
+positive rational \(\varepsilon\) a finite chain in \(\mathcal F_{\QQ}\)
+joins them with all successive sup-norm differences less than
+\(\varepsilon\).
+
+\subsection{Support reduction}
+
+For a point \(x\), its \emph{signed chart} specifies \(S=\supp x\) and the
+sign of \(x_j\) for every \(j\in S\). A row \((u,v)\) is active on \(S\)
+when \(\supp u\cup\supp v\subseteq S\).
+Let \(A_S\) be the matrix of row differences \(u-v\) for these active tests,
+restricted to columns in \(S\).
+On an inhabited chart, an active test has nonzero \(c\), compatible signs
+and two nonzero monomials. An inactive test with nonzero \(c\) has
+both monomials zero. A test with \(c=0\) requires its left monomial to vanish,
+and this remains true on every smaller support. In the native class the
+zero-coefficient case occurs only in a zero calibration.
+
+\begin{definition}[Contraction and signed core]\label{def:signed-core}
+Write \(S\to T\) if there are integer weights \(w_j\geq0\) on \(S\) such that
+\[
+  A_Sw=0,\qquad T=\{j\in S:w_j=0\}.
+\]
+A contraction keeps the signs on \(T\) and assigns zero off \(T\).
+In a sequence of contractions use the matrix of the current support at
+each step. Denote the least support reached from \(S\) by \(\Core(S)\)
+and define
+\[
+ \SCore(x)_j=
+ \begin{cases}
+   \sgn(x_j), & j\in\Core(\supp x),\\
+   0, & j\notin\Core(\supp x).
+ \end{cases}
+\]
+The test list is fixed when constructing this map.
+\end{definition}
+
+\begin{lemma}[Realization and restriction]\label{lem:contraction}
+A contraction on an inhabited rational signed chart can be realized
+from every rational point of that chart by arbitrarily fine rational
+chains with the indicated endpoint signs. Moreover, \(S\to T\)
+restricts to \(U\to U\cap T\) for every \(U\subseteq S\).
+The least reachable support in \Cref{def:signed-core} exists, is unique,
+and is unchanged by further reductions.
+\end{lemma}
+\begin{proof}
+For realization, let \(x\) be the initial rational point and set
+\(x_j(t)=x_jt^{w_j}\) for \(j\in S\) and \(x_j(t)=0\) otherwise, on
+\(0\le t\le1\), again with \(t^0=1\). For \(t>0\), equal total weights
+preserve every active test and the inactive tests stay true. At \(t=0\)
+the polynomial equalities hold by continuity. Absolute-sum budgets
+can only decrease. The resulting curve is continuous, and its samples at
+rational parameters are rational, including its limiting endpoint.
+A sufficiently fine rational mesh gives the claimed chains.
+
+For restriction, a row active on \(U\) was active on \(S\) and has no
+factors outside \(U\). Cutting \(w\) down to \(U\) therefore preserves its
+weight balance. The zero-weight coordinates in \(U\) are \(U\cap T\).
+Repeated restriction gives the same intersection rule for an entire
+reduction path.
+
+Choose a reachable support \(C\) of minimum cardinality. For every reachable
+\(U\), restrict the path from \(S\) to \(C\) to \(U\); this reaches
+\(U\cap C\) from \(U\). Since \(U\cap C\) is also reachable from \(S\),
+minimality forces \(C\subseteq U\). Thus \(C\) is least, is reachable from
+every reachable support and is still least there.
+\end{proof}
+
+\paragraph{Finite calculation.}
+For a prescribed survivor set \(T\), impose \(w_j=0\) on \(T\) and
+\(w_j\ge1\) elsewhere on \(S\) in the rational linear system \(A_Sw=0\).
+Clearing denominators produces an integer witness from any feasible
+rational one. To compute the core, at each support test, for each \(j\),
+whether the nonnegative balance system admits \(w_j\ge1\).
+The sum of one witness for each feasible \(j\) removes the entire set of
+currently removable coordinates in one step. Recompute the matrix and
+repeat. Every nonempty round removes a coordinate, and a stable support
+has no proper reduct. By \Cref{lem:contraction} it is the core.
+
+\subsection{Limits of charts}\label{sec:chart-limits}
+
+\begin{lemma}[A chart limit gives a contraction]\label{lem:limit}
+If \(b\) lies in the real closure of a lawful signed chart on support
+\(S\), then the chart contracts to \(\supp b\) with the signs of \(b\).
+This holds even when the particular meeting point \(b\) is irrational.
+\end{lemma}
+\begin{proof}
+Take a sequence \(x^{(k)}\) from the chart converging to \(b\).
+Put \(T=\supp b\) and \(Z=S\setminus T\).
+Surviving coordinates retain their signs by convergence.
+If \(Z\) is empty, use zero weights. Otherwise, with
+\(\ell^{(k)}=\log|x^{(k)}|\) on \(S\), the active equations are
+\[
+ A_{S,T}\ell^{(k)}_T+A_{S,Z}\ell^{(k)}_Z=\log|c|,
+\]
+where the right side lists the log-magnitudes of the active coefficients.
+The vector \(\ell^{(k)}_T\) is bounded, while every entry of
+\(\ell^{(k)}_Z\) tends to \(-\infty\). Hence
+\(A_{S,Z}\ell^{(k)}_Z\) is bounded. Choose a linear right inverse
+\(B\) on the image of \(A_{S,Z}\). The vectors
+\[
+ \ell^{(k)}_Z-B A_{S,Z}\ell^{(k)}_Z\in\ker A_{S,Z}
+\]
+are eventually strictly negative in every coordinate, because only a
+bounded correction was subtracted. Negation gives a strictly positive
+vector in the real kernel. The matrix has integer entries, so a rational
+basis of its kernel and rational approximation give a positive rational
+vector as well. Clear denominators and extend by zero on \(T\).
+The resulting integer weights give precisely the required contraction.
+\end{proof}
+
+\subsection{Exact rational motion within a chart}\label{sec:rational-chart}
+
+\begin{lemma}[Rational chart interpolation]\label{lem:rational-chart}
+Any two lawful rational points of the same signed chart are finely connected
+through rational points of that chart.
+\end{lemma}
+\begin{proof}
+Fix endpoints \(x,y\) on support \(S\). Their real log segment has coordinates
+\[
+ \xi_j(t)=\sgn(x_j)|x_j|^{1-t}|y_j|^t \quad(j\in S)
+\]
+and is zero outside \(S\). It preserves the active equations, since their
+log form is affine. Each absolute-sum budget is a convex function of the
+log vector. At \(0<t<1\) a budget containing a changed coordinate has
+strict slack, by strict convexity of the exponential in that coordinate.
+Every unchanged block has exactly its endpoint values throughout.
+
+To obtain rational samples that satisfy the equalities exactly, factor
+each positive rational ratio
+\(\rho_j=|y_j|/|x_j|\) as \(\prod_p p^{z_{jp}}\), with integer exponents
+and a finite set of primes shared across the coordinates. The endpoints
+satisfy the same active equations, so \(\rho^{u-v}=1\) for each active
+row. Unique factorization gives \(A_S z_p=0\) for every vector \(z_p\)
+of prime exponents. All \(z_{jp}\) vanish where \(\rho_j=1\).
+At an interior time \(t\) choose positive rationals \(r_p\) close to \(p^t\).
+The coordinates \(x_j\prod_p r_p^{z_{jp}}\) are rational, have the
+required signs, and satisfy every exact test. Unchanged coordinates stay
+fixed. The remaining inequalities hold when the choices are close enough
+to the real segment, because those budgets have strict slack at \(t\).
+
+By uniform continuity choose a finite mesh on the real segment with
+successive differences less than \(\varepsilon/3\). Approximate each
+interior sample within \(\varepsilon/3\) as above and use the given
+rational endpoints. This gives all required successive differences.
+\end{proof}
+
+\begin{theorem}[Signed-core classification]\label{thm:spectral}
+In the stated bounded class of held monomial systems, rational lawful
+points \(x,y\) are finely connected if and only if \(\SCore(x)=\SCore(y)\).
+\end{theorem}
+\begin{proof}
+For sufficiency, contract each endpoint to its core using
+\Cref{lem:contraction}. Equality of signed cores puts the resulting rational
+points in the same chart. Join them by \Cref{lem:rational-chart} and reverse
+the chain from the second endpoint to its core.
+
+For necessity, take the closure in \(\RR^J\) of the lawful rational
+points in each chart they inhabit. There are finitely many such charts.
+These closures are compact by the assumed bound and remain in the real
+lawful set. If two of them meet, \Cref{lem:limit} contracts both charts
+to the same signed support. By \Cref{lem:contraction}
+they have the same signed core. Thus unions of chart closures for
+different core values are disjoint compact sets. When there is more
+than one value, their smallest pairwise distance is positive.
+No rational chain of smaller mesh can cross from one such union to another,
+and every lawful rational point belongs to its chart union.
+This proves the necessary condition.
+\end{proof}
+
+The two uses of real analysis have separate returns. A real collision
+determines a discrete support reduction. Real interpolation is then
+sampled by rational points that obey the original equalities. The
+reachability theorem is about finite chains at each tolerance, and in
+particular does not require a continuous path taking only rational values.

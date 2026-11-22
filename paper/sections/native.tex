@@ -1,0 +1,161 @@
+\section{Transfer to native Markov edits}\label{sec:native}
+
+\subsection{The structure of an attained cover}
+
+\begin{proposition}[The six observable effects]\label{prop:effects}
+Every elementary edit has exactly one of the effect types in
+\Cref{tab:effects}. The types are determined by the named experiments.
+\end{proposition}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}llX@{}}
+\toprule
+Role & Effect & Change in the experimental record\\
+\midrule
+\(P_1\) & Local rewrite & Vary the prepared law at fixed profile within the prescribed tolerance.\\
+\(P_2\) & Gate & Contract support by a cover at fixed projected marked law.\\
+\(P_3\) & Route & Advance the timed license catalogue by a cover at fixed law.\\
+\(P_4\) & Earlier disclosure & Refine the available decision partition at one earlier grade by a cover at fixed law.\\
+\(P_5\) & Terminal packaging & Refine the terminal decision partition by a cover at fixed law.\\
+\(P_6\) & Publication & Advance the audit catalogue by a cover at fixed law.\\
+\bottomrule
+\end{tabularx}
+\caption{The measured distinctions in the elementary edit relation.}
+\label{tab:effects}
+\end{table}
+
+\begin{proof}
+The fixed-profile case is the local rewrite. Now let \(p<q\) be an
+attained cover and choose lawful laws at \(p\) and \(q\).
+If their supports differ, use the register table from \(q\) at the
+rates and spectrum of the law at \(p\), while keeping the old grades,
+licenses and publications. The later register satisfies the old coarser
+conditional decision tests. Rates and spectrum continue to pass their
+old tests. This realizes the intermediate profile obtained by replacing
+the old support alone with the new support. It lies strictly above \(p\).
+The cover makes it equal to \(q\).
+
+Suppose the support agrees. The later law can realize an advance in
+licenses alone by taking the full license set of \(q\) and all other
+fields of \(p\). The policy holds for that license set by attainment of
+\(q\), even if the policy would deny some intermediate subsets.
+An advance in publications alone is realized by the same later law
+at the old license set. Thus if either catalogue differs, the
+corresponding intermediate profile already equals \(q\). The update
+may add several names when the cover skips unattained intermediate
+sets.
+
+In the remaining case only the grades differ. Advance the latest
+differing grade to its value in \(q\). Earlier grades were coarser than the
+old value at that grade, and every later grade already agrees with \(q\).
+Nesting is therefore preserved. The later law realizes this profile
+since each of its new decision partitions is no finer than that of \(q\).
+The cover property again forces the intermediate profile to be \(q\).
+The changed grade itself distinguishes the earlier and terminal cases.
+All the cases are disjoint, and their tested fields are recoverable
+from the experiments.
+\end{proof}
+
+\subsection{The metric return and the rate fiber}
+
+Let \(N=|X\times R|\). Sum one prepared row of \(P_m\) to recover
+\(\theta_m\). Use \eqref{eq:signal} to recover the response from the same
+prepared row by dividing by \(\theta_m\).
+If the native sup-norm difference between two laws is \(\eta\),
+each of these two numerators changes by at most \(N\eta\), since
+the signal weights are signs. A reference response has magnitude at
+most one, and both rates are at least \(\delta\). Subtracting the
+quotients gives
+\begin{equation}\label{eq:inverse-modulus}
+ \Norm{\alpha_A-\alpha_B}\le \frac{2N}{\delta}\,\eta .
+\end{equation}
+Conversely, the polynomial formulas \eqref{eq:native} are uniformly
+continuous in the rates, responses and register entries on the
+bounded boxes under consideration. One can use the bound on the
+difference of three-factor products by the sum of their differences,
+since \(\theta_m,Q_m,L_m\) all lie in \([0,1]\).
+These observations connect numerical steps in both directions.
+
+For use in the forward construction, the rate laws at a fixed
+profile are finely connected. To see this, let \(\theta,\theta'\)
+be two feasible rational rate vectors. If they agree, keep them fixed.
+Otherwise take the componentwise geometric interpolation
+\(\gamma_m(t)=\theta_m^{1-t}(\theta'_m)^t\) and normalize by
+\(\sum_m\gamma_m(t)\). Homogeneity preserves every test after
+normalization. Every numerator is at least \(\delta\).
+For \(0<t<1\) the sum is strictly less than \(1\), by the
+weighted arithmetic--geometric mean inequality and the fact that at
+least one coordinate changed. All normalized rates are therefore
+strictly above the floor for interior times. Use the prime-exponent
+construction of \Cref{lem:rational-chart} for the positive endpoint
+ratios, then normalize the rational interpolants. This keeps the tests
+exact and works sufficiently close to every interior mesh point
+because the floor has slack. The endpoints themselves are used
+verbatim.
+
+\subsection{Proof of native reachability}
+
+\begin{proof}[Proof of \Cref{thm:native}]
+For the forward direction, every elementary edit increases the profile
+in \eqref{eq:profile-order} or keeps it fixed. Each later law therefore
+passes all initially held spectral tests, and all discrete covers preserve
+the spectrum. For any prescribed positive rational spectral mesh
+\(\rho\), take a native chain at tolerance
+\(\delta\rho/(2N+1)\). By \eqref{eq:inverse-modulus} its projected spectral
+steps have size less than \(\rho\). \Cref{thm:spectral} then gives equality
+of the signed cores relative to the initial tests.
+
+For the converse assume profile comparability and equality of these
+cores. Form the intermediate profile \(p'\) by taking the support
+of the target profile and all other fields of the source. It is attained
+by the target register at the source rates and spectrum. Between the
+source profile and \(p'\), the other fields are fixed. Follow a finite
+cover chain in that interval, selecting a register with the attained
+support at each step and keeping the source rates and spectrum. These
+are legal gates because the register constraints and held rate and spectral
+constraints have separate variables.
+
+At \(p'\) the current and target laws both meet the source's tests.
+The two register tables have the same positive support. Their affine
+interpolation preserves the prescribed margins, reciprocal pairing and
+conditional block masses. It is positive exactly on that support, and a
+rational mesh realizes its changes. Keeping the final register fixed, move
+the rates by the preceding rate argument and move the spectrum by
+\Cref{thm:spectral}, both with the source's tests held. The three numerical
+chains can use a small enough mesh to meet the given native tolerance
+by \eqref{eq:native}. At this stage the target law is attained with profile
+\(p'\). Follow a finite cover chain from \(p'\) to the target profile
+while keeping that law fixed. Every intermediate attained profile has
+the target support and weaker tests. Its license policy holds because
+the profile is attained. This makes each step legal and yields the
+requested chain for every positive rational native tolerance.
+\end{proof}
+
+\begin{proposition}[Readback of edits]\label{prop:readback}
+For a fixed instrument, the prepared probabilities and the named
+decision, license and publication responses determine the state.
+The correspondence with attained query tables preserves and reflects
+elementary edits, effect types and finite chains, including chains with
+a specified effect omitted. A relabeling that identifies the full
+attained profile order and the named queries gives the same conclusion
+for the relabeled instrument.
+\end{proposition}
+\begin{proof}
+The positive entries give the support, and the available decisions give each
+partition by their common equality relation. Catalogue membership is read
+from the remaining queries. The prepared probabilities determine rates and
+spectra by the preceding row-sum and signal calculations. Finally
+\[
+ L_m(g,h;u,v)=\frac{P_m((g,u),(h,v))}{\theta_m Q_m(g,h)}
+\]
+recovers every register entry. The denominator is strictly positive by
+\eqref{eq:guards}. Thus attained states and their attained query tables
+correspond in both directions. The fixed-profile comparison, cover order and
+law or projected-law preservation in the edit definition can all be tested
+on the tables. The same tests define the edits after relabeling when
+the relabeling identifies the attained order and the experiment labels,
+including the terminal grade. Lifting each step in a finite chain proves
+the claim.
+\end{proof}

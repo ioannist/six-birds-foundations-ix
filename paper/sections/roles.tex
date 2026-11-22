@@ -1,0 +1,247 @@
+\section{Connection, obstruction and the six effects}\label{sec:two-examples}
+
+We use the same small carrier for the two contrasting reachability
+examples and the family count. Take \(X=\{0,1\}\) with its single
+nonconstant parity probe and \(R=\{0,1,2,3\}\) with uniform mass.
+The four marks have rate \(1/4\) and each reverses to itself.
+Take \(\delta=1/8\), \(\kappa=1/2\), horizon two and two grades.
+Let \(F_*\) denote the split \(\{0,1\}\mid\{2,3\}\).
+
+The reset register has all entries \(1/4\). The gated register differs
+only for one designated mark and the base pair \(g=h=0\). In that
+conditional table replace its \(\{0,1\}\)-by-\(\{0,1\}\) submatrix by
+\[
+ \begin{pmatrix} 1/2 & 0\\ 0&1/2\end{pmatrix}.
+\]
+Both tables have the required stationary margins and reciprocity.
+The conditional mass of each block of \(F_*\) is \(1/2\) for every
+preparation in either table. The gated table is genuinely coupled to
+the base pair, and loses precisely the two reciprocal proposals
+between cells \(0\) and \(1\) at the designated mark and base pair.
+
+\subsection{An exact edit through two zero responses}\label{sec:staged}
+
+For the example of \Cref{sec:opening-example}, use the gated register
+at the third mark. Hold the split at both grades, the route equality
+between the first--second and first--third words, and the calibration
+\(z=1/4\). Fix the fourth response at zero. Every point of
+\eqref{eq:opening-path} is a lawful spectrum. Along the first segment
+\(y=1/4\); along the last two \(x=0\).
+The original route equality and all other tests therefore hold.
+
+For an affine segment with varying response from \(a\) to \(b\),
+choose an integer \(D>|b-a|/\varepsilon\) with \(D\ge1\) and sample
+\(a+(b-a)k/D\) for \(0\le k\le D\). The difference in each marked
+entry is bounded by the magnitude of the varying response change,
+by the explicit two-state formula and the fixed rate and register.
+The resulting rational edits are strictly within \(\varepsilon\).
+The projected probability of retaining the parity bit at the
+second mark changes from \(5/8\) to \(3/8\), conditional on the mark.
+The prepared, marked contributions to these probabilities are
+\(5/32\) and \(3/32\), respectively.
+Throughout this construction the native support is fixed, since
+\(Q_m>0\) and the register has the same support.
+
+The held calibration requires \(w_z=0\) on every support containing
+\(z\), and the reversal rows are identities. On
+\(\{x,y,z\}\), the held word requires \(w_y=w_z\).
+It follows that a single contraction cannot reach the core
+\(\{z\}\), and that a surviving \(y\) keeps its positive sign.
+The legal successive contractions remove \(x\) and then \(y\).
+On the target support \(\{y,z\}\) the same second contraction
+removes the negative \(y\). Thus both signed cores have the value
+\(+1\) at \(z\) and zero elsewhere.
+A rule that keeps the initial weight balances at all later supports
+forces \(w_y=0\) at every step. Every reduct of each endpoint would
+retain its different sign at \(y\). No common signed reduct is possible
+under that frozen rule. This failure occurs even though the original
+word probabilities are equal throughout the explicit chain.
+
+\subsection{A pair that requires all six effects}\label{sec:omissions}
+
+For a second catalogue on the same carrier, name the marks
+\(a,b,c,d\) and let the initial responses be
+\((1/4,1/4,-1/8,1/8)\).
+Initially use the reset register and the indiscrete partition at both
+grades. Hold the route \(aa\sim bb\) and the calibration
+\(\alpha_b=1/4\). The optional license compares \(ca\) with \(da\),
+and the optional publication checks \(\alpha_c=1/8\).
+Both are defined in the fixed catalogues. All license subsets are
+allowed by policy.
+
+Construct the following chain of changes. Each row describes the
+change from the state already attained by the preceding rows.
+\begin{table}[ht]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+Effect & Realizing change & Observable that forces the effect\\
+\midrule
+\(P_2\) & Gate the conditional register at mark \(c\) and base pair \(0,0\). &
+Two reciprocal positive native proposals disappear.\\
+\(P_1\) & Move \(\alpha_c\) from \(-1/8\) to \(1/8\) through zero. &
+The measured \(c\)-response changes.\\
+\(P_5\) & Disclose \(F_*\) at grade \(1\). &
+The terminal decision becomes available.\\
+\(P_4\) & Disclose \(F_*\) at grade \(0\). &
+The earlier decision becomes available.\\
+\(P_3\) & Add the license \(ca\sim da\). &
+The named timed comparison is held.\\
+\(P_6\) & Publish the calibration \(\alpha_c=1/8\). &
+The named measurement can be cited.\\
+\bottomrule
+\end{tabularx}
+\caption{One sequence of changes on the coupled carrier. Each adjacent pair has a lawful chain at every positive tolerance.}
+\label{tab:omissions}
+\end{table}
+The gate is a cover, since reciprocity requires the two deleted
+proposals to be removed together. The change of \(\alpha_c\) is
+an affine move at fixed profile while no held numerical test
+constrains that coordinate. It has arbitrary rational meshes.
+Each partition advance is a cover, since nothing lies between the
+indiscrete partition and a partition into two given blocks along
+this refinement. Each catalogue change adds one name.
+The new license passes because the \(c\) and \(d\) responses
+agree by then and all the mark rates agree. The new publication
+is exactly the measured \(c\)-response.
+
+\begin{theorem}[Six measurable effects on one carrier]\label{thm:omission}
+For each of the six effects there is an adjacent pair in
+\Cref{tab:omissions} connected at every positive rational tolerance
+whose connection requires that effect. Moreover the same initial
+and final states of the entire table are connected at every positive
+rational tolerance, and every connecting chain uses all six effects.
+These statements also hold on the attained experimental readouts.
+\end{theorem}
+\begin{proof}
+The preceding construction establishes connection. Every step of
+another type preserves the listed observable in the third column.
+For \(P_1\), this is the measured response, which all discrete steps
+preserve even when a gate changes the conditional register.
+For \(P_4\), no other type changes any earlier grade.
+For \(P_5\), the observable is terminal availability.
+The other three exclusions follow from support, the license set,
+and the publication set, respectively. Thus each failure persists
+under composition. The endpoints of the entire table differ in
+all six listed observables, so all six types are required in every
+connection. Readback follows from \Cref{prop:readback}.
+\end{proof}
+
+\subsection{A positive-tolerance obstruction}\label{sec:obstruction}
+
+Use the initial profile of the second example and replace only
+\(\alpha_a=1/4\) by \(-1/4\). Both endpoint laws pass the same held
+tests. Their common calibration pins \(b\) at \(1/4\) and their
+route equality forces \(\alpha_a^2=\alpha_b^2\). Thus \(w_b=0\)
+and \(2w_a=2w_b\) on the occupied supports, so the respective
+opposite signs of \(a\) survive. In particular the signed cores
+differ. The obstruction is also quantitative. Each intermediate
+law must pass the original route and calibration, hence its
+\(a\)-response belongs to \(\{1/4,-1/4\}\). With \(N=8\) and
+\(\delta=1/8\), a rewrite at tolerance
+\[
+ \frac{\delta(1/2)}{2N+1}=\frac1{272}
+\]
+has response change less than \(1/2\) by \eqref{eq:inverse-modulus}.
+A discrete step fixes the response. Therefore no chain at this
+positive tolerance can cross the two branches.
+This contrasts with the earlier example in which a zero
+response changes the active damping system without invalidating
+the held tests.
+
+\section{The minimum number of command families}\label{sec:basis}
+
+An \emph{edit position} here is a writable part of the measured
+record. For a numerical edit it is the local-law position.
+For a discrete edit it is the support, the schedule entry at one
+given grade, the license catalogue, or the publication catalogue.
+The existence and uniqueness of the position follow from the cover
+argument and the named readouts. A single invocation at a grade
+overwrites that grade's decision entry and leaves every other
+entry fixed. It still must be a legal cover between attained states.
+
+\begin{definition}[Single-write families]
+A family offers all lawful instances of one command with a fixed
+mutation mode and a fixed writable field. A command for the
+decision schedule has one grade argument whose domain is fixed
+independently of the state and tolerance. It offers a single grade
+write at each allowed argument. The four nonclock command modes
+offer local-law edits, gates, route licenses and publications,
+respectively. A catalogue is \emph{complete} at a tolerance if it
+generates the full chain relation at that tolerance. It is a
+\emph{basis} if it is complete and deleting any family destroys
+completeness.
+\end{definition}
+
+\begin{lemma}[Live positions]\label{lem:live}
+Call a position live at a positive tolerance if some nonidentity
+elementary edit there is lawful. A catalogue is complete exactly
+when it offers every live position. It is a basis exactly when
+it offers all live positions and each family has a live position
+offered by no other family.
+\end{lemma}
+\begin{proof}
+Coverage is sufficient because each nonidentity elementary step
+can be invoked at its position. Identity steps may be replaced
+by the empty chain. For necessity, choose a live witness at an
+omitted position. If it is the support, one grade, or one of the
+catalogues, all other positions preserve that field, so that witness
+cannot be realized. For a nonidentity local-law edit, the two
+profiles agree. In any alternative chain between them, monotonicity
+of support prevents a strict gate. With the local-law position
+also omitted, every remaining edit fixes the law. The local
+witness is again impossible. Apply the coverage test after deleting
+each family to obtain the last characterization.
+\end{proof}
+
+\begin{theorem}[Five families and the terminal split]\label{thm:basis}
+One uniform grade-indexed family together with the four nonclock
+families offers the same elementary relation as the earlier--terminal
+split, for every instrument in the class and every tolerance.
+On the coupled two-grade instrument of \Cref{sec:omissions}, at
+every positive rational tolerance, there are exactly two irredundant
+catalogues in the declared language. These are the uniform
+five-family catalogue and the split six-family catalogue.
+The uniform five-family catalogue is the unique minimum-size
+complete catalogue there. Five is the minimum number sufficient
+for the entire class in this language.
+
+If a successful invocation's family name alone must determine
+whether it changes the terminal decision readout, the split
+catalogue is the unique irredundant catalogue satisfying that
+contract on the two-grade instrument.
+\end{theorem}
+\begin{proof}
+The uniform grade family offers a decision write at every grade.
+In the split catalogue the same invocation is offered by the
+earlier family or by the terminal family according to its grade.
+This is a bijection of invocations preserving the grade,
+measured endpoints, and legality. Every finite chain is
+therefore preserved.
+
+On the coupled example all six positions are live at every
+positive tolerance. The discrete examples are covers.
+The response rewrite supplies a nonidentity step at every
+positive tolerance by subdivision.
+\Cref{lem:live} forces the four nonclock modes and coverage
+of both grade positions. A family offering both grades makes
+any other grade family redundant. If there is no such family,
+the two singleton domains are necessary. The resulting two
+catalogues are irredundant by their private live positions.
+This proves the classification and the lower bound. The uniform
+construction realizes that bound class-wide.
+
+In the split catalogue every family name specifies whether the
+terminal decision changes. The two live writes at the two
+grades in the uniform family have different answers to that test.
+The uniform catalogue therefore fails the added contract.
+The classification leaves the split catalogue as the unique
+irredundant one satisfying it on this instrument.
+\end{proof}
+
+There are six independently witnessed effects in
+\Cref{thm:omission} and five families in the specified minimum.
+Two grade-specific effects share one invocation rule while remaining
+distinct measurements. The additional contract places that
+distinction in the family name itself.

@@ -1,0 +1,101 @@
+\section{Realizing the Foundations II witnesses}\label{sec:witness-bridge}
+
+Foundations~II fixes witness predicates \(W_1,\ldots,W_6\), together
+with record closure, audit honesty and requirements on active role
+projections~\citep[Sections 2, 4 and 5]{foundations2v3}. We use the
+selected positive alternatives described below to connect the roles
+to the experiments of \Cref{sec:omissions}.
+
+\begin{proposition}[Witness realization on the coupled instrument]\label{prop:witness-realization}
+The coupled instrument admits one finite audited typed description
+with an active projection for each of the six Foundations~II roles.
+Each projection uses a witness tied to the measured change in the
+corresponding row of \Cref{tab:omissions}. The two attained query
+tables in that row are connected at every positive rational
+tolerance, and every such connection uses the corresponding effect.
+\end{proposition}
+
+\begin{proof}
+Use one description containing the prepared-law snapshots in
+\Cref{tab:omissions} and the records for the six finite checks. We
+describe each selected witness condition and check it on the data
+that change in the associated edit.
+
+\paragraph{\(W_1\). Descent of an updated native law.}
+Use a uniform preparation token with a mark, an index in
+\(\{0,\ldots,15\}\) and an index in \(\{0,\ldots,3\}\).
+The mark is the output mark. The base stays if the first index is
+below the count for that mark and flips otherwise. The counts are
+\((10,10,7,9)\) before the rewrite and \((10,10,9,9)\) after it. The second
+index selects the next register. At the gated mark and base pair,
+if both the prepared cell and drawn index belong to \(\{0,1\}\),
+the output retains the prepared register.
+This finite experiment has exactly the prepared probabilities,
+including the deleted entries.
+At the updated law the fixed token \((c,7,0)\) gives a total
+update, grouping preparations by base and output records by mark
+and base. Equal-base preparations in cells \(0\) and \(1\) give a
+nontrivial source class. Every pair in a source class has equal
+output mark and base, so the updated map descends to that
+readout. The earlier law gives a different base output for the
+same token and prepared base. This is the same \(c\)-response
+change used in the rewrite omission witness.
+
+\paragraph{\(W_2\). Loss of a realizer at the gate.}
+Use the full domain of positive native proposals after the gate
+as the candidate class for the map from proposals to destinations.
+The specification is equality with the erased proposal from
+cell \(0\) to \(1\) at the gated mark and base pair.
+Its truth table is false throughout the candidate class and
+true on the recorded same-kind erased proposal, which was
+positive at the old law. The universal check and the empty
+satisfying list certify the no-realizer alternative.
+
+\paragraph{\(W_3\). Parallel words and the complete rule list.}
+Use the reached word summaries of length at most two, with one
+overflow state. Each summary contains elapsed time, word mass
+and conditional parity response. At the disclosed law \(ca\)
+and \(da\) give paths with the same start and finish.
+The recorded source rule is \(aa\sim bb\). In the two-element OR
+monoid send \(c\) to \(1\) and the other marks to \(0\).
+The two sides of the old rule agree, while \(ca\) and \(da\)
+differ. The comparison survives every contextual application
+of the recorded rule and witnesses separation under the
+complete source rule list. The later license admits precisely
+this comparison. Before the rewrite their parity responses
+were different.
+
+\paragraph{\(W_4\) and \(W_5\). Earlier access and the terminal quotient.}
+For \(W_4\), the ordered grades at which the block decision is
+available grow from \(\{1\}\) to \(\{0,1\}\). The restricted strict
+order is irreflexive and transitive, and has a strict pair only
+after earlier disclosure.
+The \(W_5\) witness uses the terminal map \(u\mapsto\mathbf 1_{u<2}\)
+on the full register. Its graph gives the exact kernel, a merged
+pair and a reached range. The terminal edit makes the bit
+available at grade \(1\) with grade \(0\) fixed. The earlier edit
+discloses it at grade \(0\) with the terminal reading fixed.
+
+\paragraph{\(W_6\). Replay of a published calibration.}
+The evaluator at the licensed law has a loaded state and
+two absorbing answers. It computes the signed native signal
+and compares it to the mark mass times \(1/8\). The accepted
+trace has two entries and an exact check of the evaluation
+step. A separate conformance check ties the evaluator to the
+prepared table. The earlier gated law fails the same query.
+The ordinary execution and conformance claims have first-layer
+audits before the role audit records \(W_6\).
+The edit adds the citeable receipt at fixed law.
+
+The content checks evaluate the formulas on the full declared
+domains, including the false evaluations and the universal
+no-realizer check for \(W_2\). Role claims target the same
+clusters as their thresholds, witness annotations, levels and
+scope annotations. Their audited premises include the
+recomputed positive witness check. This supplies the selected
+positive \(W_i\) and active projections on one description.
+The finite witness description contains the snapshots used by
+the six checks. The reachability and omission assertions on their
+attained query tables are those of \Cref{thm:omission}, transported
+by \Cref{prop:readback}.
+\end{proof}
