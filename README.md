@@ -1,25 +1,42 @@
 # Six Birds Foundations IX
 
-**Exact Reachability for Audited Markov Edits**
+**One Word Against Two: The Complexity of Revising Markov Laws Under Held Tests**
 
-Ioannis Tsiokos · Version 1
+Ioannis Tsiokos · Preprint v1.0, 25 November 2026 ·
+DOI [10.5281/zenodo.24494014](https://doi.org/10.5281/zenodo.24494014)
 
-The paper classifies arbitrarily fine rational edit chains that preserve
-held experiments in a class of marked Markov instruments. It proves a
-signed-core reachability criterion, a six-effect omission theorem, and
-the five-family minimum for the declared command language. The same
-coupled instrument realizes the six witness predicates from
-Foundations II. [Manuscript source](paper/main.tex) · [Foundations II](https://doi.org/10.5281/zenodo.23096828)
+For labeled shared-probe Markov chains with a hidden register, the paper
+proves that revising parameters under held tests goes from P-complete to
+PSPACE-hard at one step of test syntax: single-word tests give a
+P-complete fine-reachability problem with polynomial-size certificates for
+both answers, and one test comparing a word with a sum of two words makes it
+PSPACE-hard. The Zenodo record holds the paper, the Lean source and the
+supplement *Lean Correspondence Tables*.
+
+## Layout
+
+```
+paper/v2/     Current manuscript (acmart), its figures, bibliography and the
+              supplement Lean Correspondence Tables (paper/v2/supplement/)
+paper/        First draft of Foundations IX, kept for reference; Six Birds
+              Foundations II, Version 4, builds its Section 10 on it
+lean/         Lean 4 development (MovingProjection) and proof notes (*.md)
+```
 
 ## Build the paper
 
 ```sh
-cd paper
-latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build main.tex
+cd paper/v2
+latexmk
 ```
 
-The PDF is at `paper/build/main.pdf`. Figure 1 includes its vector PDF
-and its standalone LaTeX source. [Figure source](paper/figures/signed_core_path.tex)
+The PDF is at `paper/v2/build/main.pdf`. Build the supplement after the
+paper, since it reads the paper's theorem numbers:
+
+```sh
+cd paper/v2/supplement
+latexmk -pdf -outdir=../build/supplement lean-correspondence.tex
+```
 
 ## Build the Lean proofs
 
@@ -29,11 +46,20 @@ lake exe cache get
 lake build
 ```
 
-The project pins Lean and Mathlib v4.28.0. The theorem-to-declaration
-correspondence is in the manuscript. The fixed-projection and finite-event
-appendix contains written proofs. [Lean entry point](lean/MovingProjection.lean) · [Correspondence](paper/sections/appendices.tex)
+The project pins Lean and Mathlib v4.28.0. Appendix A of the paper and the
+supplement identify the Lean declarations behind each checked result and the
+steps proved only on paper. [Lean entry point](lean/MovingProjection.lean)
 
-The bundled modules `SixBirds.Roles` and `SixBirds.FATCD` are unchanged
-from Foundations II at revision `b52b6b74f34a516f56803534cc55efd8feec2007`.
-They supply the prior role and record definitions for the witness bridge.
-[Foundations II source](https://github.com/ioannist/six-birds-foundations-ii/tree/b52b6b74f34a516f56803534cc55efd8feec2007/lean/full/SixBirds)
+## Citation
+
+```bibtex
+@misc{tsiokos2026onewordagainsttwo,
+  author = {Tsiokos, Ioannis},
+  title  = {One Word Against Two: The Complexity of Revising {Markov} Laws Under Held Tests},
+  year   = {2026},
+  doi    = {10.5281/zenodo.24494014},
+  note   = {Six Birds Foundations IX. Preprint v1.0}
+}
+```
+
+Licence: CC BY 4.0.

@@ -1,0 +1,50 @@
+{
+  "citation_policy": {
+    "allowed_entries_without_identifiers": [
+      "rockafellar"
+    ]
+  },
+  "paper": {
+    "title": "One Word Against Two: The Complexity of Revising Markov Laws Under Held Tests",
+    "source_tex": "paper/v2/main.tex",
+    "built_pdf": "paper/v2/build/main.pdf",
+    "release_metadata_include": "paper/v2/includes/release_metadata.tex",
+    "bibliography": "paper/v2/references_v2.bib"
+  },
+  "profile": "ioannis-tsiokos",
+  "release_policy": {
+    "expected_remote": "https://github.com/ioannist/six-birds-foundations-ix.git"
+  },
+  "schema_version": 1,
+  "zenodo": {
+    "metadata": {
+      "custom": {
+        "code:codeRepository": "https://github.com/ioannist/six-birds-foundations-ix",
+        "code:programmingLanguage": [
+          {
+            "id": "lean",
+            "title": {
+              "en": "Lean"
+            }
+          },
+          {
+            "id": "tex",
+            "title": {
+              "en": "TeX"
+            }
+          }
+        ]
+      },
+      "keywords": [
+        "reconfiguration",
+        "P-completeness",
+        "PSPACE-hardness",
+        "labeled Markov chains",
+        "binomial systems",
+        "exact rational arithmetic",
+        "formal verification",
+        "Lean 4"
+      ]
+    }
+  }
+}

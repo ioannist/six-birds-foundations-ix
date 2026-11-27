@@ -1,0 +1,192 @@
+
+\section{Exactness and other boundaries}\label{sec:exactness}
+
+Theorem~\ref{thm:boundary} concerns rational configurations and sequence
+existence at every positive tolerance. Its word-against-pair hardness
+reduction uses growing probe sets. In the single-word class, signed cores
+classify the real components of the budgeted eigenvalue locus
+(Corollary~\ref{cor:real}), and Proposition~\ref{prop:separation} gives an
+explicit separation cutoff for rational eigenvalue vectors with different
+signed cores. With one word-against-pair test, real and rational verdicts
+can differ. Without probes, only part of that class is decided, whereas
+many such tests give PSPACE-hardness. Appendix~\ref{app:exactness-proofs}
+has the proofs.
+
+% ---------------------------------------------------------------------------
+\subsection{Real versus rational reachability}\label{sec:real-rational}
+
+The real--rational agreement of Corollary~\ref{cor:real} can fail with one
+word-against-pair test, even in the following models. They have one register value, identity reversal, and one full-support profile at level~$0$ holding every listed test, whose word tests form the only admissible set.
+
+\begin{proposition}[One probe]\label{prop:one-probe}
+Take a binary base with one probe, $\kappa=1/2$, $\delta=1/9$, $H=2$ and
+labels $\mathsf u,\mathsf h,\mathsf x,\mathsf y,\mathsf x_2,\mathsf
+y_2,\mathsf x_4,\mathsf y_4$. Hold the calibrations $\alpha_{\mathsf
+u}=1/8$ and $\alpha_{\mathsf h}=1/4$ and the word tests
+\[
+  \mathsf u\sim\{\mathsf x_4,\mathsf y_4\},\quad
+  \mathsf x_2\mathsf h\sim\mathsf{xx},\quad
+  \mathsf x_4\mathsf h\sim\mathsf x_2\mathsf x_2,\quad
+  \mathsf y_2\mathsf h\sim\mathsf{yy},\quad
+  \mathsf y_4\mathsf h\sim\mathsf y_2\mathsf y_2 .
+\]
+With $x,y$ the eigenvalues of $\mathsf x,\mathsf y$, there are unique
+feasible configurations $A$ and $B$ with $(x,y)=(1/4,0)$ and $(0,1/4)$. A
+continuous path in the real feasible set joins them, but no
+reconfiguration sequence at tolerance $1/72$ does.
+\end{proposition}
+
+These tests force $x^4+y^4=4^{-4}$, whose rational points lie only on the
+axes by Fermat's theorem for exponent four.
+
+\begin{proposition}[No probe and no calibration]\label{prop:zero-probe-fermat}
+Take one base state, $\kappa=0$, $\delta=1/40$, $H=4$, labels
+$\mathsf u,\mathsf h,\mathsf x,\mathsf y,\mathsf x_4,\mathsf y_4$, the
+word tests $\mathsf u\sim\{\mathsf x_4,\mathsf y_4\}$,
+$\mathsf x_4\mathsf{hhh}\sim\mathsf{xxxx}$ and
+$\mathsf y_4\mathsf{hhh}\sim\mathsf{yyyy}$, and the probability-ratio test
+$\theta(\mathsf u)=17\,\theta(\mathsf h)$. With
+$x=\theta_{\mathsf x}/\theta_{\mathsf h}$ and
+$y=\theta_{\mathsf y}/\theta_{\mathsf h}$, there are unique feasible
+configurations $A$ and $B$ with $(x,y)=(1,2)$ and $(2,1)$. A real path
+joins them, but $B$ is not finely
+reachable from~$A$.
+\end{proposition}
+
+Here $x^4+y^4=17$ has finitely many rational points, by Darmon and
+Granville~\cite[Theorem~2]{darmongranville}. So testing component membership in the full real feasible set, for
+instance by a roadmap query~\cite{canny93,basupollackroy2006book}, can give
+the wrong rational verdict. This mismatch does not exclude roadmaps within
+algorithms with further arithmetic steps.
+By Proposition~\ref{prop:zero-probe-fermat}, the no-calibration
+reachability conclusion of Theorem~\ref{thm:no-calibration} does not
+extend to models with a word-against-pair test.
+
+% ---------------------------------------------------------------------------
+\subsection{Separation}\label{sec:separation}
+
+\begin{proposition}[Separation cutoff]\label{prop:separation}
+\begin{enumerate}
+\item[(a)] Fix a budgeted signed-binomial system on $J$ with $n=|J|\ge1$
+and $\FQ$ bounded. Let $\mathcal L$ be the binary length of its coordinates, tests
+and budgets (not endpoints), and $D_0$ as in Theorem~\ref{thm:certificates}.
+Let $D_1$ be the maximum of $1$ and the binary lengths of the numerator
+magnitudes and denominators of all test coefficients and budget bounds.
+For
+\[
+  D=1+D_1\,n\,n!\,D_0^{\,n}+D_1\,n^3(n!)^2D_0^{\,2n+1},
+\]
+feasible rational points with different signed cores are at sup distance
+at least $2^{-D}$. Here $\log_2D$ is polynomial in~$\mathcal L$, while $2^{-D}$ has
+a denominator of $D+1$ binary digits.
+\item[(b)] Let $A$ and $B$ be feasible rational configurations of a
+single-word model with $\SC_{p_A}(\alpha_A)\neq\SC_{p_A}(\alpha_B)$, with
+$D$ computed for $\Phi_{p_A}$ and $N=|X||R|$. Then no reconfiguration
+sequence at tolerance $\delta2^{-D}/(2N+1)$ leads from $A$ to~$B$.
+\item[(c)] For $s\ge1$, the system $x_0=1/2$, $x_{i+1}=x_i^2$
+$(0\le i<s)$, $z^2=x_s^2$ with budgets $|x_i|\le1$ and $|z|\le1$ has
+exactly two feasible rational points, with different signed cores, at
+sup distance $2^{1-2^s}$. A one-probe single-word model realizes them
+at one profile, $2^{-2^s-1}/(s+3)$ apart in its tables.
+\end{enumerate}
+\end{proposition}
+
+For a single-word model with at least one probe, Theorem~\ref{thm:directed}
+and part~(b) give equivalence between fine reachability and sequence
+existence at $\delta2^{-D}/(2N+1)$, with $D$ computed at the source
+profile. If $p_A\npreceq p_B$, no sequence exists at any tolerance; with
+no probes, the directed profile order alone decides fine reachability. By~(c) and its binary-exponent variant
+(Appendix~\ref{app:separation}), valid cutoffs can need exponentially many
+binary digits. Jeronimo,
+Perrucci and Tsigaridas bound the distance between disjoint components of
+basic closed integer semialgebraic sets, one of them compact, at this
+doubly exponential scale~\cite[Theorem~1.2]{jeronimoperruccitsigaridas}.
+Their Example~3~\cite{jeronimoperruccitsigaridas} with both parameters
+two is the system of~(c) up to indexing and redundant budgets.
+Our contribution is the direct bound of~(a) for signed-core classes of
+rational points under rational boundedness, and its Markov transfer~(b).
+
+% ---------------------------------------------------------------------------
+\subsection{Zero probes}\label{sec:zero-probes}
+
+Section~\ref{sec:quartic} leaves zero probes open. Even with no probes,
+labels $\mathsf a,\mathsf b,\mathsf c$, probability floor $1/8$,
+$\mathsf c\sim\{\mathsf a,\mathsf b\}$ and
+$\theta(\mathsf{ab})=\tfrac3{16}\theta(\mathsf{cc})$ allow only
+$(\theta_{\mathsf a},\theta_{\mathsf b})=(1/8,3/8)$ and $(3/8,1/8)$, a
+nonconvex set. For exactly one word-against-pair test
+$w_0\sim\{w_1,w_2\}$, if $p_A$ does not hold it, $B$ is finely reachable
+from~$A$ exactly when $p_A\preceq p_B$.
+Let $t=\theta(w_1)/\theta(w_0)$. In the notation of
+Proposition~\ref{prop:zero-probes} (Appendix~\ref{app:exactness-proofs}),
+the image rank is $\dim_{\RR}(f,g)(\ker_{\RR}\Psi)$. In rank two, the
+case is hyperbolic when $1/d_0+1/d_1+1/d_\infty<1$. If the source holds the test,
+image rank at most one and hyperbolic rank two each give a polynomial-time
+criterion: $B$ is finely reachable from $A$ exactly when $p_A\preceq p_B$
+and $t_A=t_B$ (Proposition~\ref{prop:zero-probes}). In the remaining
+rank-two case, $B$ is finely reachable from $A$ exactly when
+$p_A\preceq p_B$ and the closure of the feasible rational ratios at $p_A$
+contains the closed interval between $t_A$ and~$t_B$
+(Proposition~\ref{prop:zero-probe-closure}). Deciding this containment in
+the remaining case is open. The directed order matters even when both
+ratios agree. For a rank-one example, take one base state, one register value, label
+probabilities $(1/2,1/4,1/4)$ on $(\mathsf L,\mathsf A,\mathsf B)$ and
+probability floor $1/4$. Both configurations hold
+$\mathsf L\sim\{\mathsf A,\mathsf B\}$ and $\mathsf A\sim\mathsf B$, and
+only the source holds $\theta_{\mathsf A}/\theta_{\mathsf B}=1$. With all
+other profile data equal, the profiles are comparable and both ratios $t$
+are $1/2$, but no directed sequence can drop the source's held
+probability-ratio test.
+The paper establishes neither hardness with zero probes and exactly one
+word-against-pair test nor a general decision bound for fixed probe
+counts.
+
+% ---------------------------------------------------------------------------
+\subsection{The one-state subclass}\label{sec:one-state}
+
+\begin{proposition}[The one-state subclass]\label{prop:one-state}
+Consider fixed-profile Fine Reachability with one base state and one
+register value, hence no probes. Take $\kappa=0$ and identity label
+reversal (the \defterm{one-state subclass}).
+\begin{enumerate}
+\item[(a)] With words of length two, a positive probability floor and a
+growing number of word-against-pair tests, it is PSPACE-hard under
+polynomial-time many-one reductions with distinct endpoints. %
+The same reduction proves PSPACE-hardness at the supplied tolerance
+$2\delta$. On each output, sequence existence has the same verdict at
+every positive tolerance at most~$2\delta$.
+\item[(b)] If all held equations are linear in the label probabilities,
+every feasible pair is finely reachable. This includes the case in which
+all held word tests and probability-ratio tests have length one. The same
+conclusion holds if every held word test is word-against-word, by
+homogeneity and positivity of the ratio constants.
+\item[(c)] Rational-zero existence for sparsely binary-encoded integer
+polynomials reduces in polynomial time to the problem of~(a), also at its
+supplied tolerances; on each output, the real feasible set at the profile
+is path-connected.
+\end{enumerate}
+\end{proposition}
+
+Part~(a) encodes 3-CNF two-solution
+connectivity~\cite[Lemma~3.6]{gopalan} through Schnider and Weber's
+cubical complex~\cite[Definition~4]{schniderweber}, and does not give
+Theorem~\ref{thm:boundary}(ii).
+Word tests of length one alone give linear rate equations in this
+subclass, as do probability-ratio tests of length one. Some length-two
+probability ratios also reduce to linear equations: a held ratio
+$\theta(\mathsf{ab})=c\,\theta(\mathsf{cb})$ reduces to
+$\theta_{\mathsf a}=c\,\theta_{\mathsf c}$ because
+$\theta_{\mathsf b}>0$.
+A length-one word-against-pair test together with a length-two
+probability-ratio test can give a no-instance, as in the nonconvex example
+of Section~\ref{sec:zero-probes}.
+
+Part~(c) compiles the switch of Section~\ref{sec:rational-roots}, so a
+PSPACE upper bound for~(a) would put rational-zero existence in PSPACE.
+Chonev's Remark~7~\cite{chonev} encodes polynomial threshold comparisons by
+reachability probabilities. Winkler et al., Lemma~20
+\cite{winklerjungesperezkatoen}, give pointwise equivalences on the
+parameter box for five comparison relations, including equality. In the
+extended article, Junges, Katoen, Pérez and Winkler's
+Proposition~11~\cite{jungeskatoenperezwinkler} realizes an affine
+rescaling of a polynomial as a reachability probability.

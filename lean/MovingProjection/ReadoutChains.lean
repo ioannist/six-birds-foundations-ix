@@ -28,30 +28,10 @@ abbrev ReadoutChain (ε : ℚ) :=
   Relation.ReflTransGen (fun a b : D.attained n =>
     NativeReadouts.elementary (D.attained n) ε a.val b.val)
 
-abbrev ReadoutOmitting (e : Effect) (ε : ℚ) :=
-  Relation.ReflTransGen (fun a b : D.attained n =>
-    NativeReadouts.elementary (D.attained n) ε a.val b.val ∧ ¬ a.val.detects b.val e)
-
 omit [Fintype Γ] [Fintype Δ] in
 theorem readoutChain_iff (ε : ℚ) (a b : D.protocol.State n) :
     D.ReadoutChain ε (D.observe a) (D.observe b) ↔ D.protocol.Chain ε a b :=
   chain_equiv D.observe (D.elementary_iff_step ε) a b
-
-omit [Fintype Γ] [Fintype Δ] in
-theorem readoutOmitting_iff (e : Effect) (ε : ℚ) (a b : D.protocol.State n) :
-    D.ReadoutOmitting e ε (D.observe a) (D.observe b) ↔ D.protocol.Omitting e ε a b := by
-  apply chain_equiv D.observe _ a b
-  intro u v
-  change (NativeReadouts.elementary (D.attained n) ε (D.readouts u) (D.readouts v) ∧
-    ¬ (D.readouts u).detects (D.readouts v) e) ↔ ∃ k ≠ e, D.protocol.Step ε k u v
-  constructor
-  · rintro ⟨h,he⟩
-    obtain ⟨k,hk⟩ := (D.elementary_iff_step ε u v).mp h
-    refine ⟨k,fun h => ?_,hk⟩
-    exact he ((D.detected_iff_label hk e).mpr h.symm)
-  · rintro ⟨k,hne,hk⟩
-    exact ⟨(D.elementary_iff_step ε u v).mpr ⟨k,hk⟩,
-      fun h => hne ((D.detected_iff_label hk e).mp h).symm⟩
 
 omit [Fintype Γ] [Fintype Δ] in
 theorem readouts_factorization_iff (a b : D.protocol.State n) :

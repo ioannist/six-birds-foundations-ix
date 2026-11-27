@@ -51,21 +51,19 @@ private theorem retained_sign_of_limit {Y : Type*} {l : Filter Y} [l.NeBot]
   · obtain ⟨y, hy, hey⟩ := (((tendsto_order.1 h).1 0 hp).and ho).exists
     exact (sign_pos hp).trans (sign_pos hy).symm |>.trans hey
 
-theorem signedCore_of_chart_closure {tests : List (MonomialTest I)} {B : ℝ} {s : I → SignType}
-    {x : I → ℝ} (hx : x ∈ closure (realChart tests B s)) :
+theorem signedCore_of_chart_limit {tests : List (MonomialTest I)} {s : I → SignType}
+    {l : Filter (I → ℝ)} [l.NeBot] {x : I → ℝ}
+    (hsign : ∀ᶠ a in l, signCode a = s)
+    (hlim : ∀ i, Tendsto (fun a => a i) l (𝓝 (x i)))
+    (htests : ∀ᶠ a in l, ∀ r ∈ tests,
+      realMonomial r.row.lhs a = (r.ratio : ℝ) * realMonomial r.row.rhs a) :
     signedCore (tests.map MonomialTest.row) (signCode x) =
       signedCore (tests.map MonomialTest.row) s := by
   classical
-  let l := 𝓝[realChart tests B s] x
-  haveI : l.NeBot := mem_closure_iff_nhdsWithin_neBot.1 hx
-  have hev : ∀ᶠ a in l, a ∈ realChart tests B s := self_mem_nhdsWithin
-  have hsign : ∀ᶠ a in l, signCode a = s := hev.mono fun _ h => h.2.1
-  have hlim (i : I) : Tendsto (fun a : I → ℝ => a i) l (𝓝 (x i)) :=
-    (continuous_apply i).continuousAt.continuousWithinAt
   have hcontract := contracts_of_limit tests (l := l) id x (codeSupport s)
     (hs := hsign.mono fun a ha =>
       (codeSupport_signCode a).symm.trans (congrArg codeSupport ha)) hlim
-    (hev.mono fun _ h => h.2.2)
+    htests
   have hc := core_eq_of_reduces (Relation.ReflTransGen.single hcontract)
   unfold signedCore
   rw [codeSupport_signCode, ← hc]
@@ -77,6 +75,17 @@ theorem signedCore_of_chart_closure {tests : List (MonomialTest I)} {B : ℝ} {s
     exact retained_sign_of_limit (hlim i) (mem_realSupport.mp (hsub hi))
       (hsign.mono fun _ h => congrFun h i)
   · simp [hi]
+
+theorem signedCore_of_chart_closure {tests : List (MonomialTest I)} {B : ℝ} {s : I → SignType}
+    {x : I → ℝ} (hx : x ∈ closure (realChart tests B s)) :
+    signedCore (tests.map MonomialTest.row) (signCode x) =
+      signedCore (tests.map MonomialTest.row) s := by
+  let l := 𝓝[realChart tests B s] x
+  haveI : l.NeBot := mem_closure_iff_nhdsWithin_neBot.1 hx
+  have hev : ∀ᶠ a in l, a ∈ realChart tests B s := self_mem_nhdsWithin
+  exact signedCore_of_chart_limit (hev.mono fun _ h => h.2.1)
+    (fun i => (continuous_apply i).continuousAt.continuousWithinAt)
+    (hev.mono fun _ h => h.2.2)
 
 def embed (x : I → ℚ) (i : I) : ℝ := x i
 

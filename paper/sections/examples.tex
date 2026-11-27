@@ -1,0 +1,84 @@
+\section{Connection and obstruction}\label{sec:two-examples}
+
+We use the same small carrier for two contrasting reachability
+examples. Take \(X=\{0,1\}\) with its single
+nonconstant parity probe and \(R=\{0,1,2,3\}\) with uniform mass.
+The four marks have rate \(1/4\) and each reverses to itself.
+Take \(\delta=1/8\), \(\kappa=1/2\), horizon two and two grades.
+Let \(F_*\) denote the split \(\{0,1\}\mid\{2,3\}\).
+
+The reset register has all entries \(1/4\). The gated register differs
+only for one designated mark and the base pair \(g=h=0\). In that
+conditional table replace its \(\{0,1\}\)-by-\(\{0,1\}\) submatrix by
+\[
+ \begin{pmatrix} 1/2 & 0\\ 0&1/2\end{pmatrix}.
+\]
+Both tables have the required stationary margins and reciprocity.
+The conditional mass of each block of \(F_*\) is \(1/2\) for every
+preparation in either table. The gated table is genuinely coupled to
+the base pair, and loses precisely the two reciprocal proposals
+between cells \(0\) and \(1\) at the designated mark and base pair.
+
+\subsection{An exact edit through two zero responses}\label{sec:staged}
+
+For the example of \Cref{sec:opening-example}, use the gated register
+at the third mark. Hold the split at both grades, the route equality
+between the first--second and first--third words, and the calibration
+\(z=1/4\). Fix the fourth response at zero. Every point of
+\eqref{eq:opening-path} is a lawful spectrum. Along the first segment
+\(y=1/4\); along the last two \(x=0\).
+The original route equality and all other tests therefore hold.
+
+For an affine segment with varying response from \(a\) to \(b\),
+choose an integer \(D>|b-a|/\varepsilon\) with \(D\ge1\) and sample
+\(a+(b-a)k/D\) for \(0\le k\le D\). The difference in each marked
+entry is bounded by the magnitude of the varying response change,
+by the explicit two-state formula and the fixed rate and register.
+The resulting rational edits are strictly within \(\varepsilon\).
+The projected probability of retaining the parity bit at the
+second mark changes from \(5/8\) to \(3/8\), conditional on the mark.
+The prepared, marked contributions to these probabilities are
+\(5/32\) and \(3/32\), respectively.
+Throughout this construction the native support is fixed, since
+\(Q_m>0\) and the register has the same support.
+
+The held calibration requires \(w_z=0\) on every support containing
+\(z\), and the reversal rows are identities. On
+\(\{x,y,z\}\), the held word requires \(w_y=w_z\).
+It follows that a single contraction cannot reach the core
+\(\{z\}\), and that a surviving \(y\) keeps its positive sign.
+The legal successive contractions remove \(x\) and then \(y\).
+On the target support \(\{y,z\}\) the same second contraction
+removes the negative \(y\). Thus both signed cores have the value
+\(+1\) at \(z\) and zero elsewhere.
+A rule that keeps the initial weight balances at all later supports
+forces \(w_y=0\) at every step. Every reduct of each endpoint would
+retain its different sign at \(y\). No common signed reduct is possible
+under that frozen rule. This failure occurs even though the original
+word probabilities are equal throughout the explicit chain.
+
+
+\subsection{A positive-tolerance obstruction}\label{sec:obstruction}
+
+Name the four marks \(a,b,c,d\) and take the responses
+\((1/4,1/4,-1/8,1/8)\), the reset register and the indiscrete
+partition at both grades. Hold the route \(aa\sim bb\) and the
+calibration \(\alpha_b=1/4\). Compare this law with the one obtained
+by replacing only \(\alpha_a=1/4\) by \(-1/4\). Both endpoint laws
+pass the same held tests. Their common calibration pins \(b\) at \(1/4\) and their
+route equality forces \(\alpha_a^2=\alpha_b^2\). Thus \(w_b=0\)
+and \(2w_a=2w_b\) on the occupied supports, so the respective
+opposite signs of \(a\) survive. In particular the signed cores
+differ. The obstruction is also quantitative. Each intermediate
+law must pass the original route and calibration, hence its
+\(a\)-response belongs to \(\{1/4,-1/4\}\). With \(N=8\) and
+\(\delta=1/8\), a rewrite at tolerance
+\[
+ \frac{\delta(1/2)}{2N+1}=\frac1{272}
+\]
+has response change less than \(1/2\) by \eqref{eq:inverse-modulus}.
+A discrete step fixes the response. Therefore no chain at this
+positive tolerance can cross the two branches.
+This contrasts with the earlier example in which a zero
+response changes the active damping system without invalidating
+the held tests.

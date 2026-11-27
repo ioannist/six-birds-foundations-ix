@@ -1,63 +1,55 @@
 \begin{abstract}
 \noindent
-We characterize when a marked Markov instrument can change its stochastic
-law by arbitrarily fine finite chains of rational edits while retaining
-its held experimental tests. For a class with a positive parity mixture
-and a conditional register, reachability is equivalent to advance in the
-capability order and equality of a signed core computed from the initial
-tests. The core records the least support reachable by integer damping
-and the signs of its surviving coordinates. Active equations are
-recomputed as coordinates vanish. We prove completeness using real chart
-limits, exact rational interpolation and estimates in the metric on
-prepared transition probabilities. One example requires two successive
-contractions to reach the core, and another gives an obstruction at
-positive tolerance. A coupled instrument realizes all six Foundations II
-witnesses, and every chain connecting one pair of its states uses all
-six observable effects. The declared single-write language has a
-five-family minimum because one disclosure command accepts a clock
-grade. A contract requiring the family name to determine whether an
-invocation changes the terminal decision readout forces six families
-on this instrument. The reachability, omission, family and witness
-results are formalized in Lean.
+Two rational Markov laws that pass the same exact tests can be
+separated by a gap that no sufficiently fine lawful chain can cross.
+We give an endpoint criterion for arbitrarily fine rational edits in a
+class of marked Markov instruments with a parity mixture and a
+conditional register. It checks whether capabilities advance in the
+allowed order and whether the endpoint laws have the same signed core
+for the tests held at the source. Finite linear feasibility tests
+compute the core by finding which coordinates can vanish and keeping
+the signs of the survivors. A constraint that pins one response can
+cease to restrict it when another response reaches zero. We account
+for every possible meeting of sign regions and construct rational
+chains that satisfy the equations and bounds exactly. The reachability results are formalized in Lean.
 \end{abstract}
 
 \section{Introduction}\label{sec:introduction}
 
-A description used at a higher level of a system carries commitments. It may
-specify which transitions are feasible, which decisions can be made before a
-deadline, which routes have equal effects, or which measured values can be cited.
-Changing that description can expose new distinctions, but the changes are useful
-only if the commitments already in force retain their meaning. The problem in
-this paper is to decide, from two measured endpoint laws and those commitments,
-whether a finite sequence of lawful edits connects the endpoints at every
-positive tolerance.
+Suppose two rational transition tables satisfy a given list of exact
+tests. Can one table be changed into the other while every intermediate
+table still passes? At a fixed experimental profile, we ask for a finite
+chain of rational tables in which each step changes each transition
+probability by less than a prescribed tolerance. The question is whether
+such a chain exists for every positive tolerance.
 
-Six Birds Foundations I organized changes of a description around six
-roles~\citep{foundations1}. In finite Markov systems, the framework has been
-used to realize stochastic packages while preserving observed
-histories~\citep{finitepackaging} and to identify limits of deterministic
-coarse-graining~\citep{nogo}.
-Six Birds Foundations~II specifies a witness predicate for each role
-and proves a classification of finite audited typed closure descriptions
-under a recognition hypothesis~\citep{foundations2v3}.
-Here we define lawful edits directly from a Markov instrument's measured
-probabilities and named tests. \Cref{thm:native} gives an exact
-reachability criterion for this model. \Cref{thm:omission,thm:basis}
-then determine which measured changes a chain requires and how the
-corresponding commands can be grouped. One connection requires all six
-effects, and five single-write command families generate the entire edit
-relation. The witness construction in \Cref{prop:witness-realization}
-shows why the six effects instantiate the distinct Foundations~II roles.
+Consider two possible tests on measured responses, with \(z=1/4\) held
+in both cases. Under \(xy=xz\), we can move \(x\) to zero, after which
+\(y\) can pass from \(1/4\) to \(-1/4\) through rational values.
+Under \(y^2=z^2\), both signs still satisfy the test, and any sign change
+requires a jump of \(1/2\) in \(y\). The two tests arise from comparisons
+of two-step experiments, as shown below and in \Cref{sec:obstruction}.
+Endpoint feasibility and the signs of the endpoints alone leave the
+reachability question open.
+
+\Cref{thm:native} decides it from the endpoint laws and the held tests
+in the stated Markov class. Its numerical calculation repeatedly
+asks which coordinates can vanish under the current equations and
+recomputes those equations on the remaining coordinates. The remaining
+support and its signs form the signed core. A chain exists at every
+positive tolerance exactly when capabilities advance in the allowed
+order and the endpoint cores agree, both computed using the source's
+tests.
+This replaces a search through possible intermediate laws by a finite
+calculation on supports and signs.
 
 \subsection{A route that releases a pinned response}\label{sec:opening-example}
 
-Consider a two-state base with a sign probe \(\chi\) that is \(1\) on state \(0\)
-and \(-1\) on state \(1\). There are four equiprobable marks. The first three
-marks have responses \(x,y,z\) and the fourth has response zero. Conditional on
-a mark of response \(u\), the chance of keeping the parity bit is \((1+u)/2\).
-There is also a four-cell register, hidden in these route measurements.
-Its rows sum to one, so summing over the final register leaves the projected
-word law. The explicit coupled table is given in \Cref{sec:two-examples}.
+Use a bit and four equally likely marks with responses \(x,y,z,0\).
+A mark of response \(u\) keeps the bit unchanged with probability
+\((1+u)/2\). Summing out the hidden register leaves the bit's law
+because the register rows sum to one. The coupled register table is
+given in \Cref{sec:two-examples}.
 
 The two-step words with responses \(x,y\) and \(x,z\) have probability \(1/16\)
 each. Their conditional endpoint responses are \(xy\) and \(xz\). Hold their
@@ -93,9 +85,10 @@ probabilities.
  \label{fig:staged-path}
 \end{figure}
 
-The support calculation behind this path is already instructive. A damping
-weight specifies how many powers of a common parameter to multiply into each
-response. As long as \(x,y,z\) are nonzero, the weight equations are
+To calculate the core, we multiply each response by a nonnegative
+integer power of a common parameter that decreases to zero. The power
+is its damping weight. When both sides of a test are nonzero, they
+must acquire the same total power. Initially this gives
 \(w_x+w_y=w_x+w_z\) and \(w_z=0\). They allow a contraction of \(x\) and force
 \(y\) to survive. After \(x\) vanishes, the first equality is still true and
 has zero on each side. It imposes no weight balance on the new support.
@@ -105,30 +98,28 @@ equations were applied to every subsequent support, the initial positive
 and target negative signs at \(y\) would stay distinct under all reductions.
 This would incorrectly rule out \eqref{eq:opening-path}.
 
-The geometric antecedent is the difference between a positive binomial
-chart's closure and additional points of the full zero-allowing system.
-Engstr\"om, Hersh and Sturmfels give an explicit example of that difference
-in \emph{Toric Cubes}~\citep[Example~3]{toriccubes}.
-The question here is whether such changes of active support admit a
-\emph{complete} rational reachability criterion, and whether the criterion can
-be recovered from actual held measurements. Sections~\ref{sec:spectral}
-and~\ref{sec:native} address these two steps.
+The path uses points outside the closure of its starting sign region.
+This distinction between the closure of a positive binomial chart and
+the full system allowing zeros also arises in \emph{Toric
+Cubes}~\citep[Example~3]{toriccubes}.
 
 \subsection{Results and scope}
 
-We first specify the measured model and the edit relation.
-We then prove a separate theorem for bounded rational monomial systems.
-It shows that a finite calculation on supports and signs captures every
-real chart collision relevant to fine rational chains. The native theorem
-combines it with homogeneous rate tests, conditional register constraints
-and the order of attained profiles. The two complementary examples make
-the criterion testable in both directions.
-
-The lower-bound example uses the same coupled instrument for all six effects.
-A subsequent classification of the available command families makes their
-minimization precise. The terminal grade has a special role in the tests,
-even when the command family takes the grade as an argument. We connect
-these results to the witness predicates of Foundations~II in
-\Cref{sec:witness-bridge}. The claims about reachability are specific to the
-declared instruments, and the family count concerns the declared invocation
-language.
+In the general monomial system, two sign regions can approach the same
+irrational boundary point. To prove that the core detects every possible
+connection, \Cref{lem:limit} extracts integer damping weights
+from such a limit. These weights send rational points to the required
+smaller support, so any two regions whose closures meet lead to the same
+core. For different cores, the corresponding finite unions of closures
+are disjoint and compact, giving a positive distance between them.
+For the converse, after contracting to a common signed core, the two
+endpoints can still differ in magnitude. Interpolation in logarithms
+gives a real path whose samples may be irrational. Rounding coordinates
+separately can break exact equalities. \Cref{lem:rational-chart} factors
+the endpoint ratios into primes and replaces their real powers by rational
+approximations. Using the same approximation in every occurrence
+of a given prime keeps the equalities exact. \Cref{thm:spectral}
+gives the resulting classification for bounded
+monomial systems with absolute-sum budgets. \Cref{sec:native} transfers
+it to the metric on measured transition probabilities and to edits
+that advance the profile.

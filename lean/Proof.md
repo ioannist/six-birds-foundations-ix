@@ -1,8 +1,10 @@
 # Exact-six with moving projected dynamics
 
-The connection to the Foundations II witness predicates and active projections is proved in [RoleBridge.md](RoleBridge.md).
-
 ## Target and the decisive representation
+
+The [real component corollary](BoundaryCorollaries.md#3-real-components-without-a-boundedness-assumption)
+classifies the full real lawful locus by the same signed cores, without a
+real boundedness hypothesis.
 
 The final return is an iff for arbitrarily fine, finite chains of rational native edits. A support gate may be discrete, but preserves the projected law and mark rates. All numerical steps, measured in native marked one-step probabilities, must be smaller than a prescribed positive tolerance. Observation, license and receipt steps leave the law fixed. All inherited tests must hold at every endpoint of every step. Give six omission witnesses and an intrinsic obstruction in the same operational class. Proof and formalization are maintained in this research directory.
 
@@ -30,9 +32,9 @@ Live rate-ratio checks compare equal durations. Live calibration checks have the
 For two lawful endpoints, the following are equivalent.
 
 1. At every positive rational tolerance there is a finite factorization by the six effects. Every numerical factor is smaller than that tolerance in all native marked one-step probabilities. All held source tests pass throughout.
-2. The endpoint capabilities are comparable in the direction of smaller support and increasing disclosures, licenses and publications. Relative to the initial held tests, the spectra have identical signs on their least reachable supports, with the remaining coordinates set to zero.
+2. The profile of the source $A$ precedes or equals the profile of the target $B$, written $p_A\preceq p_B$. In this direction support can shrink, disclosures can refine, and the held license and publication sets can grow. Relative to the initial held tests, the spectra have identical signs on their least reachable supports, with the remaining coordinates set to zero.
 
-The criterion is computed from held exponent rows and sign supports. It does not quantify over physical paths. Each of the six effects is necessary on a single coupled source. The same source has comparable endpoints with different surviving signs and a strictly positive obstruction in the native metric.
+The criterion is computed from held exponent rows and sign supports. It does not quantify over physical paths. Each of the six effects is necessary on a single coupled source. The sign obstruction has endpoints at the same profile, so $p_A\preceq p_B$ holds, but their differing surviving signs give a strictly positive obstruction in the native metric.
 
 ## The exact spectral criterion
 
@@ -52,14 +54,14 @@ All-scale necessity and sufficiency. The closed spectral admissibility set is bo
 
 Order the profiles by reverse support inclusion, refinement of each disclosed partition, and inclusion of license and publication names. Restrict the order to profiles realized by lawful native systems. It is finite even though the probability tables range over all admissible rationals. Each cover changes only one of the following five capabilities. Any strict support change can be taken first by using the narrower register table at the old theta and q. With common support, a licensed or published set can be advanced separately using the later law and the policy at the chosen licensed set. When only partitions differ, advance the latest differing grade first. This preserves nesting and the later register table passes the resulting coarser tests. In a cover each intermediate profile constructed this way must already be the upper endpoint.
 
-| Role | Operational effect |
+| Effect | Operational change |
 | --- | --- |
-| P1 | Rewrite a rational native law locally at fixed support, disclosures, licenses and publications, with the whole lawful fiber available. |
-| P2 | Contract the attainable native proposal support by a cover, using a feasible conditional register table at the old mark rates and projected law. |
-| P3 | Extend the licensed timed comparisons by a cover at the current law. |
-| P4 | Advance the disclosure at a single earlier grade by a cover at the current law. |
-| P5 | Refine the terminal packaging by a cover at the current law. |
-| P6 | Publish a checked measurement by a cover at the current law. |
+| Local rewrite | Rewrite a rational native law locally at fixed support, disclosures, licenses and publications, with the whole lawful fiber available. |
+| Gate | Contract the attainable native proposal support by a cover, using a feasible conditional register table at the old mark rates and projected law. |
+| Route | Extend the licensed timed comparisons by a cover at the current law. |
+| Earlier disclosure | Advance the disclosure at a single earlier grade by a cover at the current law. |
+| Terminal packaging | Refine the terminal packaging by a cover at the current law. |
+| Publication | Publish a checked measurement by a cover at the current law. |
 
 For sufficiency, take a chain of support covers at the source rate and spectrum, retaining the old disclosures, licenses and publications. The register table of any reached intermediate profile can be used at the old rate and spectrum by the product formula. At fixed final mask join the conditional tables by rational affine interpolation, preserving strict positivity on the mask and holding the tested conditional block masses. Then move theta and a independently under the held tests, with the register fixed. The rate argument and EqCore give the two numerical chains. At the final law, traverse the remaining capability covers. The final law supports each of their profiles by heredity of the measurements and feasibility of the selected license policy.
 
@@ -91,8 +93,6 @@ Run `lake build` from this directory using Lean and Mathlib v4.28.0. The entry p
 | `NativeExperiments.exact_six_iff` | The operational iff on native endpoints. Timed comparisons and audit queries supply the monomial tests, whose rate homogeneity is proved from the equal-duration requirement. |
 | `NativeExperiments.disclosed_mass`, `NativeExperiments.licensed_trajectory_test`, `NativeExperiments.published_word_ratio`, `NativeExperiments.published_calibration` | Held disclosures, licenses and audit queries return exact comparisons of measured native probabilities. |
 | `Example.gated_to_zero`, `Example.zero_to_rewritten` | Both halves of the projected sign change factor at every tolerance on the common source. |
-| `Example.six_indispensable_on_one_source` | For each of the six effects a reachable pair cannot be connected by any chain omitting that effect. |
-| `Example.single_edit_requires_all_six` | A single pair factors at every positive tolerance, and every factorization of that pair uses all six effects. |
 | `Example.obstruction_at_native_tolerance`, `Example.obstruction_preserved_by_readouts` | Explicit fixed-tolerance separation and transport of nonfactorability by equality of the native experimental readouts. |
 
-The class is finite in carrier and horizon, with rational rate, projected-law and register parameters. The reduction criterion uses only a finite support calculation and rational linear feasibility. The Lean statement expresses this calculation through the unique least reduct. The theorem is an operational realization of the six roles for this experimental class.
+The class is finite in carrier and horizon, with rational rate, projected-law and register parameters. The reduction criterion uses only a finite support calculation and rational linear feasibility. The Lean statement expresses this calculation through the unique least reduct.

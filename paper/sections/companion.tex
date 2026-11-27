@@ -3,8 +3,8 @@
 This appendix gives three results about the choice of instrument and
 tests. With fixed projected kernels, a conformal normal form factors
 edits by conditional-flux circuits and prime-valuation moves. The
-held tests determine precisely which rate ratios and cycle affinities
-are invariant. Allowing finite-event comparisons gives a separate
+held tests determine precisely which rate ratios and cycle
+affinities~\citep{schnakenberg} are invariant. Allowing finite-event comparisons gives a separate
 obstruction to fine reachability, even with a single native state.
 
 \subsection{A conformal normal form at fixed projection}
@@ -34,7 +34,9 @@ A profile records the positive marked support, a nested schedule of
 partitions \(F_0,\ldots,F_T\) of \(X\) with fixed initial partition
 \(F_0\), a route license, and a set of citeable checks from a fixed
 finite catalogue. At step \(t\) the probability of each mark and next
-block of \(F_{t+1}\) must be constant on each current block of \(F_t\).
+block of \(F_{t+1}\) must be constant on each current block of \(F_t\),
+a stepwise lumpability condition; compare the block-sum
+criterion~\citep[Theorem 6.3.2]{kemenysnell}.
 Decisions at grade \(t\) are binary functions on the blocks of \(F_t\).
 The route license is a congruence on the monoid of mark words up to
 a fixed length, with an absorbing overflow element. An identified
@@ -89,14 +91,17 @@ fluxes, irreducible numerical directions are circuits of the
 homogeneous equations on the fixed support, meaning nonzero
 directions of inclusion-minimal support, with collinear
 subdivisions counted as one direction. These are the flux changes
-that admit no noncollinear conformal splitting. For rates, use
+that admit no noncollinear conformal splitting, the elementary vectors
+of Rockafellar~\citep{rockafellar}. For rates, use
 the additive coordinates
 \(v_p(\theta_m/\theta_n)\) for primes \(p\) and ordered pairs
 \((m,n)\), where \(v_p\) is the prime exponent of a positive
 rational. An irreducible rate change is supported at one prime and
 its difference cannot be split into two nonzero lawful differences
 conformal to it. A difference is conformal to another if each
-nonzero entry has the same sign and no greater magnitude.
+nonzero entry has the same sign and no greater magnitude. The
+irreducible rate changes at a prime are thus the Graver basis
+elements of the lattice of lawful prime-exponent displacements~\citep{graver}.
 
 \begin{theorem}[Fixed-projection normal form]\label{thm:fixed-normal-form}
 Two lawful rational endpoints are connected by these edits exactly
@@ -107,8 +112,7 @@ and take congruence closure, and publication covers add one check.
 Together with the numerical changes, the effects are the six
 in \Cref{tab:effects}, distinguished by the same fields and clock
 grades. Test-preserving relabelings preserve the effect types and
-the elementary numerical directions. One coupled instrument has
-a pair whose connection requires all six effects.
+the elementary numerical directions.
 \end{theorem}
 
 \begin{proof}
@@ -229,18 +233,6 @@ throughout. The relative lattice has rank one and each move
 changes \(v_p(\theta_h/\theta_-)\) by one in magnitude, so both are
 irreducible. The clockwise four-cycle affinity changes from \(4^4\)
 to \(9^4\).
-
-Every conditional register row sends mass \(1/2\) into each of
-\(\{0,1\}\) and \(\{2,3\}\). Disclose this split at grade \(2\)
-and then at grade \(1\). At the new rates, \(cc\) and \(hh\) have
-equal probabilities and the same projected law, so adjoin
-\(cc\sim hh\), adding one word to the old length-two class. Then
-publish the live check \(\theta_+/\theta_-=9\).
-The initial and final states differ in support, an observable
-rate ratio, both disclosure grades, licensed routes, and citeable
-checks. Each of the six effects is the only one that can change its
-respective observable along a chain, so omitting it rules out the
-connection.
 
 \subsection{Which affinities the held tests determine}
 

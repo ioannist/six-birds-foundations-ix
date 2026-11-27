@@ -1,0 +1,299 @@
+
+\subsection{Proofs for Section~\ref{sec:timing}}\label{app:timing-proofs}
+
+% ---------------------------------------------------------------------------
+\subsubsection{Acquisition timing}\label{app:acquisition-proofs}
+
+% compressed 2026-11-24: type (e): two sentences merged.
+Word tests of either shape are allowed; three facts carry over from the
+single-word class.
+
+\emph{(T1) The tests see only $\theta$ and $\alpha$.} By
+Lemma~\ref{lem:compile} and~\eqref{eq:word-joint}, whether a parameter
+vector passes a word test of either shape, a calibration or a
+probability-ratio test depends only on $\theta$ and~$\alpha$.
+
+\emph{(T2) The register conditions are separate.} Since $\theta_m\ge\delta>0$
+and $Q_m(g,h)\ge(1-\kappa)/|X|>0$, the positive entries of $P_m$ are those
+of~$L_m$. Stochasticity, stationarity of~$\nu$, reciprocity and the
+block-mass conditions concern $L$ alone.
+
+% compressed 2026-11-24: (e) sentences of (T3) and Carrying merged, every
+% check kept.
+\emph{(T3) The projected-table modulus.} Since
+$P_m((g,r),(h,r'))=\bar P_m(g,h)\,L_m(g,h;r,r')$ and $\bar P_m(g,h)$ sums
+these entries over the $|R|$ values~$r'$,
+$\|P_C-P_D\|_\infty<\varepsilon'$ gives
+$\|\bar P_C-\bar P_D\|_\infty<|R|\varepsilon'$. If $C$ and $D$ have the same
+register tables, with entries in $[0,1]$, then
+$\|P_C-P_D\|_\infty\le\|\bar P_C-\bar P_D\|_\infty$. As in the proof of
+Lemma~\ref{lem:transfer}(a), the row sums of $\bar P_m$ give $\theta_m$
+and its sums weighted by $\chi_i(g)\chi_i(h)$ give $\theta_m\alpha_{mi}$,
+so the projected tables determine $\theta$ and~$\alpha$.
+
+\emph{Carrying.} Let $A$ and $C$ be feasible with $p_A\preceq p_C$, and
+let $C^A$ have profile $p_A$, label probabilities $\theta_C$, eigenvalues
+$\alpha_C$ and register tables~$L_A$. This configuration is feasible: the
+model's conditions on $\theta$ and $\alpha$ hold at~$C$, and those on $L$
+at~$A$; by~(T2), its positive entries form $\Gamma_{p_A}$ and its
+decisions are those of~$A$. Every test held at $p_A$ is held at $p_C$ and
+passed by~$C$, hence by $C^A$ via~(T1). The held word tests of $p_A$ are
+admissible, as $A$ is feasible. Moreover $\bar P_{C^A}=\bar P_C$, $A^A=A$,
+and $A_B=B^A$.
+
+% compressed 2026-11-24: (c) the climb, written out a second time here, is
+% replaced by a citation of the climb in the proof of Theorem directed,
+% with the three facts it uses named.
+\emph{Climbing.} If feasible $C$ and $D$ have $p_C\preceq p_D$ and the
+same $\theta$ and~$\alpha$, then $D$ is finely reachable from~$C$. Indeed,
+the climb in the proof of Theorem~\ref{thm:directed}, from $A'$ to~$B$,
+applies with $C$ and $D$ in their places along the saturated chain from
+$p_C$ to~$p_D$. That climb keeps $\theta$ and $\alpha$ fixed, so every
+configuration built passes its held tests by~(T1). By~(T2), the registers
+give feasible configurations, and the register interpolations use only
+the affine argument of Lemma~\ref{lem:transfer}(d).
+
+% compressed 2026-11-24: (e) sentences merged in (a)-(c); both directions
+% of (a) and (b) kept.
+\begin{proof}[Proof of Theorem~\ref{thm:projected-components}]
+(a) Carrying shows that $A_B$ is feasible. If $A_B$ is finely reachable
+from~$A$, append a climb from $A_B$ to~$B$. Conversely, given rational
+$\varepsilon>0$, put $\varepsilon'=\varepsilon/(|R|+1)$ and take a
+reconfiguration sequence $A=C_0,C_1,\dots,C_n=B$ at
+tolerance~$\varepsilon'$. Profiles never decrease along it, so every
+$C_i^A$ is feasible at~$p_A$. A profile step keeps $\theta$ and $\alpha$,
+so $C_{i-1}^A=C_i^A$; a numerical step gives carried tables closer than
+$|R|\varepsilon'<\varepsilon$, by both bounds of~(T3). Deleting repetitions
+leaves numerical steps at~$p_A$, at tolerance~$\varepsilon$, from $A$
+to~$A_B$.
+
+(b) Steps never lower the profile, so fine reachability requires
+$p_A\preceq p_B$. Under this condition, by~(a) and
+$\bar P_{A_B}=\bar P_B$, it suffices that $A_B$ is finely reachable from
+$A$ exactly when $\bar P_A$ and $\bar P_B$ share a component of
+$\mathcal K_p$, where $p=p_A$. The set $H_p$
+of projected tables of feasible rational configurations at~$p$ is dense
+in~$\mathcal K_p$, which is closed and bounded, hence compact. Every
+sequence from $A$ to $A_B$ stays at~$p$ (Remark~\ref{rem:inputs}(ii)). %
+If $A_B$ is finely reachable from~$A$, then for each $\varepsilon>0$ take a
+sequence at a positive rational tolerance $\varepsilon'$ with
+$|R|\varepsilon'<\varepsilon$. By~(T3), the projected sequence lies in
+$H_p$ and has steps below~$\varepsilon$. Lemma~\ref{lem:compact-chain}
+therefore puts $\bar P_A$ and $\bar P_B$ in one component. Conversely, given rational $\varepsilon>0$,
+Lemma~\ref{lem:compact-chain} gives $\bar P_A=h_0,h_1,\dots,h_k=\bar P_B$
+in $H_p$ with consecutive sup distances below~$\varepsilon$. Each $h_j$ is
+the projected table of a feasible rational $C_j$ at~$p$. The carried
+$C_j^A$ keep these tables and share one register, so by~(T3) consecutive
+full tables differ by less than~$\varepsilon$. As the
+projected tables determine $\theta$ and~$\alpha$, the first is $A$ and the
+last~$A_B$.
+
+(c) Let $C$ be feasible and rational at~$q$, and $A$ feasible and rational
+at~$p$, which is attained. Carrying gives $C^A$ at~$p$ with
+$\bar P_{C^A}=\bar P_C$, so $H_q\subseteq H_p$ and the closures are
+nested.
+
+(d) Apply~(b) to $A$ and $B$, and to $A^+$ and~$B$. The order conditions
+hold because $p_A\preceq p_{A^+}\preceq p_B$.
+\end{proof}
+
+% compressed 2026-11-24: (d) the reading of (d) is cut to the one fact it
+% needs; the sign-example justification is kept.
+A feasible acquisition keeps the parameter vector, so
+$\bar P_{A^+}=\bar P_A$ in~(d). In the sign example, the feasible
+configurations at $p_A$ have label probabilities $1/2$, $z=1/4$ and any
+rational $y$ with $|y|\le\kappa$. Their projected tables are affine
+in~$y$, so $\mathcal K_{p_A}$ is a segment, whereas at $p_{A^+}$ the test
+$\mathsf{yy}\sim\mathsf{zz}$ leaves only $y=\pm1/4$.
+
+% compressed 2026-11-24: (e) sentences merged in both proofs; every check
+% kept.
+\begin{proof}[Proof of Theorem~\ref{thm:acquisition}]
+By Theorem~\ref{thm:directed}, $B$ is finely reachable from $A$ exactly
+when $p_A\preceq p_B$ and $\SC_{p_A}(\alpha_A)=\SC_{p_A}(\alpha_B)$, and
+from $A^+$ exactly when $p_{A^+}\preceq p_B$ and
+$\SC_{p_{A^+}}(\alpha_{A^+})=\SC_{p_{A^+}}(\alpha_B)$. Both order
+conditions hold, and $\alpha_{A^+}=\alpha_A$. The profile comparisons, the
+recovery of parameters from supplied tables and the compilation of
+$\Phi_{p_A}$ and $\Phi_{p_{A^+}}$ take polynomial time
+(Appendix~\ref{app:tractable-proofs}). The test makes two signed-core
+comparisons: using Theorem~\ref{thm:certificates}(a), it computes the
+cores of $\supp\alpha_A$ and $\supp\alpha_B$ under $\Phi_{p_A}$ and then
+under $\Phi_{p_{A^+}}$, and compares signs on them.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:source-schedule}]
+Fix rational $\varepsilon>0$. The proof of
+Theorem~\ref{thm:projected-components}(a) turns a sequence from $A$ to $B$
+at tolerance $\varepsilon/(|R|+1)$ into one from $A$ to $A_B$ at
+tolerance~$\varepsilon$ at~$p_A$. For $1\le j\le k$, let $C_j$ be $B$
+carried to~$q_j$ with the register of some feasible configuration
+at~$q_j$; it is feasible as $q_j\preceq p_B$. With $C_0=A_B$ and
+$C_{k+1}=B$, consecutive configurations have ordered profiles and the
+parameters $\theta_B$ and $\alpha_B$, so climbs at tolerance $\varepsilon$
+join them, changing only registers and profiles. If
+$\Gamma_{q_j}=\Gamma_{p_B}$, use the register of $B$ at~$q_j$: its support
+is right, each decision of $q_j$ is one of~$p_B$, as the partitions of
+$q_j$ are coarser, and the tests held at $q_j$ are held at~$p_B$. Then
+$C_j$ has the full parameter vector of~$B$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+\subsubsection{Order properties of the core}\label{app:core-order-proofs}
+
+\begin{proposition}[Empty cores]\label{prop:empty-core}
+Fix a budgeted signed-binomial system on~$J$, and $S\subseteq J$.
+(a)~$\core(S)=\emptyset$ if and only if $S$ has no nonempty irreducible
+subset. (b)~If some weight vector with $\Delta_S\eta=0$ is positive on all
+of~$S$, in particular if every test active on $S$ has equal total degrees
+on its two sides, then one peeling step leads from $S$ to~$\emptyset$.
+(c)~Any two feasible rational points with empty cores are finely
+connected, with no boundedness assumed.
+\end{proposition}
+
+% compressed 2026-11-24: (e) sentences merged in (a)-(c).
+\begin{proof}[Proof of Proposition~\ref{prop:empty-core}]
+(a) By Lemma~\ref{lem:irreducible}, $\core(S)$ is an irreducible subset
+of $S$ containing every irreducible subset of~$S$, so it is empty exactly
+when no irreducible subset of $S$ is nonempty.
+(b) A weight vector positive on all of $S$ defines the step
+$S\to\emptyset$. If every test $x^a=c\,x^b$ active on $S$ has
+$\sum_ja_j=\sum_jb_j$, then $\eta=\mathbf 1_S$ gives $(a-b)\cdot\eta=0$
+for each, as active tests have exponents only in~$S$.
+(c) If $x$ is feasible and rational with $\core(\supp x)=\emptyset$,
+iterating Lemma~\ref{lem:restriction}(a), which uses no boundedness,
+along a peeling of $\supp x$ to $\emptyset$ finely connects $x$ to the
+feasible point~$0$. Do the same for the other point; fine connectivity is
+an equivalence relation.
+\end{proof}
+
+% compressed 2026-11-24: (e) sentences merged; the degree count of each
+% equation type, both directions of the core claim, the order condition
+% and the feasibility of A_0 are kept.
+\begin{proof}[Proof of Theorem~\ref{thm:no-calibration}]
+Let $\alpha$ satisfy the equations of $\Phi_p$, and put $S=\supp\alpha$. A
+reversal equation has degree one on each side, the probe equations
+$\alpha_i(w)=\alpha_i(w')$ of a word test $w\sim w'$ have degrees
+$|w|=|w'|$, and a calibration $\alpha_{mi}=c$ has degrees one and zero. If
+$c=0$, then $\alpha_{mi}=0$, so $(m,i)\notin S$ and the calibration is
+active on no subset of~$S$. Hence, if $p$ holds no nonzero calibration,
+every test active on $S$ has equal degrees, and
+Proposition~\ref{prop:empty-core}(b) peels $S$ to $\emptyset$ in one step,
+so $\SC_p(\alpha)=0$. Conversely, if $p$ holds $\alpha_{mi}=c\neq0$, then
+$(m,i)\in S$. On every support containing $(m,i)$, that calibration is
+active; its row is the unit vector at $(m,i)$, forcing $\eta_{mi}=0$.
+Hence no peeling step removes $(m,i)$, and $\SC_p(\alpha)_{mi}=\sgn c\neq0$.
+
+Now let $A$ be feasible with no nonzero calibration held at~$p_A$, and $B$
+feasible. Fine reachability needs $p_A\preceq p_B$, as steps never lower
+the profile. If $p_A\preceq p_B$, then $p_B$ holds the tests of $p_A$, so
+$\alpha_B$ satisfies the equations of $\Phi_{p_A}$
+(Lemma~\ref{lem:separate}(b)); both signed cores at $p_A$ are zero, and
+Theorem~\ref{thm:directed} gives fine reachability. At a fixed profile
+with no nonzero calibration the order condition holds both ways, so any
+two feasible configurations there are mutually finely reachable. Finally,
+let $A_0$ have the profile, label probabilities and register tables of~$A$
+and all eigenvalues zero. The zero vector satisfies the probe equations of
+the held word tests (whose words are nonempty), the reversal equations,
+the held calibrations (all zero), and the budgets. With the label
+probabilities and register tables of~$A$, $A_0$ is thus feasible by
+Lemma~\ref{lem:separate}, and mutually finely reachable with $A$ by the
+fixed-profile claim just proved.
+\end{proof}
+
+% compressed 2026-11-24: (d) the first example's restatement of the body
+% (eta=(1,1) for y^2=z^2) is cut to its feasibility check; (e) merges.
+\emph{The examples after Theorem~\ref{thm:no-calibration}.} Without the
+calibration, the sign example's source $y=z=1/4$ stays feasible. For
+$(xy)^2=xy$ with $|x|+|y|\le2$, both $(1,1)$ and $(-1,-1)$ are feasible.
+On $\{x,y\}$ the balance $2\eta_x+2\eta_y=\eta_x+\eta_y$ forces $\eta=0$,
+so $\{x,y\}$ is irreducible; hence the signed cores $(+,+)$ and $(-,-)$
+differ, and by Theorem~\ref{thm:core} the points are not finely connected.
+With $z=0$ held and $\mathsf{yy}\sim\mathsf{zz}$
+not held, the row of $z=0$ is active on $\{z\}$ and forces $\eta_z=0$, so
+the formal support $\{z\}$ is irreducible, yet no eigenvalue vector
+passing the calibration has that support. The all-zero eigenvalue vector
+shows that the profile is attained.
+
+\begin{corollary}[Adding tests refines the classes]\label{cor:refine}
+(a)~Let every test of a budgeted signed-binomial system $\Phi$ occur in
+$\Phi'$, with the same budgets. Then, for every~$S$,
+$\core_\Phi(S)\subseteq\core_{\Phi'}(S)$ and
+\[
+  \core_\Phi(\core_{\Phi'}(S))=\core_\Phi(S)=\core_{\Phi'}(\core_\Phi(S)),
+\]
+equal $\Phi'$-signed cores imply equal $\Phi$-signed cores,
+and points finely connected under $\Phi'$ are finely connected
+under~$\Phi$.
+(b)~In the single-word class, if $A$ and $A'$ are feasible with
+$p_A\preceq p_{A'}$ and $\alpha_A=\alpha_{A'}$, every configuration finely
+reachable from $A'$ is finely reachable from~$A$. In particular an
+acquisition never enlarges the set of configurations finely reachable from
+its source.
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor:refine}]
+(a) A test of $\Phi$ active on $S$ is a test of $\Phi'$ active on~$S$, so
+every $\Phi'$-peeling step is a $\Phi$-peeling step with the same weights.
+Hence $S$ peels under $\Phi$ to $\core_{\Phi'}(S)$, and
+Lemma~\ref{lem:restriction}(c) gives
+$\core_\Phi(S)\subseteq\core_{\Phi'}(S)$ and
+$\core_\Phi(\core_{\Phi'}(S))=\core_\Phi(S)$.
+Also \(\core_{\Phi'}(\core_\Phi(S))=\core_\Phi(S)\). Deflation gives one
+inclusion, and idempotence and monotonicity in the test list give
+\(\core_\Phi(S)=\core_\Phi(\core_\Phi(S))\subseteq\core_{\Phi'}(\core_\Phi(S))\).
+Both absorption identities also hold for the signed-core maps on sign
+vectors, since each composition keeps the original signs on the resulting
+support. If
+$\SC_{\Phi'}(x)=\SC_{\Phi'}(x')$, then $\supp x$ and $\supp x'$ have one
+$\Phi'$-core $C'$, on which $x$ and $x'$ have the same signs, and both
+$\Phi$-cores equal $\core_\Phi(C')\subseteq C'$, so
+$\SC_\Phi(x)=\SC_\Phi(x')$. A sequence of feasible rational points
+of~$\Phi'$ is one of~$\Phi$, with the same steps, as the budgets agree.
+(b) If $B$ is finely reachable from $A'$, Theorem~\ref{thm:directed}
+gives $p_{A'}\preceq p_B$, hence $p_A\preceq p_B$, and
+$\SC_{p_{A'}}(\alpha_{A'})=\SC_{p_{A'}}(\alpha_B)$. The held tests are
+nested, so every equation of $\Phi_{p_A}$ occurs in $\Phi_{p_{A'}}$, with
+the same budgets. By~(a) and $\alpha_A=\alpha_{A'}$,
+$\SC_{p_A}(\alpha_A)=\SC_{p_A}(\alpha_B)$, and Theorem~\ref{thm:directed}
+gives fine reachability from~$A$.
+\end{proof}
+
+% compressed 2026-11-24: (d) the sign-example paragraph that followed this
+% proof is cut; it restated the sign example of Section 4.5 (Phi_{p_A}
+% gives only eta_z=0; after the acquisition {y,z} is irreducible).
+
+\begin{proposition}[Interior and closure operators]\label{prop:interior}
+Fix a budgeted signed-binomial system on~$J$. The core is an interior
+operator on subsets of~$J$: monotone, with $\core(S)\subseteq S$ and
+$\core(\core(S))=\core(S)$. The complement of the core on removed
+coordinates, $Z\mapsto J\setminus\core(J\setminus Z)$, is a closure
+operator whose closed sets are the complements of irreducible supports.
+At a profile $p$ of a single-word model, if a feasible configuration at~$p$
+has eigenvalue support~$S$, some feasible configuration at~$p$ has
+eigenvalue support $\core_p(S)$, the greatest irreducible such support
+inside~$S$.
+\end{proposition}
+
+% compressed 2026-11-24: (e) sentences merged; (d) the closing
+% sign-example sentence is cut, as it restated Section 6.2 and the sign
+% example of Section 4.5 (Phi_{p_A} gives only eta_z=0, so y peels).
+\begin{proof}[Proof of Proposition~\ref{prop:interior}]
+Peeling only removes coordinates, so $\core(S)\subseteq S$, and $S$ peels
+to $\core(S)$, which therefore has core $\core(S)$, by
+Lemma~\ref{lem:restriction}(c). If $U\subseteq S$, then $U$ peels to $U\cap\core(S)$
+by Lemma~\ref{lem:restriction}(b), so $\core(U)\subseteq\core(S)$.
+Complementation in $J$ reverses inclusion and is an involution, so
+$Z\mapsto J\setminus\core(J\setminus Z)$ is monotone, idempotent and
+extensive, and its fixed sets are the $Z$ with
+$\core(J\setminus Z)=J\setminus Z$, that is, with $J\setminus Z$
+irreducible.
+
+For the last claim, let $A$ be feasible at~$p$ with $S=\supp\alpha_A$.
+Iterating Lemma~\ref{lem:restriction}(a) along a peeling of $S$ to
+$\core_p(S)$ gives a feasible rational point of $\Phi_p$ with support
+$\core_p(S)$ that agrees with $\alpha_A$ there. With $\theta_A$ and $L_A$,
+this point forms a feasible configuration at~$p$
+(Lemma~\ref{lem:separate}). By Lemma~\ref{lem:irreducible}, $\core_p(S)$
+contains every irreducible subset of~$S$, attained or not.
+\end{proof}

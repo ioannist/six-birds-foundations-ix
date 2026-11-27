@@ -1,0 +1,401 @@
+
+\section{The problem at a fixed profile, and statement of results}\label{sec:problem}
+
+Sections~\ref{sec:model}--\ref{sec:binomial} set up the model, the problem
+at a fixed profile (no step changes the profile) and the algebraic language
+it compiles to. Section~\ref{sec:results} states the three results.
+% gloss: at a fixed profile
+
+% ---------------------------------------------------------------------------
+\subsection{The model}\label{sec:model}
+
+The model is built so that each label acts on each probe by a single
+number. Fix nonempty finite sets $M$ of labels, $X$ of base states and $R$
+of register values. The probes $\chi_i:X\to\{-1,1\}$, $i\in I$, are
+balanced and pairwise orthogonal:
+\[
+  \sum_{g\in X}\chi_i(g)=0,\qquad
+  \sum_{g\in X}\chi_i(g)\chi_{i'}(g)=|X|\,\mathbf 1_{i=i'} .
+\]
+% gloss: probe
+Nontrivial characters of a finite elementary abelian $2$-group are examples,
+but only these identities are used. Each label $m$ has a label probability
+$\theta_m$, an eigenvalue $\alpha_{mi}$ on each probe and register tables
+$L_m(g,h;\cdot,\cdot)$, and
+\[
+  Q_m(g,h)=\frac{1+\sum_i\alpha_{mi}\chi_i(g)\chi_i(h)}{|X|},\qquad
+  P_m((g,r),(h,r'))=\theta_m\,Q_m(g,h)\,L_m(g,h;r,r')
+\]
+are its base kernel and transition table. Each $Q_m$ is a
+\defterm{parity mixture}: it mixes a uniform refresh with moves that keep or
+flip probe signs. So every probe is an eigenvector of every base kernel,
+with eigenvalue~$\alpha_{mi}$. Here $\alpha_{mi}$ is an eigenvalue of $Q_m$,
+not in general of~$P_m$.
+
+Two bounds keep the label probabilities and base kernels positive as
+eigenvalues are damped. The \defterm{$\ell^1$ budget} $\kappa<1$ requires
+$\sum_i|\alpha_{mi}|\le\kappa$ for every label, while the eigenvalues
+themselves may be negative or zero. This budget makes $Q_m$ positive: with
+probability $1-\sum_i|\alpha_{mi}|$ the base state refreshes uniformly,
+and with probability $|\alpha_{mi}|$ moves to a uniform $h$ with
+$\chi_i(h)=\sgn(\alpha_{mi})\chi_i(g)$ (omitting zero-weight terms).
+Hence $Q_m(g,h)\ge(1-\kappa)/|X|>0$. The budget survives every decrease in
+absolute values, though not every coordinatewise decrease. The probability
+floor requires $\theta_m\ge\delta>0$ and
+$\sum_m\theta_m=1$; it lets steps in the transition tables bound steps in
+the eigenvalues (Section~\ref{sec:tractable}).
+
+The register is hidden from the word tests, which sum it out; it carries
+the discrete table-support and level data of the profile
+(Section~\ref{sec:profiles}). Its tables $L_m(g,h;\cdot,\cdot)$ are
+stochastic, may depend on the base transition $(g,h)$ and keep stationary a
+fixed rational register distribution $\nu$ of full support. The register,
+levels, decisions and admissible sets
+(Sections~\ref{sec:words}--\ref{sec:profiles}) enter the definition of
+feasibility and govern which profile steps are possible. All Markov
+hardness constructions in this paper use a one-value register, only
+level~$0$, and the full word-test list as the sole admissible set.
+
+A \defterm{reversal} is an involution $m\mapsto\bar m$ of the labels,
+included so that the stationary time reversal of each parameter vector
+remains in the model. It imposes $\alpha_{\bar mi}=\alpha_{mi}$ on every
+parameter vector, so these reversal equations must be included in the
+eigenvalue constraints $\Phi_p$ (Section~\ref{sec:binomial}). With the
+reciprocity $\nu(r)L_m(g,h;r,r')=\nu(r')L_{\bar m}(h,g;r',r)$, the
+distribution $\mu(g,r)=\nu(r)/|X|$ is stationary, and
+\[
+  \mu(g,r)\,P_m((g,r),(h,r'))\,\theta_{\bar m}
+  =\mu(h,r')\,P_{\bar m}((h,r'),(g,r))\,\theta_m
+\]
+even when $\theta_m\neq\theta_{\bar m}$. The stationary time reversal, with
+each reversed transition relabeled by the involution, has the same base and
+register kernels and label probabilities
+$\theta^{\mathrm{rev}}_m=\theta_{\bar m}$. All Markov hardness constructions
+use the identity reversal, while the $x^2=\bar xz$ example after
+Theorem~\ref{thm:fixed-profile} shows why the reversal equations matter
+for~$\Phi_p$.
+
+\begin{definition}[Shared-probe model]\label{def:model}
+A \emph{shared-probe model} fixes finite nonempty sets $M$, $X$, $R$,
+probes $(\chi_i)_{i\in I}$ as above, a reversal $m\mapsto\bar m$, a rational
+distribution $\nu$ on $R$ of full support, a maximum word length $H\ge1$
+and rationals $\delta>0$ and $0\le\kappa<1$. Its parameter vectors are the
+rational triples $(\theta,\alpha,L)$ with $\theta_m\ge\delta$,
+$\sum_m\theta_m=1$, $\sum_i|\alpha_{mi}|\le\kappa$,
+$\alpha_{\bar mi}=\alpha_{mi}$, and stochastic tables
+$L_m(g,h;\cdot,\cdot)$ that keep $\nu$ stationary and satisfy the
+reciprocity above.
+\end{definition}
+
+In other words, a parameter vector is a transition-labeled Markov chain
+on $X\times R$~\cite[Definition~1]{chenkiefer2014} with parity-mixture
+base kernels.
+% gloss: labeled Markov chain
+In the staged example, the base is
+$X=\{0,1\}$ with one probe, $\chi(0)=1$ and $\chi(1)=-1$. Its four labels
+$\mathsf x,\mathsf y,\mathsf z,\mathsf f$ each have probability $1/4$, are
+their own reversals and have eigenvalues $x,y,z,f$, with $f=0$ along the revision. The label $\mathsf f$ carries the
+remaining quarter of the label probability and appears in neither
+% gloss: held test
+held test. Here $\delta=1/8$, $\kappa=1/2$ and $H=2$. The register has four values
+and uniform $\nu$, and every table entry is $1/4$, except that for
+$\mathsf z$ at $g=h=0$ the block on values $\{0,1\}$ is
+$\operatorname{diag}(1/2,1/2)$.
+At label~$\mathsf y$, the conditional probability of keeping the probe
+sign changes from $5/8$ to $3/8$ along the revision. Jointly with that
+label, it changes from $5/32$ to $3/32$.
+
+% ---------------------------------------------------------------------------
+\subsection{Words and tests}\label{sec:words}
+
+A word $w$ is a nonempty string of labels of
+length $|w|\le H$, with $|w|_m$ occurrences of~$m$. Its word probability
+and word eigenvalues are $\theta(w)=\prod_m\theta_m^{|w|_m}$ and
+$\alpha_i(w)=\prod_m\alpha_{mi}^{|w|_m}$. Summing out the register, the
+probability of observing $w$ from state $(g,r)$ and ending at base state
+$h$ is
+\begin{equation}\label{eq:word-joint}
+  \theta(w)\,(Q_{w_1}\cdots Q_{w_{|w|}})(g,h)
+  =\frac{\theta(w)}{|X|}\Bigl(1+\sum_{i\in I}\alpha_i(w)\chi_i(g)\chi_i(h)\Bigr).
+\end{equation}
+
+% gloss: value test
+\begin{definition}[Word tests and value tests]\label{def:tests}
+A \emph{word test} is $w\sim w'$ (word-against-word) or $w\sim\{w',w''\}$
+with $w'\neq w''$ (word-against-pair), all words of one positive length at
+most~$H$. A parameter vector passes it if, from every state $(g,r)$ and for
+every final base state $h$, the probability~\eqref{eq:word-joint} for $w$
+equals that for $w'$, or the sum of those for $w'$ and $w''$. A
+\emph{value test} is a named calibration $\alpha_{mi}=c$ with $c\in\QQ$, or
+a probability-ratio test $\theta(w)=c\,\theta(w')$ with $|w|=|w'|$ and
+$c\in\QQ_{>0}$. A shared-probe model also fixes a final level $n_F\ge0$,
+finite lists of word tests and value tests, and the
+% gloss: admissible sets of word tests
+\emph{admissible sets of word tests}: the subsets of the word-test list
+that a configuration may hold together.
+\end{definition}
+
+Admissible sets let a model restrict which combinations of word tests may
+be held simultaneously. In all Markov hardness constructions, the full
+word-test list is the only admissible set.
+
+\begin{lemma}[What a word test says]\label{lem:compile}
+For every parameter vector:
+(a)~$w\sim w'$ passes if and only if $\theta(w)=\theta(w')$ and
+$\alpha_i(w)=\alpha_i(w')$ for every $i\in I$;
+(b)~$w\sim\{w',w''\}$ passes if and only if
+$\theta(w)=\theta(w')+\theta(w'')$ and
+$\theta(w)\alpha_i(w)=\theta(w')\alpha_i(w')+\theta(w'')\alpha_i(w'')$ for
+every $i\in I$.
+\end{lemma}
+
+Thus a word-against-word test gives one homogeneous rate equation and one
+binomial probe equation per probe. A word-against-pair test gives $1+|I|$
+displayed equations, possibly dependent. Its probe equations can couple
+label probabilities and eigenvalues and need not be binomial. By Lemma~\ref{lem:compile},
+the tests of the two examples also give the rate equations
+$\theta_{\mathsf x}\theta_{\mathsf y}=\theta_{\mathsf x}\theta_{\mathsf z}$
+and $\theta_{\mathsf y}^2=\theta_{\mathsf z}^2$. Lemma~\ref{lem:compile}
+and~\eqref{eq:word-joint} are proved in Appendix~\ref{app:problem-proofs}.
+
+% ---------------------------------------------------------------------------
+\subsection{Profiles and the fixed-profile problem}\label{sec:profiles}
+
+Reachability is between configurations, whose profile carries the discrete
+data.
+
+\begin{definition}[Profiles and feasibility]\label{def:profile}
+A \emph{profile} $p=(\Gamma_p,F^p,\mathcal T_p)$ has three parts. The
+table support $\Gamma_p$ is a set of indices $(m,g,r,h,r')$. The level
+partitions $F^p_0,\dots,F^p_{n_F}$ of $R$ each refine the one before. The
+\defterm{held tests} $\mathcal T_p$ are word tests and value tests that
+must keep passing. A decision at level $\ell$ is a $0/1$ function on $R$
+that is constant on the blocks of $F^p_\ell$. A configuration $A$ is a
+profile $p_A$ with a rational parameter vector
+$(\theta_A,\alpha_A,L_A)$, equivalently with its transition tables~$P_A$.
+It is \emph{feasible} if the positive entries of $P_A$ are exactly
+$\Gamma_{p_A}$, every decision $d$ at every level satisfies
+\[
+  \sum_{r':\,d(r')=1}L_m(g,h;r,r')=\sum_{r':\,d(r')=1}\nu(r')
+  \qquad\text{for all }m,g,h,r,
+\]
+the parameter vector passes every test in $\mathcal T_{p_A}$, and the held
+word tests form an admissible set.
+\end{definition}
+
+The displayed block-mass condition says that, for every label~$m$, base
+move $(g,h)$ and current register value~$r$, the new register value
+satisfies each level-$\ell$ decision with the same probability as
+under~$\nu$. Because the partitions are nested, any decision
+available at an earlier level is also available at level~$n_F$. It
+therefore suffices to check the displayed block-mass condition at
+level~$n_F$.
+
+% gloss: attained
+In other words, the profile records which transitions occur, which register
+partitions constrain block masses at each level and which tests are held. A
+profile is \defterm{attained} when some feasible rational configuration has
+it. In the staged example, levels $0$ and $1$ both group the register
+values as $\{0,1\}\mid\{2,3\}$, and the profile holds
+$\mathsf{xy}\sim\mathsf{xz}$, admissible on its own, and the calibration
+$z=1/4$.
+
+% gloss: fine reachability
+\begin{center}
+\fbox{\begin{minipage}{0.93\linewidth}
+\textsc{Fine Reachability at a fixed profile}\par\smallskip
+\emph{Input:} the explicitly presented model, a profile and two rational
+parameter vectors at it, in binary.\par\smallskip
+\emph{Promise:} both configurations are feasible.\par\smallskip
+\emph{Question:} is there, at every positive tolerance, a finite
+reconfiguration sequence of feasible rational configurations joining the
+two supplied configurations at that profile whose
+steps change each transition-table entry $P_m((g,r),(h,r'))$ by less than
+the tolerance? Zero steps are allowed when they coincide.\par\smallskip
+\emph{Supplied-tolerance variant:} the input also contains
+$\varepsilon_0\in\QQ_{>0}$, and the question is whether such a sequence
+exists at tolerance~$\varepsilon_0$.
+\end{minipage}}
+\end{center}
+
+If the answer is yes, the second configuration~$B$ is
+\defterm{finely reachable} from the first,~$A$. Real and rational
+tolerances give the same verdict.
+
+\begin{remark}[Inputs and equal profiles]\label{rem:inputs}
+(i)~Numbers are binary rationals, and the model is given by explicit lists
+and tables. The promise covers admissibility and attainment, and no
+algorithm here checks it.
+(ii)~Profile steps (Section~\ref{sec:directed}) go up a partial order, so a
+sequence between configurations at one profile contains no profile step, at
+any tolerance. Hence the lower bounds of Theorem~\ref{thm:boundary} hold
+with profile steps allowed.
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{Binomial systems, peeling and the signed core}\label{sec:binomial}
+% gloss: signed core
+
+Held word-against-word tests, calibrations and the fixed reversal equations
+give binomial eigenvalue equations, whose coordinates can be zero or
+negative; probability-ratio tests give only rate equations.
+Section~\ref{sec:core} decides reachability by tracking which coordinates
+can vanish together, and with which signs.
+
+% gloss: budgeted signed-binomial system
+\begin{definition}[Budgeted signed-binomial systems, peeling, signed core]\label{def:system}
+Let $J$ be finite.
+\begin{enumerate}
+\item[(a)] A \emph{binomial test} is $x^a=c\,x^b$ with $a,b\in\NN^J$ and
+$c\in\QQ$, where $x^a=\prod_jx_j^{a_j}$ and $x_j^0=1$ also at $x_j=0$. An
+\emph{$\ell^1$ budget} is $\sum_{j\in J_\beta}|x_j|\le\kappa_\beta$ for an
+explicitly listed subset $J_\beta\subseteq J$ and a rational $\kappa_\beta$.
+A \defterm{budgeted signed-binomial system} is a finite test list $\Phi$
+with finitely many budgets; its feasible points are those of $\RR^J$ that
+satisfy them all.
+\item[(b)] The \emph{signed support} of $x$ is $\supp x$ with the sign of each
+$x_j$ there. A test is \emph{active} on $S\subseteq J$ when
+$\supp a\cup\supp b\subseteq S$, and $\Delta_S$ has one row $a-b$,
+restricted to the columns in~$S$, for each test active on~$S$.
+\item[(c)] A \defterm{weight vector} $\eta\in\NN^S$ with $\Delta_S\eta=0$ defines
+the \emph{peeling step} $S\to T$ with $T=\{j\in S:\eta_j=0\}$. For a point
+$x$ of support $S$, its \defterm{monomial curve} is $x_jt^{\eta_j}$ on $S$
+and zero off $S$, with $t^0=1$, as $t\downarrow0$. $S$ \emph{peels to} $T$
+if zero or more peeling steps lead from $S$ to~$T$, with the active tests
+recomputed at each support.
+\item[(d)] The \emph{core} $\core_\Phi(S)$ is the least support that $S$ peels to
+(Lemma~\ref{lem:restriction}), and the \defterm{signed core}
+$\SC_\Phi(x)$ equals $\sgn x_j$ for $j\in\core_\Phi(\supp x)$ and $0$
+elsewhere ($\Phi$ is omitted when fixed).
+\item[(e)] Let $p$ be a profile of a model whose word tests are all
+word-against-word. Its \emph{eigenvalue constraints} $\Phi_p$ on
+$J=M\times I$ are one reversal equation $\alpha_{\bar mi}=\alpha_{mi}$ per
+coordinate, one equation $\alpha_i(w)=\alpha_i(w')$ per held
+word-against-word test and probe, and one equation $\alpha_{mi}=c$ per held
+calibration. Its budgets are $\sum_i|\alpha_{mi}|\le\kappa$, one per label.
+We write $\SC_p$ for $\SC_{\Phi_p}$.
+\end{enumerate}
+\end{definition}
+
+In other words, positive weights send their coordinates to zero while the
+active tests stay satisfied, and the signed core records the surviving
+support and signs, not magnitudes. The all-zero weight vector gives the
+identity step. On the signed support of a feasible point, a test with
+$c\neq0$ is inactive exactly when both its monomials vanish; for $c=0$ the
+left monomial must vanish, so the test is inactive. In $\Phi_p$ the case
+$c=0$ occurs only for a zero calibration. In the staged example, $\Phi_p$ is
+$xy=xz$, $z=1/4$ and identity reversal equations, and both endpoints have
+signed core $z$ alone, positive (Section~\ref{sec:restriction}).
+
+Write $\FQ$ for the set of feasible rational points of a budgeted
+signed-binomial system.
+
+\begin{center}
+\fbox{\begin{minipage}{0.93\linewidth}
+\textsc{Fine Connectivity}\par\smallskip
+\emph{Input:} a budgeted signed-binomial system (coordinates $J$, tests
+$x^a=c\,x^b$ with nonnegative integer exponents encoded in binary, with
+sparse lists allowed, and rational $c$,
+budgets $\sum_{j\in J_\beta}|x_j|\le\kappa_\beta$), and two rational
+points $x,x'$.\par\smallskip
+\emph{Promise:} $\FQ$ is bounded, and $x$ and $x'$ are feasible.\par\smallskip
+\emph{Question:} for every rational $\varepsilon>0$, is there a finite
+sequence of feasible rational points from $x$ to $x'$ in which consecutive
+points differ by less than $\varepsilon$ in every coordinate?\par\smallskip
+% gloss: affine trinomial
+\emph{With affine trinomials:} the input may also list affine trinomials
+$x_j+y_j=k$. The normalized version, with equations $x_{j0}+x_{j1}=1$, is
+the restriction on which hardness already holds.
+\end{minipage}}
+\end{center}
+
+% ---------------------------------------------------------------------------
+\subsection{Statement of results}\label{sec:results}
+
+% gloss: P-complete
+\begin{theorem}[The boundary, at a fixed profile]\label{thm:boundary}
+Consider Fine Reachability at a fixed profile for explicitly presented
+shared-probe models, with binary rational data and two configurations
+promised feasible.
+\begin{enumerate}
+\item[(i)] If every word test compares one word with one word, the problem
+is P-complete under deterministic log-space many-one reductions, with
+polynomial-size, polynomial-time checkable certificates for both answers.
+% gloss: PSPACE-hard
+\item[(ii)] If exactly one word test compares a single word with the sum
+over two distinct words, and every other word test compares one word with
+one word, the problem is PSPACE-hard under polynomial-time many-one
+reductions. The same reduction proves PSPACE-hardness of sequence existence
+at a supplied rational tolerance $\varepsilon_0>0$ whose reciprocal is
+polynomially bounded in the length of the reduction's input.
+\end{enumerate}
+Both lower bounds hold on instances with one common profile, at which every
+test is held, the table support is full and only level~$0$ occurs, and with
+a one-value register, identity reversal and $\kappa=1/2$. The instances for~(i) have a binary base, one probe,
+one calibration and every word in a word test of length three. Those
+for~(ii) have the word-against-pair test of length one or two, every other
+word test of length three, and distinct endpoints.
+\end{theorem}
+
+% gloss: exactly one word-against-pair test
+Thus the single-word problem is P-complete, and PSPACE-hardness already
+holds with exactly one word-against-pair test. We prove no upper bound for the full problem of part~(ii):
+a PSPACE upper bound would put the existence of rational zeros of integer
+polynomials in PSPACE (Theorem~\ref{thm:rational-roots}). On each output
+of the reduction of Section~\ref{sec:hard} from nondeterministic constraint
+logic (NCL)~\cite{hearndemaine}, the NCL verdict agrees with sequence
+existence at~$\varepsilon_0$ and at every smaller positive tolerance. This
+equivalence can fail at larger tolerances. Indeed, at tolerance~$2$, any
+two feasible configurations at one profile are one step apart, yet an NCL
+graph with two AND vertices joined by parallel edges of weights $2$, $1$
+and~$1$ has two legal orientations, each isolated.
+
+% gloss: G9
+\begin{theorem}[Fixed-profile criterion]\label{thm:fixed-profile}
+Fix a shared-probe model in which every word test is word-against-word, and
+let $A$ and $B$ be feasible rational configurations at a common
+profile~$p$. Then $B$ is finely reachable from $A$ if and only if
+$\SC_p(\alpha_A)=\SC_p(\alpha_B)$, where $\SC_p$ is the signed core for the
+eigenvalue constraints $\Phi_p$, including the reversal equations.
+\end{theorem}
+
+Thus, in the word-against-word class at a fixed profile, fine
+reachability depends only on the support that survives peeling and the
+signs there. In particular, the criterion joins the staged
+example's endpoints, whose signed cores agree, and separates the sign
+example's, whose cores differ at~$y$. The reversal equations cannot be
+omitted. Take a two-state base with one probe, a one-value register,
+$\kappa=1/2$ and labels $\mathsf x,\bar{\mathsf x},\mathsf z$ of probability
+$1/3$, where $\bar{\mathsf x}$ reverses~$\mathsf x$. Hold
+$\mathsf{xx}\sim\bar{\mathsf x}\mathsf z$ and $z=1/4$, so that $x^2=\bar xz$.
+Without the reversal equation, the weights $(1,2,0)$ peel the feasible
+endpoint $(x,\bar x,z)=(1/4,1/4,1/4)$ to the support of the feasible
+endpoint $(0,0,1/4)$, so the computed cores agree. With it, neither $x$
+nor $\bar x$ can peel, so the cores differ. Theorem~\ref{thm:directed}
+extends the criterion to profile steps: it adds $p_A\preceq p_B$ and uses
+the source profile's constraints.
+
+\begin{corollary}[The algebraic form]\label{cor:algebraic}
+Consider explicitly binary-encoded budgeted signed-binomial systems whose
+feasible rational set is promised bounded, with two supplied feasible
+rational points. Deciding whether, for every rational $\varepsilon>0$, a
+finite sequence of feasible rational points joins them with every
+coordinate changing by less than $\varepsilon$ per step is P-complete under
+deterministic log-space many-one reductions whose outputs meet the
+promises. Allowing a growing number of scalar affine trinomials
+$x_j+y_j=k$ makes it PSPACE-hard under polynomial-time many-one reductions
+with the same promises, even with $k=1$ throughout.
+\end{corollary}
+
+% gloss: affine trinomial
+Thus budgeted signed-binomial Fine Connectivity
+(Section~\ref{sec:binomial}) is P-complete, and allowing a
+growing number of scalar affine trinomials gives PSPACE-hardness under the
+same promises. %
+The signed-core characterization used for the upper bound requires
+rational boundedness. Without it, points with different signed cores can
+be finely connected, that is, joined at every tolerance, as the example in
+Section~\ref{sec:classification} shows.
+% gloss: finely connected
+For this rational problem the paper gives no upper bound with trinomials,
+and hardness with one trinomial is open.

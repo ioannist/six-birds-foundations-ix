@@ -1,0 +1,17 @@
+% Shared preamble for the v2 figures.
+% Fonts: acmart's pdfLaTeX set (Libertine text, newtxmath[libertine]) when
+% installed; otherwise Latin Modern. Recompile once Libertine is installed.
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\IfFileExists{libertine.sty}{%
+  \IfFileExists{newtxmath.sty}{%
+    \usepackage[tt=false,type1=true]{libertine}%
+    \usepackage[libertine]{newtxmath}%
+  }{\usepackage{lmodern}}%
+}{\usepackage{lmodern}}
+% Colours: Okabe--Ito-derived, distinguishable in greyscale by luminance
+% and always paired with a second cue (line weight, dash, marker shape).
+\definecolor{editblue}{HTML}{193E57}  % dark: paths, peeling steps, branch
+\definecolor{lawgray}{HTML}{81888C}   % mid grey: constraint sets, context
+\definecolor{pointver}{HTML}{D55E00}  % vermillion: forced points, blocks
+\newcommand{\lab}[1]{\mathsf{#1}}     % labels in sans serif

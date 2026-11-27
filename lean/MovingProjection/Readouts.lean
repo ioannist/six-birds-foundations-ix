@@ -1,5 +1,5 @@
 import MovingProjection.Experiments
-import MovingProjection.Omission
+import MovingProjection.Effects
 
 /-! Elementary edits specified by measured preparations, decisions at named
 grades, licensed comparisons, and available audit receipts. -/

@@ -1,0 +1,63 @@
+
+\section{Formal verification}\label{app:verification}
+
+This appendix records the Lean~\cite{lean4,mathlib} checks of the
+signed-core criteria and reduction correspondences, including selected
+record and size bounds. The LP resource bounds and complete
+binary-transduction and running-time analyses are written proofs.
+
+The supplement \emph{Lean Correspondence Tables} is archived with the
+code under the DOI given in the data and code availability
+statement. Tables~S1--S9 give the correspondence for the results and
+examples listed there. Depending on the row, the checked statement is the
+paper's statement itself, a semantic counterpart, a transfer whose added
+hypotheses the row names, or a related construction. Table~\ref{tab:lean-base}
+gives the versions, the build and the axioms.
+
+Two points of correspondence need comment. First, the Lean core is defined
+by classical choice: a least support is chosen after it is proved to exist
+and to be unique, and it is not computed. Second, the procedure of
+Section~\ref{sec:computing-core} is a mathematical algorithm.
+% gloss: G13
+Lean checks supplied peeling and Gordan certificates, the existence of certificates and
+a stage count.
+
+The LP search, the LP witness and certificate binary-length bounds, the
+complete binary encodings and transductions, and all running-time bounds
+are written proofs. The same holds for the imported
+hardness theorems of Goldschlager~\cite{goldschlager} and of Hearn and
+Demaine~\cite{hearndemaine}, and for the input encodings, including the
+full serialization and the tape-level log-space implementation of the
+reduction of Theorem~\ref{thm:p-hard}. It also holds for the compilers'
+total binary-output bounds, the upper bound of
+Corollary~\ref{cor:real-complexity}, from Heintz, Roy and
+Solern\'o~\cite{heintzroysolerno1994components}, and the conditional
+arithmetic consequence of Corollary~\ref{cor:quartic}. Where a supplement table lists
+no declaration, it records no formal counterpart for that result.
+
+% lint: lean-table begin
+\DeclareUrlCommand\leanid{\urlstyle{tt}}
+\newcommand{\lc}{\raggedright\let\\\tabularnewline\hspace{0pt}}
+\newcommand{\leanrow}{\addlinespace[2pt]}
+\newcommand{\leanhead}{%
+  \toprule
+  \lc Result & \lc Lean declarations, by file & \lc What Lean checks & \lc Proved only on paper\\
+  \midrule}
+
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Trusted base of the Lean development.}\label{tab:lean-base}
+\begin{tabular}{@{}p{0.18\textwidth}p{0.78\textwidth}@{}}
+\toprule
+\lc Lean & \lc Lean~4, toolchain \leanid{leanprover/lean4:v4.28.0}.\\
+\lc Mathlib & \lc Release tag \leanid{v4.28.0}, revision \leanid{8f9d9cff6bd728b17a24e163c9402775d9e6a365}.\\
+\lc Development & \lc Library and root file \leanid{MovingProjection}. In a fresh clone, \texttt{lake build} completed successfully after loading the Mathlib cache. Lake reported 2,435 jobs.\\
+\lc Axioms & \lc An audit of all 3,575 constants declared in the development, including every project declaration named in Tables~S1--S9 of the supplement, finds that they depend only on \leanid{propext}, \leanid{Classical.choice} and \leanid{Quot.sound}. The project code contains no \leanid{sorry}, \leanid{admit} or added \leanid{axiom}.\\
+\lc Archive & \lc Zenodo record with DOI \texttt{\archivedoi}. See the data and code availability statement.\\
+\bottomrule
+\end{tabular}
+\end{table}
+% lint: lean-table end
+
+\clearpage

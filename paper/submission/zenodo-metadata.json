@@ -1,0 +1,583 @@
+{
+  "metadata": {
+    "access_right": "open",
+    "creators": [
+      {
+        "affiliation": "Automorph Inc.",
+        "name": "Tsiokos, Ioannis",
+        "orcid": "0009-0009-7659-5964"
+      }
+    ],
+    "custom": {
+      "code:codeRepository": "https://github.com/ioannist/six-birds-foundations-ix",
+      "code:programmingLanguage": [
+        {
+          "id": "lean",
+          "title": {
+            "en": "Lean"
+          }
+        },
+        {
+          "id": "tex",
+          "title": {
+            "en": "TeX"
+          }
+        }
+      ]
+    },
+    "description": "<p>We prove that, for explicitly presented labeled shared-probe Markov chains with a hidden register, revising parameters under held tests goes from P-complete to PSPACE-hard at one step of test syntax. A word test equates joint probabilities of two sets of words with each final observed base state, from every initial full state. Its words share one positive length within the model's bound. Value tests fix a probe eigenvalue or an equal-length word-probability ratio. At a fixed profile (labeled transition support, register partitions, held tests), fine reachability asks for a finite feasible rational chain between supplied endpoints at every ε &gt; 0, each step changing every full-state labeled transition probability by less than ε. On promised-feasible inputs this is P-complete under log-space reductions if every word test compares single words, with polynomial-size certificates for both answers. It is PSPACE-hard if exactly one compares a word with a sum of two distinct words, the others single words, even at a supplied inverse-polynomial tolerance. Single-word tests give binomial probe equations that become vacuous when both monomials vanish. Peeling damps coordinates to zero along monomial curves with nonnegative integer weights that preserve the active equations, then recomputes them. At a fixed single-word profile each signed support has a unique terminal signed support, its signed core, and feasible endpoints are finely reachable exactly when their cores agree. In the reduction from nondeterministic constraint logic, a positive sum keeps at least one summand nonzero; further equations and budgets make the represented orientations legal. For budgeted signed-binomial systems with promised bounded rational solution sets and supplied feasible rational endpoints, fine connectivity by sup-norm steps is P-complete; growing numbers of affine trinomials make it PSPACE-hard.</p>\n<p>This record contains the paper, the Lean 4 source of its formalization (Lean and Mathlib v4.28.0; build with <code>lake build</code> in <code>lean/</code>), and the supplement <em>Lean Correspondence Tables</em>, which identifies the Lean declarations and the scope of each listed check.</p>",
+    "imprint_publisher": "Zenodo",
+    "keywords": [
+      "reconfiguration",
+      "P-completeness",
+      "PSPACE-hardness",
+      "labeled Markov chains",
+      "binomial systems",
+      "exact rational arithmetic",
+      "formal verification",
+      "Lean 4"
+    ],
+    "language": "eng",
+    "license": "cc-by-4.0",
+    "prereserve_doi": {
+      "doi": "10.5281/zenodo.24494014",
+      "recid": 24494014
+    },
+    "publication_date": "2026-11-25",
+    "publication_type": "preprint",
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.18365949",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1007/s12215-013-0115-9",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1215/S0012-7094-96-08401-X",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1214/009053606000000263",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.ijar.2011.01.013",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1090/conm/334/05984",
+        "relation": "cites",
+        "resource_type": "publication-section"
+      },
+      {
+        "identifier": "10.1007/s00454-013-9498-9",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1090/S0894-0347-99-00311-2",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.2307/1968867",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1089/cmb.2005.12.204",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "9780387901923",
+        "relation": "cites",
+        "resource_type": "publication-book"
+      },
+      {
+        "identifier": "10.1214/aos/1030563990",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.5281/zenodo.21370763",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.5281/zenodo.23075822",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1214/aos/1176349030",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1006/aama.1993.1011",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/BF01681344",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1103/RevModPhys.48.571",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/978-3-030-79876-5_37",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1145/3372885.3373824",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.5281/zenodo.23087000",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.5281/zenodo.23187549",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.5281/zenodo.23097936",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1137/07070440X",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.3233/SAT190097",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.tcs.2005.05.008",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.tcs.2010.12.005",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.jco.2005.11.001",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/s00037-006-0213-6",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.4230/LIPIcs.SoCG.2024.77",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1016/j.tcs.2019.05.028",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.tcs.2020.12.025",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1145/3618260.3649667",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.48550/arXiv.2312.17140",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1145/1008354.1008356",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1093/oso/9780195085914.001.0001",
+        "relation": "cites",
+        "resource_type": "publication-book"
+      },
+      {
+        "identifier": "10.1093/comjnl/36.5.504",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/BF02573999",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/3-540-54195-0_50",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1007/978-1-4612-2628-4_28",
+        "relation": "cites",
+        "resource_type": "publication-section"
+      },
+      {
+        "identifier": "10.1007/3-540-33099-2",
+        "relation": "cites",
+        "resource_type": "publication-book"
+      },
+      {
+        "identifier": "10.1145/62212.62257",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1109/SFCS.1979.10",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1137/0213038",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1090/conm/342/06126",
+        "relation": "cites",
+        "resource_type": "publication-section"
+      },
+      {
+        "identifier": "10.48550/arXiv.1409.1534",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1353/ajm.2007.0029",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/s13398-012-0076-4",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.48550/arXiv.math/0411265",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1007/978-1-4612-4108-9_8",
+        "relation": "cites",
+        "resource_type": "publication-section"
+      },
+      {
+        "identifier": "10.1216/JCA-2014-6-2-173",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1515/advgeom-2012-0020",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/s11538-010-9502-y",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.jsc.2005.04.003",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.48550/arXiv.1405.0320",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1006/jagm.1993.1038",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1145/2601327",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.3233/FI-2015-1168",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1214/12-AOS986",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.48550/arXiv.2203.01690",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1007/s11538-014-0024-x",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.ejor.2023.03.021",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1515/9781400881987-005",
+        "relation": "cites",
+        "resource_type": "publication-section"
+      },
+      {
+        "identifier": "10.1214/08-EJS349",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/978-3-030-30806-3_7",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.4230/LIPIcs.CONCUR.2019.14",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1016/j.jcss.2021.02.006",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.4204/EPTCS.256.2",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/s10703-023-00442-x",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/978-3-030-31514-6_7",
+        "relation": "cites",
+        "resource_type": "publication-section"
+      },
+      {
+        "identifier": "10.1145/2603088.2603099",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.48550/arXiv.2609.13401",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1109/LICS.2001.932503",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1007/978-3-642-15155-2_19",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1016/j.jco.2026.102055",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.48550/arXiv.2610.26206",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "https://math.mit.edu/~poonen/papers/aws2003.pdf",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.48550/arXiv.math/0411107",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1080/10586458.1992.10504244",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1090/conm/270/04377",
+        "relation": "cites",
+        "resource_type": "publication-section"
+      },
+      {
+        "identifier": "https://github.com/openai/math/tree/301488868beec11bfd897168433b0a64f5258559/preprints/Hilberts-tenth-problem-over-the-rational-numbers-October-6-2026",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.48550/arXiv.2610.20691",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1137/110857751",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.48550/arXiv.2611.16130",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1112/blms/27.6.513",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1137/0208040",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/0004-3702(87)90051-8",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "https://www.ijcai.org/proceedings/1993/192",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1007/978-3-642-00312-7_38",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.48550/arXiv.2310.08494",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.48550/arXiv.1707.09601",
+        "relation": "cites",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.1016/0743-1066(84)90014-1",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1145/1060590.1060636",
+        "relation": "cites",
+        "resource_type": "publication-conferencepaper"
+      },
+      {
+        "identifier": "10.1007/s10463-010-0290-9",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/s00209-009-0487-x",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1214/009117904000000766",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1093/imrn/rnaa112",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/s00209-021-02837-0",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.46298/theoretics.24.10",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1007/s10208-005-0208-8",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.jnt.2025.01.023",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1016/j.jsc.2010.06.009",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1145/2996450",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1177/027836498400300405",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1177/0278364909352098",
+        "relation": "cites",
+        "resource_type": "publication-article"
+      },
+      {
+        "identifier": "10.1090/cbms/038",
+        "relation": "cites",
+        "resource_type": "publication-book"
+      }
+    ],
+    "title": "One Word Against Two: The Complexity of Revising Markov Laws Under Held Tests",
+    "upload_type": "publication"
+  }
+}

@@ -1,0 +1,114 @@
+\documentclass[acmsmall,screen,review,nonacm]{acmart}
+
+% --- Journal metadata (volume, number, article and DOI are set by ACM) ----
+\acmJournal{TOCT}
+
+% --- Packages ---------------------------------------------------------------
+% acmart already loads amsmath, amsthm (acmthm=true), natbib, hyperref,
+% graphicx, xcolor and booktabs.
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\AtEndPreamble{%
+  \theoremstyle{acmdefinition}%
+  \newtheorem{remark}[theorem]{Remark}%
+  \theoremstyle{acmplain}}
+
+\newcommand{\wt}{\operatorname{wt}}
+%                 A comment "% gloss: <term or G-id>" on the same or an
+%                 adjacent line marks a gloss given in other words.
+% % lint: lean-table begin / end
+%                 brackets the Appendix A correspondence table, the only
+%                 place where Lean identifiers may appear.
+% % lint: program begin / end
+%                 brackets the origin paragraph (Section 1.5) and the marked
+%                 reading paragraph (Section 8.2), the only places where the
+%                 program vocabulary may appear.
+\newcommand{\defterm}[1]{\emph{#1}}
+% Release identity (DOI, version, date) written by the Zenodo toolkit's
+% paper_set_release.py.
+\input{includes/release_metadata}
+% Zenodo archive DOI (reserved 2026-11-24, deposition 24494014; see
+% paper/submission/zenodo-release.json).
+\newcommand{\archivedoi}{10.5281/zenodo.24494014}
+% Shared notation (moved from Section 3)
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\SC}{\operatorname{sc}}
+\newcommand{\FQ}{\mathcal F_{\QQ}}
+\newcommand{\FR}{\mathcal F_{\RR}}
+
+% --- Front matter ---------------------------------------------------------------
+\title[One Word Against Two]{One Word Against Two: The Complexity of Revising Markov Laws Under Held Tests}
+
+\author{Ioannis Tsiokos}
+\orcid{0009-0009-7659-5964}
+\affiliation{%
+  \institution{Automorph Inc.}
+  \city{Athens}
+  \country{Greece}}
+\email{ioannis@automorph.io}
+\renewcommand{\shortauthors}{Ioannis Tsiokos}
+
+\begin{abstract}
+We prove that, for explicitly presented labeled shared-probe Markov chains with a hidden register, revising parameters under held tests goes from P-complete to PSPACE-hard at one step of test syntax. A word test equates joint probabilities of two sets of words with each final observed base state, from every initial full state. Its words share one positive length within the model's bound. Value tests fix a probe eigenvalue or an equal-length word-probability ratio. At a fixed profile (labeled transition support, register partitions, held tests), fine reachability asks for a finite feasible rational chain between supplied endpoints at every $\varepsilon>0$, each step changing every full-state labeled transition probability by less than $\varepsilon$. On promised-feasible inputs this is P-complete under log-space reductions if every word test compares single words, with polynomial-size certificates for both answers. It is PSPACE-hard if exactly one compares a word with a sum of two distinct words, the others single words, even at a supplied inverse-polynomial tolerance. Single-word tests give binomial probe equations that become vacuous when both monomials vanish. Peeling damps coordinates to zero along monomial curves with nonnegative integer weights that preserve the active equations, then recomputes them. At a fixed single-word profile each signed support has a unique terminal signed support, its signed core, and feasible endpoints are finely reachable exactly when their cores agree. In the reduction from nondeterministic constraint logic, a positive sum keeps at least one summand nonzero; further equations and budgets make the represented orientations legal. For budgeted signed-binomial systems with promised bounded rational solution sets and supplied feasible rational endpoints, fine connectivity by sup-norm steps is P-complete; growing numbers of affine trinomials make it PSPACE-hard.
+\end{abstract}
+
+% CCS 2012 concepts (concept IDs as used in published ACM CCS markup).
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10003752.10003777.10003779</concept_id>
+       <concept_desc>Theory of computation~Problems, reductions and completeness</concept_desc>
+       <concept_significance>500</concept_significance>
+   </concept>
+   <concept>
+       <concept_id>10003752.10003777.10003783</concept_id>
+       <concept_desc>Theory of computation~Algebraic complexity theory</concept_desc>
+       <concept_significance>300</concept_significance>
+   </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Theory of computation~Problems, reductions and completeness}
+\ccsdesc[300]{Theory of computation~Algebraic complexity theory}
+
+% Keywords: the candidates of the target profile, in American spelling.
+\keywords{reconfiguration, P-completeness, PSPACE-hardness, labeled Markov chains, binomial systems, exact rational arithmetic, formal verification}
+
+\begin{document}
+
+\maketitle
+
+\noindent{\small \manuscriptversion, \manuscriptdate. \copyright~\manuscriptyear{} Automorph Inc. CC-BY 4.0. Zenodo DOI: \href{https://doi.org/\paperdoi}{\paperdoi}.}
+
+\input{sections/01-intro}
+\input{sections/02-problem}
+\input{sections/03-signed-core}
+\input{sections/04-tractable}
+\input{sections/05-hard}
+\input{sections/06-timing}
+\input{sections/07-exactness}
+\input{sections/08-discussion}
+\input{sections/09-open}
+
+% Back matter: AI use in the research, data and code availability.
+\input{statements}
+
+\bibliographystyle{ACM-Reference-Format}
+% references_v2.bib: see latexmkrc (BIBINPUTS).
+\bibliography{references_v2}
+
+\appendix
+\input{sections/appendix-a-verification}
+\input{sections/appendix-b-proofs}
+\input{sections/appendix-b5-proofs}
+\input{sections/appendix-b6-proofs}
+\input{sections/appendix-b7-proofs}
+
+\end{document}

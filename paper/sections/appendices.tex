@@ -23,39 +23,25 @@ Effects and table readback &
 \path{NativeExperiments.elementary_iff_unique_effect},\newline
 \path{NativeExperiments.same_tests_same_effect},\newline
 \path{NativeExperiments.table_exact_six}\\
-Common witness and obstruction &
-\path{Example.single_edit_requires_all_six},\newline
+Positive-tolerance obstruction &
 \path{Example.obstructionTolerance_value},\newline
 \path{Example.obstruction_at_native_tolerance}\\
-Clock families and terminal contract &
-\path{Example.every_basis_two_grades},\newline
-\path{Example.minimum_complete_catalogue},\newline
-\path{Example.six_with_terminal_contract}\\
 Recomputed and frozen damping &
 \path{StagedContraction.edits_through_zero},\newline
 \path{StagedContraction.no_single_contraction_to_core},\newline
 \path{StagedContraction.signed_cores},\newline
 \path{StagedContraction.frozen_rejects}\\
-Foundations II witnesses on the coupled description &
-\path{Example.Manuscript.all_roles_active},\newline
-\path{Example.Manuscript.role_realization},\newline
-\path{Example.Manuscript.one_recorded_edit_needs_all_six}\\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-Run \verb|lake build| from \path{lean} with Lean and Mathlib v4.28.0.
-The project includes the Foundations~II role and raw-record
-definitions used by the witness bridge in \path{lean/SixBirds}.
+Run \verb|lake build| from \path{lean} with Lean~\citep{lean4} and
+Mathlib~\citep{mathlib} v4.28.0.
 The checked least-support definition chooses a least reduct
 classically after proving it exists and is unique.
 The finite feasibility procedure in \Cref{sec:spectral} is a
 mathematical algorithm for the support.
-The correspondence table in Foundations~II documents the separate
-schema projection status of its general recognition-relative
-theorem~\citep[Appendix B]{foundations2v3}.
-The declarations above implement the native results and the
-particular witness bridge.
+The declarations above implement the native results.
 The fixed-projection normal form, affinity criterion and finite-event
 result in \Cref{sec:companion} have written proofs in the appendix.
 Their statements are outside the scope of this Lean correspondence.

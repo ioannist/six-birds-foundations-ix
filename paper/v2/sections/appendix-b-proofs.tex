@@ -1,0 +1,493 @@
+% Appendix B. Deferred proof details -- 950 words
+% (appendix share 12.3% of 14,250; option (a), O-6)
+%
+% B.1 Serialization of the P-hardness reduction (C1.4): record layout,
+%     field widths, preliminary log-space validation, and the map from
+%     malformed inputs to the fixed feasible negative instance ... 180 words
+% B.2 Separation estimates (C7): radius, determinant estimates and M
+%     .......................................................... 120 words
+% B.3 Zero probes (C10-C13; C13 with its compact-closure and rate-fiber
+%     arguments) ............................................... 400 words
+% B.4 One-state compilers and bounds (C3 compiler and polynomial-size
+%     proof; C5 template and encoding bounds) ................... 250 words
+
+\section{Deferred proof details}\label{app:proofs}
+
+\subsection{Proofs for Section~\ref{sec:problem}}\label{app:problem-proofs}
+
+\begin{proof}[Proof of~\eqref{eq:word-joint}]
+For each fixed base trajectory, summing the register factors backwards uses
+their unit row sums. The remaining sum over base trajectories is the
+indicated base-matrix product. The base kernels share the uniform and probe
+projections, which gives the displayed expansion.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:compile}]
+By~\eqref{eq:word-joint}, each side combines the pairwise orthogonal
+nonzero functions $1$ and $\chi_i(g)\chi_i(h)$ of $(g,h)$. Compare
+coefficients, and in~(a) divide by $\theta(w)=\theta(w')>0$.
+\end{proof}
+
+\subsection{Proofs for Section~\ref{sec:core}}\label{app:core-proofs}
+
+% compressed 2026-11-24: type (c): in part (a) the subdivision sentence is
+% named "rational subdivision" and later proofs (Lemma transfer(d), the
+% control, the algebraic transfer, Theorem rational-roots) cite it instead
+% of repeating it; type (e): parts (b) and (c) tightened, every step kept.
+\begin{proof}[Proof of Lemma~\ref{lem:restriction}]
+(a) For $t>0$, an active test gains $t^{\eta\cdot a}$ and
+$t^{\eta\cdot b}$ on its two sides, equal as $\Delta_S\eta=0$. An inactive
+test has both sides zero at~$x$, through a coordinate outside $S$ or
+through $c=0$, and they stay zero along the curve, as those coordinates
+do. The equalities pass to $t=0$ by continuity, and $|x_j(t)|\le|x_j|$
+keeps the budgets. The curve is rational at rational~$t$ and uniformly
+continuous on $[0,1]$, so finely spaced rational samples give, for each
+$\varepsilon>0$, a sequence from $x$ to $x(0)$ with steps
+below~$\varepsilon$ (\emph{rational subdivision}).
+
+(b) A test active on $U$ is active on~$S$, and $a-b$ vanishes outside~$U$,
+so $\Delta_U\eta|_U=0$, with zero set $U\cap T$. Along
+$S=S_0\to S_1\to\dots\to S_m=T$ this gives
+$U\to U\cap S_1\to\dots\to U\cap S_m=U\cap T$.
+
+(c) Let $C$ have least cardinality among the supports $S$ peels to. If $S$
+peels to~$U$, then by~(b) $S$ peels to $U\cap C$, so $C\subseteq U$ by
+minimality. Thus $C$ is least and unique, and $U$ peels to $U\cap C=C$,
+which is also least for~$U$. Supports with the same core both peel to it;
+conversely, a common support they both peel to has one core, that of each.
+\end{proof}
+
+% compressed 2026-11-24: type (e): the right-inverse step is stated in two
+% sentences instead of four; no step removed.
+\begin{proof}[Proof of Lemma~\ref{lem:limit}]
+By convergence, $T=\supp x^*$ keeps the signs of~$\sigma$. Put
+$Z=S\setminus T$; if $Z=\emptyset$, take $\eta=0$.
+Otherwise let $\ell^{(k)}=(\log|x^{(k)}_j|)_{j\in S}$. Every test active
+on $S$ has $c\neq0$ and nonzero monomials at $x^{(k)}$, so
+\[
+  \Delta_{S,T}\,\ell^{(k)}_T+\Delta_{S,Z}\,\ell^{(k)}_Z=\gamma ,
+\]
+where $\Delta_{S,T}$ and $\Delta_{S,Z}$ are the column blocks of $\Delta_S$
+and $\gamma$ lists the $\log|c|$. This system includes a row for every test active on~$S$,
+including those whose monomials vanish at~$x^*$. As $\ell^{(k)}_T$
+converges, $\Delta_{S,Z}\ell^{(k)}_Z$ is bounded, while
+$\ell^{(k)}_Z\to-\infty$ entrywise. For a fixed linear right inverse $B$
+of $\Delta_{S,Z}$ on its image,
+$\ell^{(k)}_Z-B\Delta_{S,Z}\ell^{(k)}_Z\in\ker\Delta_{S,Z}$ is within a
+bounded distance of $\ell^{(k)}_Z$, so its negative is eventually
+positive. The integer matrix $\Delta_{S,Z}$ has a rational kernel basis,
+so rational approximation and clearing denominators give a positive
+integer kernel vector. Extending it by zero on~$T$ yields a weight vector
+with $\Delta_S\eta=0$ and zero set~$T$. So $S$ peels to~$T$,
+$\core(T)=\core(S)$ by Lemma~\ref{lem:restriction}(c), and with the signs
+on~$T$, $\SC(x^*)=\SC(x^{(k)})$. The peeling step keeps the starting
+magnitudes on the surviving support; those magnitudes may differ from the
+limit magnitudes.
+\end{proof}
+
+The bridge to Tevelev's criterion~\cite[Lemma~2.2]{tevelev} is as follows.
+Impose the tests active on $S$ in the complex torus on~$S$. A component
+containing a subsequence has algebraic closure meeting the closed orbit of
+$\mathbb A^{S\setminus T}\times(\mathbb C^*)^T$, where $T=\supp x^*$.
+Tevelev's Lemma~2.2 gives a valuation vector in the relative interior of
+the coordinate cone. Valuation of the active equations puts this vector in
+$\ker\Delta_S$, and clearing denominators gives the weights. The retained
+signs follow from real convergence.
+
+% compressed 2026-11-24: (d) the opening roadmap sentence ("We first join x
+% and x' by a real curve ... exactly") is cut; (c) the inactive-test check
+% cites Lemma restriction(a); the closing epsilon/3 step is named
+% "rational sampling" for reuse in Lemma transfer(c).
+\begin{proof}[Proof of Lemma~\ref{lem:interpolation}]
+Let $S$ be the common support. On $S$ put
+\[
+  \xi_j(t)=\sgn(x_j)\,|x_j|^{1-t}|x'_j|^{t}\qquad(0\le t\le1),
+\]
+and $\xi_j(t)=0$ off~$S$. An active test reads
+$(a-b)\cdot\log|\xi|=\log|c|$ on~$S$, with a sign condition independent
+of~$t$; this is affine in $t$ and holds at both ends, hence throughout.
+Inactive tests stay zero as in the proof of
+Lemma~\ref{lem:restriction}(a). Each $|\xi_j(t)|$ is convex in~$t$,
+strictly when $|x_j|\neq|x'_j|$, so a budget containing a changed
+coordinate has strict slack for $0<t<1$, and a budget of unchanged
+coordinates keeps its endpoint value.
+
+Write each $\rho_j=|x'_j|/|x_j|$ $(j\in S)$ as
+$\prod_\pi\pi^{\zeta_{j\pi}}$ with integer exponents over one finite set of
+primes. The endpoints satisfy the active tests with the same signs, so
+$\rho^{a-b}=1$ for each, and unique factorization gives
+$\Delta_S\zeta_\pi=0$ for every~$\pi$, with $\zeta_{j\pi}=0$ wherever
+$\rho_j=1$. At an interior time $t$ choose positive rationals $r_\pi$ near
+$\pi^t$, and put $x_j\prod_\pi r_\pi^{\zeta_{j\pi}}$ on $S$ and $0$
+off~$S$. This point is rational, has the signs of~$x$, keeps the unchanged
+coordinates, satisfies the inactive tests as before, and satisfies every
+active test exactly, each gaining the factor
+$\prod_\pi r_\pi^{(a-b)\cdot\zeta_\pi}=1$ between its sides. It tends to
+$\xi(t)$ as $r_\pi\to\pi^t$, so close choices meet the budgets.
+
+Finally, given $\varepsilon>0$, uniform continuity gives
+$0=t_0<\dots<t_n=1$ with
+$\|\xi(t_i)-\xi(t_{i-1})\|_\infty<\varepsilon/3$; keeping $x$ and $x'$ and
+replacing each interior $\xi(t_i)$ by such a rational point within
+$\varepsilon/3$ gives steps below~$\varepsilon$ (\emph{rational
+sampling}).
+\end{proof}
+
+% compressed 2026-11-24: (e) sentences merged; both directions kept.
+\begin{proof}[Proof of Lemma~\ref{lem:compact-chain}]
+Let $h$ and $h'$ lie in different components of~$Z$. In a compact
+Hausdorff space a point's component is the intersection of its clopen
+neighborhoods, so a clopen $V$ contains $h$ but not~$h'$. The compact sets
+$V$ and $Z\setminus V$ are at a positive distance~$d$, and steps below $d$
+never leave~$V$.
+
+Conversely, fix $\varepsilon>0$, let $R\subseteq Y$ be the points reached
+from $h$ by sequences in $Y$ with steps below~$\varepsilon$, and let $O$
+and $O'$ be the unions of the open $\varepsilon/3$-balls about the points
+of $R$ and of $Y\setminus R$. They cover~$Z$, as $Y$ is dense, and are
+disjoint, since a common point would put a point of $Y\setminus R$ within
+$2\varepsilon/3$ of~$R$, hence in~$R$. The component of $h$ is connected
+and meets~$O$, so it lies in~$O$; if it contains $h'$, then $h'\in O$, so
+$h'\notin O'$ and $h'\in R$.
+\end{proof}
+
+\subsection{Proofs for Section~\ref{sec:tractable}}\label{app:tractable-proofs}
+
+% compressed 2026-11-24: type (e): two sentences merged.
+\begin{proof}[Proof of Lemma~\ref{lem:separate}]
+Lemma~\ref{lem:compile}(a) splits each held word test into the equation
+in~(a) and one probe equation per probe. Each value test constrains
+$\theta$ or $\alpha$ alone, and every parameter vector satisfies the
+reversal equations and the budgets. As $\theta_m\ge\delta>0$ and
+$Q_m(g,h)\ge(1-\kappa)/|X|>0$, an entry of $P_m$ is positive exactly when
+that of $L_m$ is.
+\end{proof}
+
+% compressed 2026-11-24: type (b): in part (a) the quotient bound is stated
+% in one sentence; type (c): in part (c) the closing subdivision (finite
+% subdivision at epsilon/3, keep endpoints, approximate interior samples
+% within epsilon/3) is replaced by a citation of rational sampling (proof
+% of Lemma interpolation), and in part (d) the sampling sentence cites
+% rational subdivision.
+\begin{proof}[Proof of Lemma~\ref{lem:transfer}]
+(a) A row of $P_m$ sums to $\theta_m$, as $Q_m$ and $L_m$ are stochastic.
+Since $Q_m\chi_i=\alpha_{mi}\chi_i$,
+\[
+  \chi_i(g)\sum_{h,r'}P_m((g,r),(h,r'))\,\chi_i(h)=\theta_m\alpha_{mi}.
+\]
+Tables differing by at most $\tau$ per entry change both row sums,
+ordinary and signed, by at most $N\tau$, the weights being signs. As
+$\theta_m\ge\delta$ at both and $|\alpha_{mi}|\le\kappa<1$, subtracting the
+quotients gives
+$|\alpha_{A,mi}-\alpha_{B,mi}|\le N\tau/\delta+|\alpha_{B,mi}|\,N\tau/\delta
+\le2N\tau/\delta$.
+
+(b) Each entry is $\theta_mQ_m(g,h)L_m(g,h;r,r')$, a product of three
+numbers in $[0,1]$, and $Q_m$ is affine in~$\alpha$. On $[0,1]$,
+$|uvw-u'v'w'|\le|u-u'|+|v-v'|+|w-w'|$.
+
+(c) If $\theta=\theta'$, keep it fixed. Otherwise normalize
+$\gamma_m(t)=\theta_m^{1-t}(\theta'_m)^t$ by $\sum_m\gamma_m(t)$. Each
+equation $\theta(w)=c\,\theta(w')$ with $|w|=|w'|$ holds along $\gamma$, as
+at both ends, and survives normalization, both sides having equal degree.
+Every $\gamma_m(t)\ge\delta$, and for $0<t<1$ the weighted
+arithmetic--geometric mean inequality gives $\sum_m\gamma_m(t)<1$, as some
+coordinate changes, so every normalized probability exceeds~$\delta$.
+Rational sampling (proof of Lemma~\ref{lem:interpolation}) of the ratios
+$\theta'_m/\theta_m$, then normalization, keeps the equations exact, and
+the slack above the probability floor absorbs the approximation at interior samples.
+
+(d) Unit row sums, stationarity of~$\nu$, reciprocity and the block-mass
+conditions are affine in~$L$, and a convex combination of two nonnegative
+tables with the same positive entries has those positive entries. At fixed
+$\theta$ and $\alpha$ each table entry is linear in~$L$, so rational
+subdivision of the segment gives the sequence.
+\end{proof}
+
+% compressed 2026-11-24: type (b): the Cramer bound in part (a) is stated
+% in one sentence; type (e): the verifier steps of part (c) are merged into
+% two sentences, each check kept.
+\begin{proof}[Proof of Theorem~\ref{thm:certificates}]
+One LP per round finds all removable coordinates at once:
+\[
+  \max\sum_{j\in S}\zeta_j\quad\text{subject to}\quad
+  \Delta_S\eta=0,\quad \eta\ge0,\quad 0\le\zeta_j\le1,\quad \zeta_j\le\eta_j .
+\]
+A coordinate is removable exactly when some feasible $\eta$ is positive
+there. Summing one such $\eta$ per removable coordinate and scaling
+attains their number, the maximum, so every optimum has $\zeta_j=1$
+exactly on the removable coordinates and $\eta=0$ exactly on the
+others. The LP has at most $2n$ nonnegative variables, entries at most
+$D_0$ and right sides $0$ or~$1$, so its polyhedron is pointed. By
+Cramer's rule an optimal vertex has one positive integer denominator
+which, like its numerators, is at most $(2n)!\,D_0^{2n}$ in absolute
+value; clearing it gives integer weights. There are at most $n$ deletion
+stages, each removing a coordinate, and empty support stops without an LP.
+This proves~(a).
+
+For~(b), if $\eta\ge0$ and $\Delta_C\eta=0$, then
+$(\Delta_C^{\mathsf T}\lambda)\cdot\eta=\lambda\cdot\Delta_C\eta=0$ forces
+$\eta=0$, so $C$ is irreducible, hence the core by
+Lemma~\ref{lem:restriction}(c). Conversely, at an irreducible $C$ no
+nonzero real $\eta\ge0$ has $\Delta_C\eta=0$, as rational linear
+feasibility would give a rational one, so Gordan's alternative gives
+$\Delta_C^{\mathsf T}\lambda>0$. For nonempty $C$, express this
+combination, scaled to be at least one in every coordinate, in a basis of
+the row space of $\Delta_C$ drawn from the difference vectors of its
+active tests. Independence makes the multiplier polyhedron pointed, and
+Cramer's rule at a vertex, times the absolute determinant, gives integers
+of absolute value at most $n!\,D_0^n$. Empty $C$ uses the empty
+certificate. At most $n$ stages of $n$ weights, and at most $n$
+multipliers with their indices, give the stated binary length.
+
+For~(c), compile $\Phi_p$ with $|M||I|$ coordinates, exponents at most~$H$,
+and one test per reversal equation, held calibration, and pair of held word
+test and probe. Compute both signed cores and apply
+Theorem~\ref{thm:fixed-profile}. For either verdict, supply a certificate
+as in~(b) for each endpoint under the same compiled tests. From the
+endpoint's support, the verifier checks at each stage that the weights are
+nonnegative integers balancing every test active on the current support,
+and passes to exactly the zero-weight coordinates. It then checks the Gordan
+inequalities at the terminal support and reads the surviving signs from
+the endpoint. It accepts exactly when the two signed cores agree for yes or
+differ for no. Checking compares sums of $n$ products of numbers of
+polynomial binary length.
+\end{proof}
+
+% compressed 2026-11-24: type (e): two sentences merged.
+\begin{proof}[Proof of Proposition~\ref{prop:long-sequences}]
+On the full support the weights satisfy $\eta_{i+1}=2\eta_i$, so
+$\eta_i=2^i$ peels every coordinate. The equations have equal weighted
+degree on their two sides for weights $2^i$ on~$x_i$; their ordinary
+degrees differ. Both signed cores are zero, and
+Theorem~\ref{thm:core} applies, since the budgets bound the feasible set.
+Ordered from~$0$, a sequence with steps below $1/4$ has a first point with
+$x_0\ge1/4$. There $x_0<1/2$, so its reduced denominator is $q\ge2$; hence
+$x_k=x_0^{2^k}$ has reduced denominator $q^{2^k}\ge2^{2^k}$, of binary
+length at least $2^k+1$.
+\end{proof}
+
+% compressed 2026-11-24: (a) the weight equations, stated in the body's
+% proof sketch of Theorem p-hard, are cited instead of re-listed; the
+% remaining paragraphs are tightened with every case kept.
+\begin{proof}[Proof of Theorem~\ref{thm:p-hard}]
+Both endpoints are feasible whatever the circuit: the probability floor
+forces the label probabilities, every word has length three, the gate tests avoid~$s$,
+and $s$ enters the output test squared. The table support is full, as the
+base kernels are positive and the register has one value.
+
+Common letters contribute equally to both sides of a weight equation and
+the reversal equations are identities, so active tests give the weight
+equations listed in the proof sketch after Theorem~\ref{thm:p-hard}. Let
+$K$ be the core of the full support, and $S_0$ the set of~$z$, the false
+gates and, if the output is~$0$, the sentinel. We show $K=S_0$.
+
+At~$S_0$, every coordinate other than $z$ has an active test tying it
+to~$z$. A constant~$0$ has its own test; a false AND gate, the slot of a
+false input; a false OR gate, its test (both inputs are false); and $s$,
+the output test. So $S_0$ is irreducible, and Lemma~\ref{lem:irreducible}
+gives $S_0\subseteq K$.
+
+Conversely, let $\gamma$ be the first true gate in~$K$, if any. Its tests
+are identities or inactive on~$K$, as its true inputs come earlier and lie
+outside~$K$, and every other test contains $\mathsf g_\gamma$ as a common
+letter or not at all. So the unit weight vector at $g_\gamma$ balances
+every test active on~$K$, contradicting the irreducibility of the core
+(Lemma~\ref{lem:irreducible}). If the output is~$1$, the output test is
+then inactive on~$K$, and the same argument removes~$s$. Hence $K=S_0$.
+
+The endpoints have full support and the same signs except at~$s$, so
+their signed cores agree exactly when $s\notin K$, that is, when the
+output is~$1$; Theorem~\ref{thm:fixed-profile} gives the equivalence.
+The log-space transducer of Appendix~\ref{app:serialization} writes the
+instance record by record, reading only the requested gate and evaluating
+none.
+\end{proof}
+
+% compressed 2026-11-24: (e) sentences merged; every case of the cover
+% analysis, the admissibility check and the nesting check are kept.
+\begin{proof}[Proof of Lemma~\ref{lem:covers}]
+Choose feasible configurations at $p$ and~$q$, with parameter vectors
+$(\theta,\alpha,L)$ and $(\theta',\alpha',L')$. %
+A decision at a level of~$p$ is constant on the finer blocks of~$q$, so
+$L'$ meets the block-mass conditions of~$p$. By Lemma~\ref{lem:compile}
+and the definitions of the value tests, passing any held test of either
+shape depends only on $\theta$ and~$\alpha$. Since $\theta_mQ_m(g,h)>0$,
+the table support is determined by~$L$. Each case below gives an attained
+profile strictly above $p$ and at most~$q$, which the cover forces to
+equal~$q$.
+
+If the supports differ, $L'$ with $\theta$ and $\alpha$ attains the
+partitions and tests of~$p$ with the support of~$q$. If the supports agree
+and the held word tests differ, the configuration at~$q$ attains the
+profile with the held word tests of $q$ (admissible since $q$ is attained)
+and everything else from~$p$. It also
+attains every profile obtained from~$p$ by replacing only its held
+word-test set with an admissible set strictly between the two held sets,
+so a cover adds several word tests only when no such set is admissible. %
+If the supports and held word-test sets agree but the held value-test sets
+differ, the configuration at~$q$ attains the profile obtained by adding
+to~$p$ one value test held at~$q$ but not at~$p$. The cover forces this
+profile to equal~$q$. If only partitions differ, replace $F^p_\ell$ by $F^q_\ell$ at the
+last level $\ell$ where they differ. The partitions stay nested: earlier
+levels of $p$ are coarser than $F^p_\ell$, hence than $F^q_\ell$, while
+later ones agree with~$q$. Moreover, $L'$ meets them all, as no level is
+finer than in~$q$. The cases are disjoint, and each
+is read from the readout table of Remark~\ref{rem:readback}.
+\end{proof}
+
+% compressed 2026-11-24: (e) sentences of the necessity, sufficiency and
+% complexity paragraphs merged; (d) the restatement "In Theorem directed
+% the verifier first compares the profiles" is cut. Every step of the
+% climb is kept; Appendix app:acquisition-proofs cites this climb.
+\begin{proof}[Proof of Theorem~\ref{thm:directed}]
+For necessity, numerical steps keep the profile and profile steps raise
+it, so $p_A\preceq p_B$, and every configuration of a sequence passes the
+tests of~$p_A$. Its eigenvalue vector is thus a feasible point of
+$\Phi_{p_A}$ (Lemma~\ref{lem:separate}). Profile steps keep $\alpha$, and
+numerical steps move it as in the proof of Theorem~\ref{thm:fixed-profile},
+which gives the equality of signed cores.
+
+For sufficiency, $\theta_B$ and $\alpha_B$ pass the source's tests (which
+$p_B$ holds); since the register conditions are separate, they form with
+the source register a feasible configuration~$A'$ at~$p_A$. As
+$\alpha_{A'}=\alpha_B$, Theorem~\ref{thm:fixed-profile} joins $A$ to~$A'$.
+
+It remains to climb. Take a saturated chain
+$p_A=q_0\prec q_1\prec\dots\prec q_k=p_B$ of attained profiles, each
+covering the previous one. It exists because there are finitely many
+profiles; it is a chain in the order, not a sequence of steps. At each
+$q_j$, pick the register $L_j$ of some feasible configuration (with $L_0$
+the source register). Since $q_j\preceq p_B$, every test held at $q_j$ is held
+at $p_B$ and passed by $\theta_B$ and $\alpha_B$. Together with $L_j$,
+these values form a feasible configuration $A_j$ at~$q_j$, with $A_0=A'$.
+If the support shrinks from $q_{j-1}$ to $q_j$, the profile step
+$A_{j-1}\to A_j$ keeps the projected tables. If the supports agree, first
+interpolate from $L_{j-1}$ to $L_j$ at $q_{j-1}$ by
+Lemma~\ref{lem:transfer}(d), as $L_j$ meets the weaker partition
+conditions with the same support, then take the profile step with the full
+parameter vector fixed. A final interpolation at~$p_B$ replaces $L_k$
+by~$L_B$, which also handles $p_A=p_B$.
+
+For the complexity, comparing supports, partitions and test lists checks
+$p_A\preceq p_B$ in polynomial time; a failed comparison certifies no, and
+otherwise the verifier of Theorem~\ref{thm:certificates}(c) runs on
+$\Phi_{p_A}$. For endpoint data supplied as tables, the rational row sums
+and divisions have polynomial binary cost, since a common denominator of a
+row sum has binary length at most the sum of the input denominator
+lengths. At equal profiles the two problems agree
+(Remark~\ref{rem:inputs}(ii)), so Theorem~\ref{thm:p-hard} gives the
+single-word lower bound with profile steps, and the same transfer from
+Theorem~\ref{thm:boundary}(ii), proved in Section~\ref{sec:hard}, gives
+the widened one.
+\end{proof}
+
+\begin{remark}[What the data determine]\label{rem:readback}
+A configuration's \defterm{readout table} lists its answers to three kinds
+of \defterm{named queries}: the value of each transition-table entry,
+whether each decision is available at each level, and whether each listed
+test is held. For a fixed shared-probe model, the readout table determines
+the configuration; the probabilities that the held word tests compare need
+not. In the sign example, $A^+$ and~$B$ agree on the joint probabilities
+with each final base state in the held word test. Their word probabilities
+agree because the label probabilities agree, and the projected distributions
+agree because the sign-changing eigenvalue enters squared. The
+correspondence with attained readout tables preserves and reflects steps,
+step types and reconfiguration sequences. %
+The same holds under any relabeling that identifies the full attained
+profile order, the named queries and their answers, which level is final,
+and how transition entries are grouped into each projected sum.
+\end{remark}
+
+% compressed 2026-11-24: (c) the row-sum recovery of theta and alpha cites
+% the proof of Lemma transfer(a) instead of repeating it; (e) sentences
+% merged.
+\begin{proof}[Reconstruction in Remark~\ref{rem:readback}]
+The positive entries give the support, and two register values share a
+block exactly when every available decision agrees on them. From any
+starting state, the row sums of the proof of Lemma~\ref{lem:transfer}(a)
+give $\theta_m$ and $\theta_m\alpha_{mi}$, hence~$\alpha_{mi}$; then $Q_m$
+follows, and dividing each entry by $\theta_mQ_m(g,h)>0$ gives~$L_m$. Held
+membership is read from the named answers, so the readout table recovers
+the profile and the full parameter vector. Numerical steps are tested on the
+recorded entries, and profile steps by attained covers and equality of the
+recorded full tables or their projected sums. These checks also determine
+the step type and transfer finite sequences in both directions. A relabeling
+preserves these checks when it identifies the attained order, the named
+queries and their answers, including the final level and the grouping of
+entries in each projected sum.
+\end{proof}
+
+% compressed 2026-11-24: (e) two sentences merged; (d) the read-back "The
+% endpoints still differ in one sign and depend only on the gate count, but
+% the instances have no profiles" is cut (Section 4.5 states it).
+\paragraph{The algebraic transfer of Section~\ref{sec:circuit-transfer}.}
+The emitted system has the $G+2$ eigenvalue coordinates, the probe equations
+of the $2G+1$ word tests, the calibration $z=1/4$ and the budgets
+$|x_m|\le1/2$; identity reversal adds only identities. Every coordinate
+lies in a budget, so the feasible set is bounded; the endpoints are
+feasible whatever the circuit, and their signed cores agree exactly when
+the output is~$1$, by the proof of Theorem~\ref{thm:p-hard}. Converting each length-three word to an exponent record uses
+bounded counts and log-space scans. By Corollary~\ref{cor:real}, with no
+boundedness needed, equal signed cores also give the real path-component
+verdict, and the endpoints are feasible over the reals.
+
+\subsubsection{Serialization of the reduction of Theorem~\ref{thm:p-hard}}\label{app:serialization}
+
+% compressed 2026-11-24: (e) merges, and the record items start with their
+% names instead of "A header gives" etc.; the record layout, field
+% bounds, work-tape analysis and the malformed-input handling are kept in
+% full.
+Both parts of Theorem~\ref{thm:boundary} read one explicit binary grammar,
+in which a word test lists one word on one side and one or two on the
+other. Goldschlager's circuits come with an assignment to their input
+variables~\cite{goldschlager}; substituting the assigned constants needs
+one scan of the assignment and an index counter. The transducer then
+writes the following records, with binary natural fields separated by
+delimiters that fixed binary codes can replace.
+\begin{itemize}
+\item Header: $G+2$ labels, two base states, one register value, one
+probe, $H=3$, $\delta=1/(G+2)$, $\kappa=1/2$, $2G+1$ word tests and one
+calibration.
+\item Geometry: the probe's signs, the register weight, the single level
+and its partition, and the single admissible set.
+\item Per label: its number, its reversal, its probability, its eigenvalue
+at each endpoint, its four unit register entries and its four support
+flags.
+\item Per word test: its number, its two words as triples of label numbers,
+and three membership flags, all one: in the admissible set and in the held
+tests of each endpoint. Calibration: the anchor, the probe, the value
+$1/4$ and two held flags.
+\end{itemize}
+The flags encode the explicitly listed admissible set and endpoint held
+sets, which rescanning can also emit as lists. Records appear in order:
+header, geometry, labels, output test, the two slots of each gate in source
+order, and calibration. Gate-label numbers and gate-slot test numbers
+are fixed affine functions of the gate index, with a fixed offset for each
+slot. The anchor, sentinel and output test have fixed numbers. There are $3G+6$
+records, each with at most seventeen fields; the $2G+16$ field bound
+applies to the parameter records. Entries shared by the endpoints are
+printed twice where the grammar asks for separate tables. Requested
+transition-table entries are $3/(8(G+2))$ or $5/(8(G+2))$, by the probe
+signs and the sentinel's sign, so a denominator $8(G+2)$ still has
+logarithmic binary length.
+
+For an input of length~$\ell_{\mathrm{in}}$, the work tape holds a constant
+number of counters and fields of binary length
+$O(\log(\ell_{\mathrm{in}}+2))$. They record the input position, the
+current record and slot, the header data, the current gate record and the
+current output field and digit. A slot is emitted by scanning to the requested gate
+record, reading its type and at most two input indices, and computing
+label and test numbers by addition and doubling. Each field is written in
+binary from its leading digit, with a digit counter. The output has binary
+length $O((G+1)\log(G+2))$, and the running time is polynomial.
+
+First count the input length $\ell_{\mathrm{in}}$ and scan the gate
+records. Check that there are $G\ge1$ records, that each has an allowed tag
+and exactly the required fields, that the output index is in
+$1,\ldots,G$, and that every predecessor is in $1,\ldots,i-1$ at
+record~$i$. Reject an index as soon as its value exceeds
+$\ell_{\mathrm{in}}$. On failure emit the instance for the one-gate
+constant-$0$ circuit, a fixed feasible negative instance. So the reduction
+is total, and its scans use logarithmic space on every input.
+

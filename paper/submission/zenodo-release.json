@@ -1,0 +1,56 @@
+{
+  "artifact": {
+    "bytes": 977599,
+    "filename": "Tsiokos_2026_One_Word_Against_Two_The_Complexity_of_Revising_Markov_Laws_Under_Held_Tests.pdf",
+    "pages": 57,
+    "path": "paper/submission/artifacts/Tsiokos_2026_One_Word_Against_Two_The_Complexity_of_Revising_Markov_Laws_Under_Held_Tests.pdf",
+    "sha256": "b7417cb1dbdaeaf1ab08071444fd8c7e517c5120a14213d9768cd4a345a23e5d",
+    "source_git_commit": "b86011c4e6be0e06004e8a36a764033798e369b2",
+    "validated_values": {
+      "copyright": "© 2026",
+      "license": "CC-BY 4.0",
+      "paper version": "Preprint v1.0",
+      "publication date": "25 November 2026",
+      "reserved DOI": "10.5281/zenodo.24494014"
+    }
+  },
+  "assembled_at_utc": "2026-11-25T13:04:43.465910+00:00",
+  "dashboard_url": "https://zenodo.org/deposit/24494014",
+  "deposition_id": 24494014,
+  "doi_reservation": {
+    "client": "datacite",
+    "identifier": "10.5281/zenodo.24494014",
+    "provider": "datacite",
+    "verified_via": "rdm_pid_table"
+  },
+  "draft_source": "created",
+  "manual_dashboard_publication_only": true,
+  "metadata": {
+    "citation_count": 106,
+    "path": "paper/submission/zenodo-metadata.json",
+    "sha256": "916d1aed996c1943e6131d7a19afb429efc32a868a75bab7b64bf7487a39a3a3",
+    "skipped_citations": [
+      {
+        "bib_key": "rockafellar",
+        "reason": "no supported identifier field"
+      }
+    ]
+  },
+  "paper_release_include": "paper/v2/includes/release_metadata.tex",
+  "publication_date": "2026-11-25",
+  "remote_file": {
+    "bytes": 977599,
+    "filename": "Tsiokos_2026_One_Word_Against_Two_The_Complexity_of_Revising_Markov_Laws_Under_Held_Tests.pdf",
+    "md5": "390b380667a1a4b6b6977656d67394c3",
+    "sha256": "b7417cb1dbdaeaf1ab08071444fd8c7e517c5120a14213d9768cd4a345a23e5d",
+    "verified": true
+  },
+  "remote_metadata": {
+    "desired_sha256": "916d1aed996c1943e6131d7a19afb429efc32a868a75bab7b64bf7487a39a3a3",
+    "modified": "2026-11-25T13:06:22.918247+00:00",
+    "sha256": "1ffc67e53491d2a73285169cf66ddb778659bdc0cca9cdddb1bd72378bcb40df"
+  },
+  "reserved_doi": "10.5281/zenodo.24494014",
+  "schema_version": 1,
+  "stage": "file_uploaded"
+}

@@ -1,0 +1,562 @@
+\documentclass[acmsmall,screen,nonacm]{acmart}
+\usepackage{mathtools}
+\usepackage{xr}
+\externaldocument[P-]{../build/main}
+\newcommand{\archivedoi}{10.5281/zenodo.24494014}
+\newcommand{\wt}{\operatorname{wt}}
+% Shared notation (moved from Section 3)
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\SC}{\operatorname{sc}}
+\newcommand{\FQ}{\mathcal F_{\QQ}}
+\newcommand{\FR}{\mathcal F_{\RR}}
+
+
+\renewcommand{\thetable}{S\arabic{table}}
+\title{Lean Correspondence Tables: Supplement to ``One Word Against Two: The Complexity of Revising Markov Laws Under Held Tests''}
+\author{Ioannis Tsiokos}
+\orcid{0009-0009-7659-5964}
+\affiliation{%
+  \institution{Automorph Inc.}
+  \city{Athens}
+  \country{Greece}}
+\email{ioannis@automorph.io}
+\renewcommand{\shortauthors}{Ioannis Tsiokos}
+\begin{document}
+\maketitle
+\noindent These tables identify the Lean declarations and scope of each
+listed check. The Lean~4 development is archived with the paper under the
+DOI \texttt{\archivedoi}. Cross-references to the paper use its numbering.
+Tables S1--S9 are numbered within this supplement. In each row, the third
+column states what Lean checks and the fourth what is proved only on
+paper.
+
+% lint: lean-table begin
+\DeclareUrlCommand\leanid{\urlstyle{tt}}
+\newcommand{\lc}{\raggedright\let\\\tabularnewline\hspace{0pt}}
+\newcommand{\leanrow}{\addlinespace[2pt]}
+\newcommand{\leanhead}{%
+  \toprule
+  \lc Result & \lc Lean declarations, by file & \lc What Lean checks & \lc Proved only on paper\\
+  \midrule}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:problem}. Declarations
+are named relative to the namespace \texttt{MovingProjection}. In a cell,
+each group gives a file and, where needed, a namespace:
+``\texttt{F.lean}, \texttt{N}: \texttt{a}, \texttt{b}'' names
+\texttt{N.a} and \texttt{N.b} in the file \texttt{F.lean}. Declarations marked
+private are internal proof steps.
+The same conventions hold in
+Tables~\ref{tab:lean-core}--\ref{tab:lean-exactness}.}\label{tab:lean-problem}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Equation~\eqref{P-eq:word-joint}, Lemma~\ref{P-lem:compile}
+& \lc \leanid{NativeWords.lean}: \leanid{nativeWordEndpoint_factor}.
+\leanid{EventExperiments.lean}, \leanid{NativeExperiments}: \leanid{singleton_joint_iff}.
+\leanid{ParityKernel.lean}, \leanid{ParityBasis}: \leanid{word_identity_iff}.
+\leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: \leanid{joint_words_iff}.
+& \lc The factorization of word probabilities; (a)~as equal word probabilities
+and equal projected word kernels, with kernels compared through eigenvalue
+products; (b)~for nonempty words, the probability equation and one equation
+per probe.
+& \lc None.\\
+\leanrow
+\lc Definition~\ref{P-def:system}
+& \lc \leanid{Spectral.lean}: \leanid{MonomialTest}, \leanid{MarkBudget}, \leanid{Legal}.
+\leanid{Contraction.lean}: \leanid{Contracts}, \leanid{Reduces}, \leanid{IsCore}, \leanid{core}.
+\leanid{Components.lean}: \leanid{signedCore}.
+\leanid{Local.lean}: \leanid{FineConnected}.
+\leanid{Experiments.lean}, \leanid{NativeExperiments}: \leanid{protocol}.
+\leanid{Capabilities.lean}, \leanid{Protocol}: \leanid{fiber}.
+\leanid{FixedProfile.lean}: \leanid{spectrumBudgets}.
+& \lc The algebraic definitions of Definition~\ref{P-def:system}(a)--(d), and
+the related fine-connectivity definition of
+Section~\ref{P-sec:fine-connectivity}. For (e), \leanid{NativeExperiments.protocol}
+and \leanid{Protocol.fiber} supply the held word and calibration rows and
+the reversal rows, and \leanid{spectrumBudgets} supplies the per-label
+budgets. The Lean relation \leanid{FineConnected} admits an empty chain even
+at an unlawful point; the classification supplies feasibility of the
+endpoints as separate hypotheses. The Lean model type assumes $\kappa<1$;
+with a nonempty label set, the existence of a feasible parameter vector
+also implies $\kappa\ge0$.
+& \lc Computing the core (Theorem~\ref{P-thm:certificates}(a)).\\
+\leanrow
+\lc Theorem~\ref{P-thm:fixed-profile}
+& \lc \leanid{FixedProfile.lean}: \leanid{finePhysical_iff_signedCore}.
+\leanid{Experiments.lean}, \leanid{NativeExperiments}: \leanid{exact_six_iff}, \leanid{compiled_rate_tests}.
+\leanid{ComplexityTheorem.lean}, \leanid{EventExperiments}: \leanid{singleton_criterion}.
+& \lc The fixed-profile signed-core equivalence. The abstract form assumes
+homogeneous rate rows and positive ratios. The native equal-length tests
+with positive ratios supply those hypotheses.
+& \lc None.\\
+\leanrow
+\lc Theorem~\ref{P-thm:boundary}(i)
+& \lc \leanid{ComplexityTheorem.lean}, \leanid{EventExperiments}: \leanid{complexity_boundary}, \leanid{singleton_certificate}.
+Rows for Theorems~\ref{P-thm:certificates} and~\ref{P-thm:p-hard}.
+& \lc The signed-core criterion, soundness and existence of certificates on
+presented inputs, and the circuit equivalence.
+& \lc Membership in P, certificate size and checking time; the log-space
+reduction and Goldschlager's theorem.\\
+\leanrow
+\lc Theorem~\ref{P-thm:boundary}(ii)
+& \lc \leanid{ComplexityTheorem.lean}, \leanid{EventExperiments}: \leanid{complexity_boundary}.
+Rows for Section~\ref{P-sec:hard}.
+& \lc The NCL equivalence at the supplied tolerance and for fine reachability,
+for each length of the word-against-pair test; distinct constructed endpoints for distinct input orientations.
+& \lc Polynomial-time encoding, binary output size and the polynomial bound
+on $1/\varepsilon_0$, together with Hearn--Demaine's hardness theorem.\\
+\leanrow
+\lc Corollary~\ref{P-cor:algebraic}, P-complete part
+& \lc \leanid{AlgebraicBoundary.lean}, \leanid{MonotoneCircuitMarkov.Circuit}: \leanid{algebraic_fine_iff_value}, \leanid{algebraic_endpoint_legal}, \leanid{algebraic_bounded}.
+\leanid{CoreCertificate.lean}, \leanid{CoreCertificate}: \leanid{checkPair_sound}.
+\leanid{CertificateComplete.lean}, \leanid{CoreCertificate}: \leanid{checkPair_complete}, \leanid{checkCore_complete_short}.
+& \lc The circuit system: feasible endpoints, the bounded promise and
+equivalence to the circuit value; certificate soundness, existence and the
+stage bound.
+& \lc LP search with its round, dimension and binary-length bounds; certificate encoding;
+running time; the log-space transduction.\\
+\leanrow
+\lc Corollary~\ref{P-cor:algebraic}, PSPACE part
+& \lc \leanid{AlgebraicBoundary.lean}, \leanid{AlgebraicConstraintLogic}: \leanid{lawful_iff}, \leanid{endpoint_lawful}, \leanid{bounded}, \leanid{chain_of_flips}, \leanid{flips_of_chain}, \leanid{fine_iff_flips}.
+& \lc Exact semantics of the charge binomials, budgets and trinomials;
+feasible endpoints; boundedness; legal flips give sequences at every
+tolerance, and a sequence at tolerance one gives legal flips. The forward
+direction clips the toggles to $[0,1]$.
+& \lc The polynomial-time encoding; Hearn and Demaine's theorem.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:core}.}\label{tab:lean-core}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Lemma~\ref{P-lem:restriction}
+& \lc (a) \leanid{Spectral.lean}: \leanid{rational_contraction}.
+\leanid{Local.lean}: \leanid{fineConnected_scale}, \leanid{fineConnected_to_core}.
+\leanid{RealComponents.lean}: \leanid{real_contract_path} (private).
+(b) \leanid{Contraction.lean}: \leanid{Contracts.restrict}, \leanid{Reduces.restrict}.
+(c) \leanid{Contraction.lean}: \leanid{exists_core}, \leanid{IsCore.unique}, \leanid{IsCore.of_reduces}, \leanid{core_eq_of_reduces}, \leanid{core_eq_iff_common_reduct}.
+& \lc Part (a): feasible rational samples and fine connectivity, and a
+feasible real monomial path. Parts (b) and (c): restriction and the
+least-support conclusions.
+& \lc None.\\
+\leanrow
+\lc Lemma~\ref{P-lem:irreducible}
+& \lc \leanid{CoreOrder.lean}: \leanid{irreducibleSupport_iff_core_eq}, \leanid{core_greatest_irreducible}, \leanid{core_eq_union_irreducible}.
+& \lc As stated.
+& \lc None.\\
+\leanrow
+\lc Figure~\ref{P-fig:peeling} (the staged example)
+& \lc \leanid{StagedContraction.lean}, \leanid{StagedContraction}: \leanid{edits_through_zero}, \leanid{two_contractions}, \leanid{no_single_contraction_to_core}, \leanid{signed_cores}, \leanid{factorable_by_signed_core}, \leanid{frozen_rejects}.
+& \lc Sequences through zero at every tolerance; the starting support needs two peeling steps to reach its core;
+the signed cores and the verdict; keeping the source equations for both
+reductions leaves no common signed support.
+& \lc The figure itself.\\
+\leanrow
+\lc Lemma~\ref{P-lem:limit}
+& \lc \leanid{LimitContraction.lean}: \leanid{contracts_of_limit}.
+\leanid{Components.lean}: \leanid{signedCore_of_chart_limit}, \leanid{retained_sign_of_limit} (private).
+& \lc As stated.
+& \lc None.\\
+\leanrow
+\lc Lemma~\ref{P-lem:interpolation}
+& \lc \leanid{ChartPath.lean}: \leanid{fineConnected_same_chart}.
+\leanid{PrimeInterpolation.lean}: \leanid{balanced_of_endpoints}.
+\leanid{Mesh.lean}: \leanid{fineConnected_of_segment}.
+& \lc For feasible rational endpoints of the same signed support,
+\leanid{fineConnected_same_chart} concludes lawful \leanid{FineConnected}. Its
+construction uses points of that signed chart.
+& \lc The explicit restriction of every chain point to the common signed
+chart is part of the written statement.\\
+\leanrow
+\lc Lemma~\ref{P-lem:compact-chain}
+& \lc \leanid{CommitLateComponents.lean}: \leanid{fineMesh_iff_component} (private).
+& \lc As stated, for a compact space and a map with dense range.
+& \lc None.\\
+\leanrow
+\lc Theorem~\ref{P-thm:core}
+& \lc \leanid{Classification.lean}: \leanid{fineConnected_iff_signedCore}.
+\leanid{Components.lean}: \leanid{fineConnected_signedCore}, \leanid{realChart_closure_compact}.
+& \lc As stated, with boundedness of the rational feasible locus as hypothesis.
+& \lc None.\\
+\leanrow
+\lc Remark~\ref{P-rem:closure}
+& \lc None.
+& \lc ---
+& \lc The whole remark.\\
+\leanrow
+\lc Corollary~\ref{P-cor:real}
+& \lc \leanid{RealComponents.lean}: \leanid{real_joinedIn_iff_signedCore}, \leanid{real_connectedComponent_iff_signedCore}, \leanid{fineConnected_iff_real_joinedIn}.
+& \lc In full.
+& \lc None.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:tractable}.}\label{tab:lean-tractable}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Lemma~\ref{P-lem:separate}
+& \lc \leanid{FixedProfile.lean}: \leanid{FixedProfile.legal}.
+\leanid{Capabilities.lean}, \leanid{Protocol}: \leanid{fiber}.
+\leanid{Experiments.lean}, \leanid{NativeExperiments}: \leanid{protocol}, \leanid{physical_support}.
+& \lc Lean represents the separate legality conditions, compiles the tests
+and proves the table-support identity.
+& \lc The combined formulation of Lemma~\ref{P-lem:separate} is written.\\
+\leanrow
+\lc Lemma~\ref{P-lem:transfer}
+& \lc (a) \leanid{NativeProbes.lean}: \leanid{native_spectral_modulus}.
+\leanid{FixedProfile.lean}: \leanid{spectralModulus_for_physicalStep}.
+(c) \leanid{Rates.lean}: \leanid{rate_fineConnected}.
+(d) \leanid{Register.lean}: \leanid{register_fineConnected}.
+One-block estimates: \leanid{FixedProfile.lean}, \leanid{ParityBasis}: \leanid{kernel_sub_le}.
+\leanid{FixedProfile.lean}: \leanid{finePhysical_of_signedCore}.
+& \lc Parts (a), (c) and (d), and the one-block table estimates used in the
+fixed-profile lift. For (c), Lean interpolates in inverse coordinates under
+the bound $\sum_m|v_m|\le1$, not by normalized geometric interpolation.
+& \lc The joint uniform-continuity statement in (b) is written.\\
+\leanrow
+\lc Remark~\ref{P-rem:restrictions}
+& \lc None.
+& \lc ---
+& \lc The kernel example.\\
+\leanrow
+\lc Theorem~\ref{P-thm:certificates}
+& \lc \leanid{CoreCertificate.lean}, \leanid{CoreCertificate}: \leanid{checkCore_sound}.
+\leanid{CertificateComplete.lean}, \leanid{CoreCertificate}: \leanid{checkCore_complete_short}, \leanid{native_certificate_exists}.
+\leanid{NativeCertificate.lean}, \leanid{CoreCertificate}: \leanid{nativeCheck_sound}, \leanid{nativeCheck_complete}.
+\leanid{ComplexityTheorem.lean}, \leanid{EventExperiments}: \leanid{singleton_certificate}.
+& \lc Soundness of supplied peeling and Gordan certificates, their existence,
+and the stage count (at most one stage per removed coordinate). The
+checker reads the source's compiled tests and both endpoints.
+& \lc (a) the LP search and its time; (b) the multiplier and binary-length
+bounds; (c) the decision time, certificate size and checking time.\\
+\leanrow
+\lc Proposition~\ref{P-prop:long-sequences}
+& \lc None.
+& \lc ---
+& \lc The whole proposition.\\
+\leanrow
+\lc Theorem~\ref{P-thm:p-hard}
+& \lc \leanid{MonotoneCircuitMarkov.lean}, \leanid{MonotoneCircuitMarkov.Circuit}: \leanid{native_fine_iff_value}, \leanid{endpoints_distinct}.
+\leanid{MonotoneCircuitEncoding.lean}, \leanid{MonotoneCircuitMarkov.Encoding}: \leanid{checked_reduction}, \leanid{stream_length}, \leanid{fields_fit_bits}, \leanid{cursor_fits_bits}.
+& \lc The circuit equivalence, with feasible endpoints at one common profile;
+its transfer to the common word-test language; the indexed stream's record
+count and its field and cursor-width bounds.
+& \lc Goldschlager's theorem; full record decoding and the serialization
+(Appendix~\ref{P-app:serialization}); the tape-level log-space
+implementation.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:tractable}, continued.}\label{tab:lean-tractable-cont}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Lemma~\ref{P-lem:covers}
+& \lc \leanid{Effects.lean}: \leanid{Protocol.capKind_of_cover}.
+& \lc For the underlying protocol, an attained cover changes exactly one
+profile coordinate of the indicated kinds.
+& \lc The classification for widened attained covers, the one-new-value-test
+clause, and the admissible-intermediate-set criterion for word tests.\\
+\leanrow
+\lc Theorem~\ref{P-thm:directed}
+& \lc \leanid{Experiments.lean}, \leanid{NativeExperiments}: \leanid{exact_six_iff}.
+\leanid{ExactSix.lean}, \leanid{Protocol}: \leanid{factorable_iff}, \leanid{Chain.profile_le}.
+\leanid{NativeCertificate.lean}, \leanid{CoreCertificate}: \leanid{ProfileTable.leCheck_correct}, \leanid{nativeCheck_sound}, \leanid{nativeCheck_complete}.
+& \lc The directed signed-core equivalence, with both cores from the source's
+constraints; the order comparison in the certificate check.
+& \lc P-completeness, certificate size and checking time; the PSPACE-hardness
+clause, from Theorem~\ref{P-thm:boundary}(ii) and
+Remark~\ref{P-rem:inputs}(ii).\\
+\leanrow
+\lc The sign example (Sections~\ref{P-sec:directed} and~\ref{P-sec:acquisition})
+& \lc \leanid{CommitLateExample.lean}, \leanid{CommitLateExample}: \leanid{early_acquisition}, \leanid{late_acquisition}, \leanid{late_factorable}, \leanid{early_chain_iff}, \leanid{early_to_source_no_chain}.
+& \lc Fine reachability from $A$ to $B$; from $A^+$ a sequence to $B$ exists
+exactly when $\varepsilon>1/8$; no sequence from $A^+$ back to $A$ at any
+tolerance.
+& \lc None.\\
+\leanrow
+\lc The four-label obstruction (Section~\ref{P-sec:directed})
+& \lc \leanid{Example.lean}, \leanid{Example}: \leanid{obstructionTolerance_value}, \leanid{obstruction_at_native_tolerance}.
+& \lc No sequence from the positive-$y$ endpoint to the negative-$y$
+endpoint at tolerance $1/272$. The Lean catalogue also contains one
+additional word test and one additional calibration, neither held at the
+endpoints.
+& \lc None.\\
+\leanrow
+\lc Remark~\ref{P-rem:readback}
+& \lc \leanid{Readouts.lean}, \leanid{NativeExperiments}: \leanid{readouts_eq_iff}, \leanid{elementary_iff_step}, \leanid{elementary_iff_unique_effect}.
+\leanid{QueryTables.lean}, \leanid{NativeExperiments}: \leanid{tables_eq_iff}, \leanid{table_chain_iff}, \leanid{table_exact_six}, \leanid{same_tests_same_effect}.
+& \lc Within one fixed instrument, the readout table determines the
+configuration, the correspondence preserves and reflects steps and
+sequences, and the directed criterion is recoverable from the tables. Two
+presentations into that instrument with matching tables have identical
+elementary effect predicates.
+& \lc The comparison of $A^+$ and $B$ in the sign example. Relabeling
+across instruments under the stated attained-order, named-query,
+final-level and projected-sum hypotheses.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:hard}.}\label{tab:lean-hard}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Lemma~\ref{P-lem:engine}
+& \lc \leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: \leanid{joint_words_iff}, \leanid{floor}, \leanid{nclInstrument}.
+& \lc The general measured comparison gives the mass and probe equations. In
+the constructed model, common-profile feasibility forces the displayed
+rates and loads.
+& \lc The load-test iff for arbitrary shared-probe models with the stated
+floor and calibrations.\\
+\leanrow
+\lc Lemma~\ref{P-lem:feasible}
+& \lc \leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: \leanid{measured_forces_rates} (private), \leanid{decode_lawful} (private), \leanid{encode_legal} (private), \leanid{encode_holds} (private).
+\leanid{ConstraintLogic.lean}, \leanid{ConstraintLogic.Network}: \leanid{legal_iff_scaled}.
+& \lc At the common profile the decoder obtains a lawful graph point. Under
+the weight and capacity bounds the encoder gives a feasible configuration
+from a lawful graph point, with clipped summands.
+& \lc The iff for an arbitrary supplied parameter vector with all the
+remaining model constraints retained is written.\\
+\leanrow
+\lc Lemma~\ref{P-lem:decode}
+& \lc \leanid{ConstraintLogic.lean}, \leanid{ConstraintLogic.Graph}: \leanid{common_orientation}, \leanid{flips_of_represents}, \leanid{legal_of_represents}.
+\leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: \leanid{decode_chain} (private).
+& \lc Common represented orientations at small summand steps, legality of
+mixtures, and decoding of native chains at the cutoff.
+& \lc The sequence conclusion under just the per-edge summand bound on each consecutive pair, without assuming the native cutoff.\\
+\leanrow
+\lc Lemma~\ref{P-lem:lift}
+& \lc \leanid{ConstraintLogic.lean}, \leanid{ConstraintLogic.Graph}: \leanid{flip_segments_lawful}, \leanid{chain_of_flips}.
+\leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: \leanid{encode_chain} (private).
+& \lc Feasibility of the three rational segments, their subdivision at
+arbitrary positive tolerance, and transfer to native sequences.
+& \lc None.\\
+\leanrow
+\lc Lemma~\ref{P-lem:cutoff}
+& \lc \leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: \leanid{ncl_chain_iff}, \leanid{ncl_fine_iff}, \leanid{tolerance}.
+& \lc The equivalence at the supplied cutoff $\varepsilon_0$ and for fine
+reachability.
+& \lc Every smaller tolerance, by combining the two with monotonicity.\\
+\leanrow
+\lc The construction (Section~\ref{P-sec:construction}, Appendix~\ref{P-app:ncl-size})
+& \lc \leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: \leanid{ncl_exactly_one}, \leanid{ncl_licence_duration}, \leanid{ncl_base_size}, \leanid{ncl_endpoints_distinct}.
+\leanid{BinaryParity.lean}, \leanid{BinaryParity}: \leanid{size_bounds}.
+\leanid{ConstraintLogic.lean}, \leanid{ConstraintLogic.Network}: \leanid{flips_iff_scaled}.
+& \lc Exactly one word-against-pair test and its length; the base-size bounds;
+distinct constructed endpoints for distinct input orientations; the transfer from weighted networks to scaled charges.
+& \lc Hearn and Demaine's Corollary~6; the binary enumeration of labels; the
+running time and binary-length bounds.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:hard}, continued.}\label{tab:lean-hard-cont}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Proposition~\ref{P-prop:length-one}
+& \lc \leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: the \leanid{short} parameter of \leanid{nclInstrument} and of each theorem above.
+& \lc Each length separately.
+& \lc The cancellation identifying the two feasible sets.\\
+\leanrow
+\lc Remark~\ref{P-rem:control}
+& \lc \leanid{SingleAdditiveLicence.lean}, \leanid{SingleAdditiveLicence}: \leanid{control_replacement}, \leanid{Control.endpoint_profile}, \leanid{Control.fine}, \leanid{Control.verdict_changes}.
+& \lc The replacement keeps the endpoints and their profile; a yes verdict at
+every tolerance; the change of verdict, assuming that no legal flips join
+the orientations.
+& \lc The $K_{3,3}$ example, which supplies that assumption.\\
+\leanrow
+\lc Corollary~\ref{P-cor:real-complexity}
+& \lc \leanid{RealAlgebraicBoundary.lean}, \leanid{MonotoneCircuitMarkov.Circuit}: \leanid{algebraic_real_path_iff_value}.
+\leanid{RealAlgebraicBoundary.lean}, \leanid{AlgebraicConstraintLogic}: \leanid{real_path_iff_flips}, \leanid{flips_of_real_path}, \leanid{network_real_path_iff_flips}.
+\leanid{RealComponents.lean}: \leanid{real_joinedIn_iff_signedCore}.
+& \lc The real signed-core criterion without boundedness; the circuit
+equivalence; both directions of the real NCL correspondence for the
+constructed endpoints.
+& \lc The LP resource bounds, input encodings and machine-level reductions;
+the upper bound (Appendix~\ref{P-app:hrs}).\\
+\leanrow
+\lc Theorem~\ref{P-thm:rational-roots}
+& \lc \leanid{ResponseBudgets.lean}, \leanid{ResponseBudgets}: \leanid{assign_lawful}, \leanid{decode_solution}, \leanid{decode_lift}, \leanid{lift_chain}, \leanid{decode_chain}, \leanid{fine_iff_box}, \leanid{no_native_chain_of_selector}.
+\leanid{CalibratedResponses.lean}, \leanid{CalibratedResponses}: \leanid{rates_eq}, \leanid{lawful_state}, \leanid{build_decode}.
+& \lc For supplied response rows, a parity basis and feasible box endpoints,
+Lean verifies the row compiler and the transfers in both directions. The
+fixed-tolerance obstruction assumes that every feasible box solution has
+selector zero or one and that the endpoints have opposite selector values.
+& \lc The selector dichotomy; the gate compilation of sparse polynomials; the
+compiler's binary-length bounds and running time; the residual-to-row
+assembly and the three-segment construction.\\
+\leanrow
+\lc Corollary~\ref{P-cor:quartic}
+& \lc \leanid{QuarticSelector.lean}, \leanid{QuarticSelector}: \leanid{homogeneous_scale}, \leanid{interior_hasRoot}, \leanid{no_root_selector}, \leanid{root_has_three_segments}, \leanid{RowRealization.native_boundary}, \leanid{RowRealization.nativeEndpoints_distinct}.
+\leanid{ResponseBudgets.lean}, \leanid{ResponseBudgets}: \leanid{square_rows}.
+& \lc The homogeneous identity, root extraction and three segments; given a
+\leanid{RowRealization} (lift, readback and slope proofs), both verdicts at
+the exact tolerance, exactly one word-against-pair test and distinct
+endpoints.
+& \lc The fixed-layout row assembly, its counts and binary-length bounds; the conditional
+consequence.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:timing}.}\label{tab:lean-timing}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Theorem~\ref{P-thm:acquisition}
+& \lc \leanid{CommitLate.lean}, \leanid{NativeExperiments}: \leanid{commitLate_iff}.
+& \lc The equivalence, for equal parameter vectors and ordered profiles.
+& \lc The polynomial-time claim.\\
+\leanrow
+\lc Theorem~\ref{P-thm:projected-components}
+& \lc (a) \leanid{CommitLate.lean}, \leanid{EventExperiments}: \leanid{carry}, \leanid{atSource}, \leanid{projected_near}, \leanid{carry_near}, \leanid{fixedProfile_registerChain}, \leanid{chain_of_sameNumbers}, \leanid{factorable_iff_atSource}.
+(b) \leanid{CommitLateComponents.lean}, \leanid{EventExperiments}: \leanid{ProjectedClosure}, \leanid{fixedProfile_iff_projectedComponent}, \leanid{factorable_iff_projectedComponent}.
+\leanid{EventExperiments.lean}, \leanid{EventExperiments}: \leanid{Chain.profile_le}.
+(c) \leanid{CommitLateComponents.lean}, \leanid{EventExperiments}: \leanid{projectedClosure_mono}.
+(d) \leanid{CommitLateComponents.lean}, \leanid{EventExperiments}: \leanid{commitLate_iff_projectedComponents}.
+& \lc (a)--(d). The Lean form of (d) allows different parameter vectors at $A$
+and $A^+$ and assumes no cover.
+& \lc None.\\
+\leanrow
+\lc Proposition~\ref{P-prop:source-schedule}
+& \lc \leanid{CommitLate.lean}, \leanid{EventExperiments}: \leanid{commitAtTargetNumbers}, \leanid{commitAtTarget}, \leanid{commitAtTargetNumbersAlong}.
+& \lc Given fine reachability from $A$ to $B$, Lean constructs stages at the
+prescribed ordered profiles with the target's label probabilities and
+eigenvalues. Each stage is finely reachable from $A$ and can finely reach
+$B$, and every ordered pair of stages has the corresponding
+fine-reachability relation. A stage at a profile with the target's support
+can use the target's entire parameter vector.
+& \lc Concatenation into one sequence at a specified tolerance.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:timing}, continued, including the results stated in Appendix~\ref{P-app:core-order-proofs}.}\label{tab:lean-timing-cont}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Theorem~\ref{P-thm:no-calibration}
+& \lc \leanid{NativeCoreOrder.lean}: \leanid{calibration_mem_core}.
+\leanid{NativeCoreOrder.lean}, \leanid{NativeExperiments}: \leanid{active_spectral_rows_balanced}, \leanid{spectral_core_empty_iff}, \leanid{signature_eq_zero_iff}, \leanid{factorable_iff_profile_le_of_no_nonzero_calibration}, \leanid{realise_zero_of_no_nonzero_calibration}.
+\leanid{CoreOrderExamples.lean}, \leanid{CoreOrderExamples}: \leanid{product_not_fineConnected}, \leanid{Native.zero_calibration_formal_support}.
+& \lc As stated, including the configuration with zero eigenvalues; the two
+examples after it.
+& \lc None.\\
+\leanrow
+\lc Proposition~\ref{P-prop:empty-core}
+& \lc \leanid{CoreOrder.lean}: \leanid{core_eq_empty_iff}, \leanid{core_eq_empty_of_positive_damping}, \leanid{core_eq_empty_of_balanced_active}, \leanid{fineConnected_of_empty_cores}.
+& \lc (a)--(c).
+& \lc None.\\
+\leanrow
+\lc Corollary~\ref{P-cor:refine}
+& \lc \leanid{CoreOrder.lean}: \leanid{Contracts.of_rows_subset}, \leanid{Reduces.of_rows_subset}, \leanid{core_mono_rows}, \leanid{core_absorb_rows}, \leanid{signedCore_absorb_rows}, \leanid{signedCore_eq_of_rows_subset}, \leanid{FineConnected.of_tests_subset}.
+\leanid{NativeCoreOrder.lean}: \leanid{Protocol.spectralRows_mono}, \leanid{NativeExperiments.factorable_of_higher_source}.
+\leanid{CoreOrderExamples.lean}, \leanid{CoreOrderExamples.Native}: \leanid{strict_core_growth}, \leanid{strict_reachability_split}.
+& \lc (a) and (b); the example of strict growth.
+& \lc None.\\
+\leanrow
+\lc Proposition~\ref{P-prop:interior}
+& \lc \leanid{CoreOrder.lean}: \leanid{coreInterior}, \leanid{removedClosure}, \leanid{removedClosure_isClosed_iff}, \leanid{core_greatest_irreducible}.
+\leanid{NativeCoreOrder.lean}, \leanid{NativeExperiments}: \leanid{realise_core}, \leanid{attainedCoreInterior}, \leanid{core_greatest_attained_irreducible}.
+\leanid{CoreOrderExamples.lean}, \leanid{CoreOrderExamples.Native}: \leanid{core_not_extensive_on_attained_supports}.
+& \lc As stated; the example after it.
+& \lc None.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Lean correspondence for Section~\ref{P-sec:exactness}, including the
+results stated in Appendix~\ref{P-app:zero-probes}.}\label{tab:lean-exactness}
+\begin{tabular}{@{}p{0.14\textwidth}p{0.33\textwidth}p{0.27\textwidth}p{0.20\textwidth}@{}}
+\leanhead
+\lc Proposition~\ref{P-prop:one-probe}
+& \lc \leanid{FermatProbe.lean}, \leanid{FermatProbe}: \leanid{corner_lawful}, \leanid{endpoint}, \leanid{no_chain}, \leanid{not_factorable}, \leanid{exactly_one}, \leanid{realArc}, \leanid{continuous_realArc}, \leanid{realArc_endpoints}, \leanid{realArc_quartic}, \leanid{quartic} (private), \leanid{axis} (private), \leanid{marked_diag} (private).
+& \lc The feasible endpoints, no sequence at tolerance $1/72$, and a continuous
+real arc satisfying the equations; uses Mathlib's Fermat theorem for
+exponent four, \leanid{fermatLastTheoremFour}.
+& \lc The real arc as a path of real-valued configurations (Lean's
+configurations are rational).\\
+\leanrow
+\lc Proposition~\ref{P-prop:zero-probe-fermat}
+& \lc None.
+& \lc ---
+& \lc The whole proposition, with Darmon and Granville's theorem.\\
+\leanrow
+\lc Proposition~\ref{P-prop:separation}
+& \lc \leanid{CoreGap.lean}, \leanid{CoreCertificate}: \leanid{dual_log_identity}, \leanid{dual_survivor_lower}.
+\leanid{CoreGap.lean}, \leanid{Protocol}: \leanid{signature_eq_of_bounded_mesh}.
+& \lc The separation lemmas under supplied bounds: the lower bound assumes an
+accepted Gordan certificate and the radius, coordinate and coefficient
+bounds; the model statement assumes a uniform bound.
+& \lc The radius, the determinant estimates and $D$; part~(c); the
+binary-exponent variant.\\
+\leanrow
+\lc Proposition~\ref{P-prop:zero-probes}
+& \lc \leanid{NoProbeRatios.lean}, \leanid{NoProbeRatios}: \leanid{rank_one_no_three}.
+& \lc The strict-convexity step of the rank-one case.
+& \lc Everything else, including the polynomial-time claim.\\
+\leanrow
+\lc Proposition~\ref{P-prop:zero-probe-closure}
+& \lc None.
+& \lc ---
+& \lc The whole proposition.\\
+\leanrow
+\lc Proposition~\ref{P-prop:one-state}(a)
+& \lc \leanid{BooleanEvents.lean}, \leanid{OneStateEvents.BooleanReduction}: \leanid{native_fine_iff_flips}, \leanid{native_chain_iff_flips_of_le}, \leanid{endpoints_distinct}.
+\leanid{ClauseReconfiguration.lean}, \leanid{ClauseReconfiguration}: \leanid{fine_iff_flips}.
+\leanid{EventCompiler.lean}, \leanid{OneStateEvents.Equations}: \leanid{mark_card}, \leanid{tests_length}, \leanid{tests_ne_nil}, \leanid{encode_lawful}, \leanid{lawful_decode}, \leanid{fine_encode_iff}.
+\leanid{WidenedOneState.lean}, \leanid{OneStateEvents}: \leanid{widened_chain_iff}.
+\leanid{ComplexityTheorem.lean}, \leanid{OneStateEvents.BooleanReduction}: \leanid{widened_fine_iff_flips}, \leanid{widened_chain_iff_flips_of_le}, \leanid{widened_endpoints_distinct}.
+& \lc The finite compiler correspondences for tautology-free formulas with
+satisfying endpoints, at every tolerance at most $2\delta$ and for fine
+reachability; the transfer to the model with named word tests. Lean also
+checks the compiler's exact label and test counts for supplied
+expression-node data.
+& \lc The imported PSPACE-hardness and its preprocessing; the clause-template
+sizes and total binary-output bound, encodings and running time.\\
+\leanrow
+\lc Proposition~\ref{P-prop:one-state}(b)
+& \lc \leanid{NativeTractable.lean}, \leanid{OneStateEvents}: \leanid{one_step_event_fine}, \leanid{linearTests}, \leanid{singleton_event_fine}, \leanid{SingletonTest}, \leanid{singletonTests}.
+& \lc For external predicates consisting of equalities of sums over label
+sets, Lean proves fine connectivity under a positive floor. It separately
+proves fine connectivity for lists of equal-length monomial-ratio tests
+with positive ratios.
+& \lc The general case of all held equations linear in the rates, including
+mixed duration-one word tests and probability-ratio tests in the paper's
+named model.\\
+\leanrow
+\lc Proposition~\ref{P-prop:one-state}(c)
+& \lc \leanid{ArithmeticEvents.lean}, \leanid{OneStateEvents.ArithmeticReduction}: \leanid{native_fine_iff_solvable}, \leanid{native_chain_iff_solvable_of_le}, \leanid{endpoints_distinct}.
+\leanid{PolynomialEvents.lean}, \leanid{OneStateEvents.ArithmeticReduction.Term}: \leanid{solvable_iff_zero}, \leanid{native_fine_iff_rational_zero}, \leanid{native_chain_iff_rational_zero_of_le}.
+& \lc The reduction for supplied gate lists and arithmetic terms, on auxiliary
+one-state configurations defined by external test predicates.
+& \lc The sparse-input and test-list construction, template bounds, running
+time; path-connectedness of the real feasible set.\\
+\bottomrule
+\end{tabular}
+\end{table}
+% lint: lean-table end
+
+\end{document}

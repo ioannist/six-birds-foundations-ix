@@ -5,9 +5,6 @@ defaultTargets = ["MovingProjection"]
 [[lean_lib]]
 name = "MovingProjection"
 
-[[lean_lib]]
-name = "SixBirds"
-
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"

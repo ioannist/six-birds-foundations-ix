@@ -1,0 +1,47 @@
+
+\section{Open problems}\label{sec:open}
+
+\begin{enumerate}
+\item \emph{An upper bound.} Is Fine Reachability with exactly one
+word-against-pair test in PSPACE, or decidable at all? It is PSPACE-hard
+(Theorem~\ref{thm:boundary}). A PSPACE upper bound or a decision procedure,
+for this class or for the one-state subclass with many word-against-pair
+tests, would put rational-zero existence in PSPACE or decide it
+(Theorem~\ref{thm:rational-roots}, Proposition~\ref{prop:one-state}). If
+Hilbert's tenth problem over~$\QQ$ is undecidable, as a 2026 preprint
+claims~\cite{openaih10q} and Sun reports~\cite[Section~1]{sun}, both
+classes are undecidable. We have not independently verified the arithmetic
+proof, and our reductions do not depend on it.
+\item \emph{A fixed positive number of probes.} Is there a fixed integer
+$c\ge1$ such that Fine Reachability with $c$ probes and exactly one
+word-against-pair test is PSPACE-hard? If the Bhargava--Burungale quartic
+theorem~\cite[Corollary~1.2(3)]{bhargavaburungale} holds, some fixed
+positive probe count gives undecidability (Corollary~\ref{cor:quartic});
+what is the least such count?
+\item \emph{Zero probes and the one-state case.} For a model with
+zero probes and exactly one word-against-pair test, held at the source, is
+the remaining rank-two case decidable? Proposition~\ref{prop:zero-probes} decides two zero-probe
+cases in polynomial time, leaving image rank two with
+$1/d_0+1/d_1+1/d_\infty\ge1$. Its interval test uses the closure of
+feasible rational ratios; image rank, $d_0,d_1,d_\infty$, and this closure
+are defined alongside Propositions~\ref{prop:zero-probes}
+and~\ref{prop:zero-probe-closure}, and deciding the test is open. Outside
+the proved fragments, is the fixed-profile one-state case with exactly one
+word-against-pair test, no held value tests, and a positive probability
+floor decidable, in~P, or PSPACE-hard?
+\item \emph{Components of $\mathcal K_p$.} Is there an algorithm that
+decides whether two projected tables lie in one component of the projected
+rational closure, for word tests of both shapes?
+Theorem~\ref{thm:projected-components} characterizes acquisition timing
+through these components but gives no procedure. Cornelissen and Zahidi
+derive from Mazur's conjecture~\cite{mazur} the exclusion of a Diophantine
+model of~$\mathbb Z$ in~$\QQ$~\cite[Theorem~3.6]{cornelissenzahidi}; none of
+our results uses that implication.
+\item \emph{One affine trinomial.} Is Fine Connectivity PSPACE-hard with a
+single affine trinomial? Corollary~\ref{cor:algebraic} uses a growing
+number, one per NCL edge. Is real path-component membership also
+PSPACE-hard with one scalar affine trinomial?
+\item \emph{Nonzero calibrations.} Does fixed-profile Fine Reachability
+remain PSPACE-hard with exactly one word-against-pair test when no
+calibration to a nonzero eigenvalue is held?
+\end{enumerate}

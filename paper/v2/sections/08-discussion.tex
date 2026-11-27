@@ -1,0 +1,83 @@
+
+\section{Discussion: scope, and a reading of the results}\label{sec:discussion}
+
+\subsection{Scope}\label{sec:scope}
+
+The complexity results concern promise problems on explicitly presented
+shared-probe models or budgeted signed-binomial systems in binary.
+The decision bounds are for promised inputs. The algebraic endpoint test
+checks feasibility of a supplied point. For algebraic Fine Connectivity,
+boundedness of the rational feasible set remains a promise.
+Theorems~\ref{thm:fixed-profile} and~\ref{thm:directed} rest on four
+features of the model, whose roles Remark~\ref{rem:restrictions} gives: the
+$\ell^1$ budget, equal word lengths, the probability floor
+$\theta_m\ge\delta>0$, and register constraints that are affine and
+separate from the rest.
+The theorems are stated for the shared-probe model, its parity-mixture
+kernels and its test families.
+
+We claim no unconditional undecidability and do not classify test
+languages: the boundary is a threshold at one syntactic step. The NCL construction uses calibrations, selector equations,
+budgets and a growing probe family, with no necessity claimed for any of
+them.
+Restricting to rational points does not by itself create the obstructions.
+The two signs after acquisition lie in different real components of the
+binomial eigenvalue locus (Corollary~\ref{cor:real}). The algebraic NCL
+reduction also gives obstructions over the reals
+(Section~\ref{sec:real-ncl}). In Section~\ref{sec:real-rational}, however,
+both endpoints are feasible rational configurations, and a real path joins
+them even though rational fine reachability fails. The results concern a mathematical model and
+make no claim about natural systems.
+
+\subsection{A reading of the results}\label{sec:reading}
+
+% lint: program begin
+The question came from a program about how descriptions are strictly
+extended, and the results admit a reading in its terms.
+Foundations~I~\cite[Sections~4.1--4.2]{foundations1} takes the objects of a
+theory to be the fixed points of a completion rule. Here, for a fixed
+test list, the core is an interior operator on supports. Its
+removed-coordinate map $Z\mapsto J\setminus\core(J\setminus Z)$ is a
+closure operator satisfying Foundations~I's three order-closure axioms,
+whose closed sets are the complements of the irreducible supports
+(Proposition~\ref{prop:interior}). That much is proved; identifying these closed sets with the program's
+objects is a reading.
+
+Foundations~I calls the appearance of stable fixed
+points within a theory package emergence and reserves open-endedness for
+strict theory extension~\cite[Section~3.4]{foundations1}. We read feasible
+revisions in which a configuration acquires a held test and retains its
+earlier tests as an operational analogue of strict theory extension. An
+acquisition can be redundant. The reading does not check that definability
+changes strictly.
+By Lemma~\ref{lem:restriction}, for single-word tests every terminal
+peeling sequence from a given signed support has the same signed core.
+As an analogy, not an instance, this matches the order-free admission of
+Foundations~VII, Theorem~B~\cite{foundations7}.
+The positive load equation in the calibrated NCL construction is analogous
+to the disabling example in Foundations~VII. On the load line either
+summand can vanish, and both cannot.
+On explicitly presented models and
+promised-feasible rational endpoints, single-word Fine Reachability is
+P-complete under deterministic log-space many-one reductions and has
+polynomial-size, polynomial-time checkable certificates for both answers.
+With exactly one word-against-pair test, it is PSPACE-hard under
+polynomial-time many-one reductions. Both statements hold at a fixed
+profile and with profile steps allowed (Theorems~\ref{thm:boundary}
+and~\ref{thm:directed}). For algebraic fine connectivity, with budgets and metric
+fixed, adding tests refines the classes on points satisfying the enlarged
+test list (Corollary~\ref{cor:refine}).
+% gloss: adding tests refines the classes (budgets and metric fixed; points satisfying the enlarged list)
+
+The reading has a one-line summary. A feasible world is what it cannot let
+go of; all it keeps of that is a side; and the first commitment letting it
+let go of either of two things, but not both, is the first wall. In the paper's terms, a
+world is a feasible configuration and a commitment is a held test. The
+signed core is what survives peeling, with its signs. In the calibrated
+NCL construction, the fixed positive sum rules out joint vanishing, while
+the selector equations and budgets govern the legal choices. Section~\ref{sec:acquisition} proves that early acquisition can
+block fine reachability that late acquisition allows, even when both
+endpoints pass the new test. We read this dependence on timing as a degree
+of freedom in open-ended growth. None of this is a claim about nature, and
+we make no priority claim within the program.
+% lint: program end

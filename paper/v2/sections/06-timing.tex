@@ -1,0 +1,169 @@
+
+% gloss: acquisition timing
+\section{Acquisition timing and order properties of the core}\label{sec:timing}
+
+Profile steps can add held tests and never drop them
+(Definition~\ref{def:profile-steps}). For sequences with profile steps,
+acquisition timing can change fine reachability.
+Section~\ref{sec:acquisition} gives a polynomial-time signed-core test in
+the single-word class and a projected-component criterion for the full
+class.
+The hardness reductions of Section~\ref{sec:hard} for the Markov model use
+a fixed profile, so their instances involve no acquisition timing.
+Section~\ref{sec:core-order} shows when the profile order alone decides
+reachability.
+
+% ---------------------------------------------------------------------------
+\subsection{Acquisition timing}\label{sec:acquisition}
+
+An \defterm{acquisition} is a profile step whose cover adds one held test,
+keeping the table support, partitions and parameter vector.
+\defterm{Acquisition timing} is whether a test is acquired before or after
+a numerical revision. The sign example of Section~\ref{sec:directed}
+shows this effect.
+Both endpoint parameter vectors pass $\mathsf{yy}\sim\mathsf{zz}$, yet $B$
+is finely reachable from~$A$ and not from~$A^+$: $A$ can take $y$
+through~$0$ before acquiring the test, whereas $A^+$ holds the test from
+the start.
+
+\begin{theorem}[Acq{}uisition timing, single-word class]\label{thm:acquisition}
+Fix a shared-probe model in the single-word class, and feasible
+configurations $A$, $A^+$ and~$B$, where $A^+$ has the parameter vector
+of~$A$ and $p_A\preceq p_{A^+}\preceq p_B$. Then $B$ is finely reachable
+from $A$ and not from $A^+$ if and only if
+$\SC_{p_A}(\alpha_A)=\SC_{p_A}(\alpha_B)$ and
+$\SC_{p_{A^+}}(\alpha_A)\neq\SC_{p_{A^+}}(\alpha_B)$. With explicit binary
+inputs promised feasible, two signed-core comparisons, each computing both
+endpoint cores by Theorem~\ref{thm:certificates}(a), decide this in
+polynomial time.
+\end{theorem}
+
+Under the hypotheses of Theorem~\ref{thm:acquisition}, the timing effect
+occurs exactly when the endpoint signed cores agree under the source tests
+and differ under the tests held after acquisition. The acquired test may be a value test. An acquisition never enlarges the set of reachable targets
+(Corollary~\ref{cor:refine}).
+
+A held word-against-pair test can couple label probabilities and
+eigenvalues (Lemma~\ref{lem:compile}(b)), and Definition~\ref{def:system}(e)
+defines $\Phi_p$ for the single-word class. For the full class, we instead
+use the projected tables $\bar P_{A,m}=\theta_{A,m}Q_{A,m}$ $(m\in M)$
+from Definition~\ref{def:profile-steps}. For an attained profile~$p$, the
+\defterm{projected rational closure} $\mathcal K_p\subseteq[0,1]^{M\times X\times X}$ is the sup-norm
+closure of the projected tables of feasible rational configurations at~$p$.
+The projected rational closure is compact. It can be strictly smaller than
+the locus of projected tables of feasible real configurations at the same
+profile, even with one probe (Proposition~\ref{prop:one-probe}).
+
+\begin{theorem}[Projected components]\label{thm:projected-components}
+Fix a shared-probe model, with word tests of both shapes allowed, and
+feasible configurations $A$ and~$B$.
+\begin{enumerate}
+\item[(a)] If $p_A\preceq p_B$, then $\theta_B$, $\alpha_B$ and the
+register tables of $A$ form a feasible configuration $A_B$ at~$p_A$, and
+$B$ is finely reachable from $A$ if and only if $A_B$ is.
+\item[(b)] $B$ is finely reachable from $A$ if and only if
+$p_A\preceq p_B$ and $\bar P_A,\bar P_B$ lie in one connected component
+of~$\mathcal K_{p_A}$.
+\item[(c)] If $p\preceq q$ are attained, then
+$\mathcal K_q\subseteq\mathcal K_p$.
+\item[(d)] For a feasible $A^+$ with
+$p_A\preceq p_{A^+}\preceq p_B$, $B$ is finely reachable from $A$ and
+not from $A^+$ if and only if $\bar P_A,\bar P_B$ share a component of
+$\mathcal K_{p_A}$ and $\bar P_{A^+},\bar P_B$ do not share one
+of~$\mathcal K_{p_{A^+}}$.
+\end{enumerate}
+\end{theorem}
+
+As in Theorem~\ref{thm:directed}, first check $p_A\preceq p_B$: if this
+order fails, no sequence exists at any tolerance. Otherwise, the verdict
+is whether the two projected tables lie in the same connected component
+of~$\mathcal K_{p_A}$ (Lemma~\ref{lem:compact-chain};
+Appendix~\ref{app:timing-proofs}).
+In~(d), take the directed interval $p_A\preceq p_{A^+}\preceq p_B$ and a
+feasible acquisition that keeps the parameter vector fixed. Then the
+timing effect occurs exactly when the endpoints' projected tables share a
+component before acquisition and lie in different components afterward.
+In the sign example, $\mathcal K_{p_A}$ is a segment of tables indexed
+by~$y$, and $\mathcal K_{p_{A^+}}$ is the two tables with $y=\pm1/4$. A
+feasible acquisition need not split a component.
+
+We give no algorithm for the components of~$\mathcal K_p$. Because
+$\mathcal K_p$ is a closure of rational projected tables in the real
+projected-table space, deciding its components is related to Mazur's
+question on the real topology of rational points~\cite{mazur}.
+
+\begin{proposition}[Source-profile scheduling]\label{prop:source-schedule}
+Fix a shared-probe model, with word tests of both shapes allowed, feasible
+configurations $A$ and $B$ with $B$ finely reachable from~$A$,
+and attained profiles $p_A\preceq q_1\preceq\dots\preceq q_k\preceq p_B$.
+For every rational $\varepsilon>0$, a reconfiguration sequence at
+tolerance $\varepsilon$ leads from $A$ to the configuration $A_B$ of
+Theorem~\ref{thm:projected-components}(a), then through configurations at
+$q_1,\dots,q_k$ in order, each with label probabilities $\theta_B$ and
+eigenvalues $\alpha_B$, to~$B$.
+\end{proposition}
+
+Thus the label-probability and eigenvalue revisions can be completed at
+the source profile, before any test is acquired (Theorem~\ref{thm:projected-components}(a)).
+Register rewrites may occur in the later phase. The sequence can pass
+through the target's full parameter vector at a prescribed intermediate
+profile whose support equals the target support.
+
+Barrett and Weld's account of Korf's subgoal taxonomy~\cite{korf}
+distinguishes goals that can be achieved and protected in a suitable order
+from goals for which no such order
+works~\cite[Sections~3.2--3.3]{barrettweld}. In Hauser and Latombe's
+multimodal planning, a transition point in the intersection of two modes
+can lie in a component inaccessible from the start in the old mode or from
+the goal in the new mode~\cite[Sections~2.3--2.5]{hauserlatombe}. Hu, Iyer
+and Christensen connect within-manifold roadmaps at
+intersections~\cite[Section~IV.B]{huiyerchristensen}. To our knowledge,
+the before-and-after criterion for projected rational closures in this
+model has not been stated.
+
+% ---------------------------------------------------------------------------
+\subsection{Order properties of the core}\label{sec:core-order}
+
+% gloss: G17
+\begin{theorem}[No nonzero calibration]\label{thm:no-calibration}
+Fix a shared-probe model in the single-word class and a profile~$p$. For
+every rational $\alpha$ satisfying the equations of~$\Phi_p$,
+$\SC_p(\alpha)=0$ if and only if $p$ holds no calibration
+$\alpha_{mi}=c$ with $c\neq0$. Hence, if $A$ is feasible and $p_A$ holds
+no such calibration, a feasible $B$ is finely reachable from $A$ if and
+only if $p_A\preceq p_B$.
+At a fixed profile with no nonzero calibration, any two feasible
+configurations are mutually finely reachable. Setting all eigenvalues of
+$A$ to zero while keeping its label probabilities and register tables gives
+a feasible configuration at the same profile, mutually finely reachable
+with~$A$.
+\end{theorem}
+
+For a vector satisfying the compiled equations, zero calibrations are
+inactive on its support. If no nonzero calibration is held, the active
+equations have equal degrees on their two sides, so unit weights peel the
+entire support (Proposition~\ref{prop:empty-core}). A held nonzero
+calibration keeps its coordinate in the core. Without
+$z=1/4$, the sign example's test gives $2\eta_y=2\eta_z$, met by
+$\eta=(1,1)$.
+The empty-core conclusion in the absence of held nonzero calibrations can
+fail for arbitrary binomial tests: under
+$(xy)^2=xy$ and $|x|+|y|\le2$, the cores of the endpoints $(1,1)$ and
+$(-1,-1)$ both have support $\{x,y\}$, with signed cores $(+,+)$ and
+$(-,-)$. Moreover, $\alpha$ must satisfy~$\Phi_p$: with $z=0$ held and
+the word test unheld, the formal support $\{z\}$ is irreducible, but no
+eigenvalue vector passing the calibration has that support.
+
+% gloss: G18
+With budgets and metric fixed, adding tests only splits the classes of the
+points that satisfy them, and a new test can also exclude points
+(Corollary~\ref{cor:refine}).
+
+% gloss: G19
+By Lemmas~\ref{lem:restriction} and~\ref{lem:irreducible}, the core is
+an interior operator on supports, and its removed-coordinate map
+$Z\mapsto J\setminus\core(J\setminus Z)$ is a closure operator whose
+closed sets are the complements of irreducible supports
+(Proposition~\ref{prop:interior}). The core can strictly shrink an
+attained support: at the sign example's source profile, the attained
+support $\{y,z\}$ has core~$\{z\}$.

@@ -1,2 +1,31 @@
 /lean/.lake/
 /paper/build/
+/.codex/threads/
+/.codex/logs/
+/paper/v2/build/
+
+# Local agent state, internal planning and reviews (kept on disk)
+/.codex/
+**/.claude/
+**/.agents/
+**/CLAUDE.local.md
+/paper/prep/
+
+# Files uploaded to the Zenodo record (published there; rebuilt from source)
+/paper/submission/artifacts/
+
+# Secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+credentials*.json
+*secret*
+*token*.txt
+
+# LaTeX intermediates
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz

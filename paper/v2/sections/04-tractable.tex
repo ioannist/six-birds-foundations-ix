@@ -1,0 +1,423 @@
+
+\section{One word against one: the tractable side and profile steps}\label{sec:tractable}
+
+This section proves part~(i) of Theorem~\ref{thm:boundary}, the
+fixed-profile criterion, the single-word claims of
+Theorem~\ref{thm:directed}, and the P-complete half of
+Corollary~\ref{cor:algebraic}.
+% gloss: single-word class
+We call a model \defterm{single-word}, or in the \defterm{single-word class}, when all its word tests are word-against-word.
+
+% ---------------------------------------------------------------------------
+\subsection{From word tests to binomial equations}\label{sec:compile}
+
+Feasibility then splits into three systems with separate variables.
+
+\begin{lemma}[Feasibility separates]\label{lem:separate}
+Fix a shared-probe model in the single-word class, a profile $p$ whose held
+word tests form an admissible set, and a parameter vector
+$(\theta,\alpha,L)$ with tables~$P$. Then the configuration $(p,P)$ is
+feasible if and only if conditions (a)--(c) hold.
+(a)~The vector $\theta$ satisfies $\theta(w)=\theta(w')$ for every held
+word test $w\sim w'$ and $\theta(w)=c\,\theta(w')$ for every held
+probability-ratio test.
+(b)~The vector $\alpha$ is a feasible point of $\Phi_p$ with its budgets.
+(c)~The tables satisfy $L_m(g,h;r,r')>0$ exactly when
+$(m,g,r,h,r')\in\Gamma_p$, and $L$ satisfies the block-mass conditions at
+every level of~$p$.
+\end{lemma}
+
+Lemma~\ref{lem:compile}(a) gives the split
+(Appendix~\ref{app:tractable-proofs}). The next lemma moves between steps in the tables and
+steps in each part.
+
+\begin{lemma}[Tables and parameters]\label{lem:transfer}
+Fix a shared-probe model and put $N=|X||R|$.
+\begin{enumerate}
+\item[(a)] Any two parameter vectors, with eigenvalue vectors
+$\alpha_A,\alpha_B$ and tables $P_A,P_B$, satisfy
+$\|\alpha_A-\alpha_B\|_\infty\le(2N/\delta)\,\|P_A-P_B\|_\infty$.
+\item[(b)] On the set of parameter vectors, the tables are uniformly
+continuous functions of $(\theta,\alpha,L)$.
+\item[(c)] At a profile $p$ of the single-word class, let rational vectors
+$\theta,\theta'$ satisfy the probability floor, normalization and the
+equations of Lemma~\ref{lem:separate}(a). For every rational
+$\varepsilon>0$, a finite sequence of such rational vectors with sup-norm
+steps below~$\varepsilon$ joins them.
+\item[(d)] The same holds for two register tables satisfying
+Definition~\ref{def:model} and Lemma~\ref{lem:separate}(c) at~$p$, through
+rational affine interpolation.
+\end{enumerate}
+\end{lemma}
+
+Appendix~\ref{app:tractable-proofs} proves the lemma, interpolating label
+probabilities geometrically and registers affinely.
+
+\begin{remark}[The role of each restriction]\label{rem:restrictions}
+The $\ell^1$ budget keeps every base kernel positive along the monomial
+curves of Lemma~\ref{lem:restriction}(a), which shrink absolute values,
+while the eigenvalues themselves can be negative or zero. Positivity of
+$Q_m$ alone would not do. On $(\mathbb Z/2)^2$, take two generating
+characters and their product as the three probes. Eigenvalues
+$(4/5,4/5,7/10)$ give a positive kernel. Damping the third eigenvalue to
+zero gives the entry $(1-4/5-4/5)/4=-3/20$. The probability floor
+$\theta_m\ge\delta>0$ gives Lemma~\ref{lem:transfer}(a), through division
+by~$\theta_m$. Equal word lengths make the rate equations homogeneous, so
+normalization preserves them. The register conditions are affine and
+separate from the others.
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{Proof of the fixed-profile criterion}\label{sec:fixed-proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:fixed-profile}]
+By Lemma~\ref{lem:separate}, the eigenvalue vectors of feasible
+configurations at~$p$ are exactly the feasible rational points of $\Phi_p$
+with its budgets. The reversal equations belong to $\Phi_p$ because every
+parameter vector satisfies them. Every coordinate lies in a budget, so this
+feasible rational set is bounded, and Theorem~\ref{thm:core} applies to it.
+
+For necessity, fix a rational $\varepsilon_\alpha>0$ and a reconfiguration
+sequence from $A$ to $B$ at tolerance $\delta\varepsilon_\alpha/(2N+1)$,
+with $N$ as in Lemma~\ref{lem:transfer}. By Lemma~\ref{lem:transfer}(a),
+consecutive eigenvalue vectors differ by less than $\varepsilon_\alpha$ in
+sup norm. So $\alpha_A$ and $\alpha_B$ are finely connected, and
+Theorem~\ref{thm:core} gives $\SC_p(\alpha_A)=\SC_p(\alpha_B)$.
+
+For sufficiency, fix $\varepsilon>0$ and change one part of the parameter
+vector at a time. Lemma~\ref{lem:transfer}(c) joins $\theta_A$ to
+$\theta_B$, Theorem~\ref{thm:core} joins $\alpha_A$ to $\alpha_B$, and
+Lemma~\ref{lem:transfer}(d) joins $L_A$ to $L_B$, whose positive entries
+both give~$\Gamma_p$. Every intermediate configuration is feasible by
+Lemma~\ref{lem:separate}. By Lemma~\ref{lem:transfer}(b), fine enough steps
+in each part change every table entry by less than~$\varepsilon$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+\subsection{The algorithm and its certificates}\label{sec:algorithm}
+
+The linear-programming (LP) computation of Section~\ref{sec:computing-core}
+has at most $|J|$ deletion rounds and one final check. Its LPs have
+polynomial input size because their matrices are restrictions of the
+binary-encoded exponent differences. Neither this computation nor the real
+signed-core criterion of Corollary~\ref{cor:real} requires a bounded locus,
+so the same computation decides real path-component membership
+(Corollary~\ref{cor:real-complexity}). Fraca and Haddad's
+Proposition~27~\cite{fracahaddad} analyzes their Algorithm~2
+(Section~\ref{sec:computing-core}).
+
+% gloss: Gordan certificate
+A peeling sequence shows which coordinates can be removed; a certificate
+must also show that no more can be. A \defterm{Gordan certificate} for a
+support $C$ is an integer vector $\lambda$, indexed by the tests active
+on~$C$, with $\Delta_C^{\mathsf T}\lambda>0$ in every coordinate; for
+$C=\emptyset$ it is empty. In the sign example on $C=\{y,z\}$, multiplier $1$ on
+the difference vector $(2,-2)$ of $y^2=z^2$, multiplier $3$ on $(0,1)$ of
+$z=1/4$, and $0$ on the identity reversal equations give
+$\Delta_C^{\mathsf T}\lambda=(2,1)$. Let $D_0$ be the
+maximum of $1$ and the absolute values of the entries of the vectors $a-b$.
+
+\begin{theorem}[Polynomial time, with certificates]\label{thm:certificates}
+Let $\Phi$ be an explicitly binary-encoded budgeted signed-binomial system
+with $n=|J|$ coordinates and $|\Phi|$
+tests.
+\begin{enumerate}
+\item[(a)] For every support $S$, the core $\core_\Phi(S)$ is computable in
+deterministic polynomial time.
+\item[(b)] Integer weight vectors of a peeling sequence from $S$ to~$C$,
+each checked against the tests active at its own support, together with a
+Gordan certificate for $C$, prove $C=\core_\Phi(S)$. Such a certificate
+exists with at most $n$ stages and at most $n$ nonzero multipliers, each
+of absolute value at most $n!\,D_0^n$. It can be stored with binary length
+$O(n^3(1+\log(n+1)+\log D_0)+n\log(|\Phi|+1))$.
+% gloss: polynomial-size certificates (G8; read back after the proof)
+\item[(c)] Fine Reachability at a fixed profile in the single-word class is
+decided in deterministic polynomial time, and both answers have
+polynomial-size certificates, checkable in polynomial time.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Part~(a) is the computation above. Appendix~\ref{app:tractable-proofs}
+proves the bounds and~(b)--(c). In~(b), soundness uses the terminal
+dot-product check and completeness uses Gordan's alternative. Part~(c)
+compiles $\Phi_p$, applies Theorem~\ref{thm:fixed-profile} and gives the
+verifier for both verdicts.
+\end{proof}
+
+Thus both answers are certified by peeling stages and Gordan certificates,
+not by the points of a sequence.
+
+Checking whether a supplied rational point satisfies the binomial equations
+of a Fine Connectivity instance is a separate task. After handling zero
+coefficients, vanishing monomials and signs, clear denominators in each
+comparison, keeping the powers encoded. Proposition~2.1 of Etessami,
+Stewart and
+Yannakakis~\cite[Proposition~2.1]{etessamistewartyannakakis} supplies the
+power-product equality check. With the zero and sign checks and
+rational budget arithmetic, this equality check verifies feasibility of the
+supplied endpoint. Boundedness remains a promise, and the check does not
+decide whether a feasible point exists.
+
+\begin{proposition}[Explicit seq{}uences can need exponential binary length]\label{prop:long-sequences}
+For $k\ge1$, let $\Phi$ have coordinates $x_0,\dots,x_k$, tests
+$x_{i+1}=x_i^2$ for $0\le i<k$, and budgets $|x_i|\le1$. The points $0$
+and $(1,\dots,1)$ are finely connected. Every sequence of feasible rational
+points between them with sup-norm steps below $1/4$ contains a point whose
+coordinate $x_k$ has a reduced denominator of binary length at least
+$2^k+1$.
+\end{proposition}
+
+The proof (Appendix~\ref{app:tractable-proofs}) follows~$x_0$ across
+$[1/4,1/2)$.
+
+\paragraph{Scope of the tolerance.} The single-word P-completeness result
+and its certificates concern fine reachability, at every positive rational
+tolerance. Different signed cores can still be joined at a coarse
+tolerance, as one step joins the two signs of the sign example above~$1/8$. Proposition~\ref{prop:separation} supplies a
+sufficient separation cutoff whose expanded rational denominator can
+require exponentially many binary digits. For each NCL reduction instance
+of Section~\ref{sec:hard}, the NCL verdict agrees with sequence existence
+at its supplied cutoff and at every smaller positive tolerance. A positive
+certificate proves sequence existence at every tolerance, while by
+Proposition~\ref{prop:long-sequences} an explicit sequence can require
+exponentially many binary digits even at a fixed tolerance.
+
+% ---------------------------------------------------------------------------
+\subsection{P-hardness}\label{sec:p-hardness}
+
+% gloss: anchor
+As in both examples of Section~\ref{sec:question}, $\mathsf z$ is the
+\defterm{anchor}, a label calibrated to $1/4$ whose coordinate never peels.
+We reduce from monotone circuit value, which Goldschlager proved P-complete
+under log-space reductions~\cite{goldschlager}; Greenlaw, Hoover and Ruzzo
+prove the variant with numbered gates and assigned
+inputs~\cite[Theorem~6.2.2]{greenlawhooverruzzo}. A circuit lists gates
+$1,\dots,G$, each a constant $0$ or $1$ or a binary AND or OR of earlier
+gates, and names an output gate~$\gamma_{\mathrm{out}}$.
+
+% gloss: sentinel
+The reduction outputs an instance of the single-word class with base
+$\{0,1\}$, one probe, a one-value register and only level~$0$. Its labels,
+each its own reversal, are a gate label $\mathsf g_\gamma$ for each gate,
+the anchor and a \defterm{sentinel}~$\mathsf s$, whose sign alone
+distinguishes the two endpoints. The eigenvalues of the gate labels, the anchor and the sentinel are
+$g_\gamma$, $z$ and~$s$, respectively. With $\delta=1/(G+2)$ every label
+probability is~$\delta$; also $\kappa=1/2$ and $H=3$. To keep two tests per
+gate uniformly for log-space output, each gate receives two named word tests,
+its \emph{slots}. An AND gate uses one test per input, constant~$0$ and OR
+repeat one test, and constant~$1$ uses two trivial identities so it still
+fills both slots. With inputs $\gamma',\gamma''$, the slots are
+\[
+\begin{array}{lll}
+\text{constant }0: & \mathsf g_\gamma\mathsf{zz}\sim\mathsf{zzz}, & \mathsf g_\gamma\mathsf{zz}\sim\mathsf{zzz};\\
+\text{constant }1: & \mathsf{zzz}\sim\mathsf{zzz}, & \mathsf{zzz}\sim\mathsf{zzz};\\
+\text{AND}: & \mathsf g_\gamma\mathsf g_{\gamma'}\mathsf z\sim\mathsf z\mathsf g_{\gamma'}\mathsf z, &
+\mathsf g_\gamma\mathsf g_{\gamma''}\mathsf z\sim\mathsf z\mathsf g_{\gamma''}\mathsf z;\\
+\text{OR}: & \mathsf g_\gamma\mathsf g_{\gamma'}\mathsf g_{\gamma''}\sim\mathsf z\mathsf g_{\gamma'}\mathsf g_{\gamma''}, &
+\mathsf g_\gamma\mathsf g_{\gamma'}\mathsf g_{\gamma''}\sim\mathsf z\mathsf g_{\gamma'}\mathsf g_{\gamma''}.
+\end{array}
+\]
+The output test is
+$\mathsf{ss}\mathsf g_{\gamma_{\mathrm{out}}}\sim\mathsf{zz}\mathsf g_{\gamma_{\mathrm{out}}}$.
+All $2G+1$ word tests and the calibration $z=1/4$ are held, and the only
+admissible set is the set of all word tests. The endpoint $A$ has every
+eigenvalue $1/4$, and $B$ differs only in $s=-1/4$; both are feasible
+whatever the circuit, since $s$ enters only the output test, squared.
+
+In other words, a test is active only while all its letters are nonzero.
+So the coordinates that peel follow gate-local Horn rules: a constant~$1$
+is removed, an AND gate once both inputs are, an OR gate once either is,
+and $s$ once the output gate is. In the three-gate circuit, $\mathsf g_1$
+is the constant~$0$, $\mathsf g_2$ the constant~$1$, and the output is
+$\mathsf g_3=\mathrm{OR}(\mathsf g_1,\mathsf g_2)$. Here $g_2$ peels first,
+making the test of $\mathsf g_3$ inactive; then $g_3$ peels, making the
+output test inactive; then $s$ peels. The core is $\{z,g_1\}$, and
+$B$ is finely reachable from~$A$. With AND in place of OR, the slot of
+$\mathsf g_1$ keeps $g_3=z$ after $g_2$ leaves. Then $\{z,g_1,g_3,s\}$ is
+irreducible and $B$ is not finely reachable, although one numerical step
+joins the endpoints at any tolerance above $1/20$.
+
+\begin{theorem}[P-hardness]\label{thm:p-hard}
+The map from a monotone circuit to the instance above is computable in
+deterministic logarithmic space. The configurations $A$ and $B$ are
+feasible at one common profile with full table support, and $B$ is finely
+reachable from $A$ if and only if the circuit outputs~$1$. Hence Fine
+Reachability at a fixed profile in the single-word class is P-hard under
+deterministic log-space many-one reductions on promised-feasible inputs.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+An active gate test other
+than a constant-$1$ slot gives $\eta_{g_\gamma}=\eta_z$, where $\gamma$ is
+its gate. The constant-$1$ slots are identities. The active output test
+gives $2\eta_s=2\eta_z$, and the calibration gives $\eta_z=0$. The anchor,
+the false gates and, if the output is~$0$, the sentinel form an irreducible
+support, so they lie in the core of the full support
+(Lemma~\ref{lem:irreducible}). A first true gate in that core would peel
+alone, and so would the sentinel once the output gate is gone. So the
+signed cores of $A$ and~$B$ agree exactly when the output is~$1$, and
+Theorem~\ref{thm:fixed-profile} gives the equivalence.
+Appendix~\ref{app:tractable-proofs} gives the details and the log-space
+transducer.
+\end{proof}
+
+Thus the sentinel survives peeling exactly when the circuit outputs~$0$.
+With
+Theorem~\ref{thm:certificates}, the problem is P-complete, and since the
+reductions land inside the promise, it is in log-space-uniform NC only if P
+equals log-space-uniform NC.
+
+The reduction follows the circuit-value pattern of Fraca and Haddad's
+Proposition~32 for continuous Petri nets~\cite{fracahaddad}. Here the
+surviving signed core computes the circuit. For a given gate count, the
+endpoint eigenvalue vectors are fixed independently of the gate types,
+wiring and output value; the endpoints share a profile within each
+instance and differ only in one sign. On these instances the removed set
+is the least model of the gate-local Horn rules above, which the
+propagation of Dowling and Gallier computes in linear
+time~\cite[Sections~4--5]{dowlinggallier}. This reading is for the circuit
+instances only: in general a peeling step combines tests through kernel
+vectors found by linear programming.
+
+% ---------------------------------------------------------------------------
+\subsection{Profile steps: the directed criterion}\label{sec:directed}
+
+% gloss: profile order
+% gloss: cover
+% gloss: profile step
+Theorem~\ref{thm:directed} lets the profile change: a configuration can
+acquire held tests, refine its register partitions or shrink its table
+support, but never the reverse, so a held test keeps passing for the rest
+of the sequence. Definition~\ref{def:profile-steps} extends the sequences and fine
+reachability of Section~\ref{sec:profiles}.
+
+\begin{definition}[Profile order and profile steps]\label{def:profile-steps}
+For profiles $p$ and~$q$, put $p\preceq q$ if $\Gamma_q\subseteq\Gamma_p$,
+$F^q_\ell$ refines $F^p_\ell$ at every level~$\ell$, and
+$\mathcal T_p\subseteq\mathcal T_q$. An attained profile $q$ \emph{covers}
+an attained $p$ if $p\prec q$ and no attained profile lies strictly between.
+A \emph{numerical step} at tolerance~$\varepsilon$ joins feasible
+configurations $A,B$ with $p_A=p_B$ and $\|P_A-P_B\|_\infty<\varepsilon$.
+A \emph{profile step} joins feasible configurations $A,B$ such that $p_B$
+covers $p_A$ and either $\Gamma_{p_B}=\Gamma_{p_A}$ and $P_B=P_A$, or
+$\Gamma_{p_B}\subsetneq\Gamma_{p_A}$ and the projected tables
+$\theta_mQ_m(g,h)$ agree. A \emph{reconfiguration sequence at
+tolerance~$\varepsilon$} is a finite, possibly empty, sequence of such
+steps through feasible rational configurations. $B$ is \emph{finely
+reachable} from $A$ if one exists from $A$ to $B$ for every rational
+$\varepsilon>0$.
+\end{definition}
+
+In other words, steps go up the partial order~$\preceq$, and agreement of
+the projected tables means $\theta_B=\theta_A$ and $\alpha_B=\alpha_A$, so
+only the register can change. %
+In the sign example the two labels are self-reversing. Take $\kappa=1/2$,
+$H=2$, full table support and only level~$0$. The admissible sets of word tests are the empty set and the
+singleton containing $\mathsf{yy}\sim\mathsf{zz}$. Let $A$ hold only
+the calibration, at $y=1/4$, and let $B$ also hold
+$\mathsf{yy}\sim\mathsf{zz}$, at $y=-1/4$; then $p_A\preceq p_B$.
+
+\begin{center}
+\fbox{\begin{minipage}{0.93\linewidth}
+\textsc{Fine Reachability with profile steps}\par\smallskip
+\emph{Input:} an explicitly presented model, and two rational configurations
+$A$ and~$B$, each given by its profile, or data that determine it
+(Remark~\ref{rem:readback}), and its parameter vector or transition tables,
+in binary.\par\smallskip
+\emph{Promise:} $A$ and $B$ are feasible.\par\smallskip
+\emph{Question:} is $B$ finely reachable from~$A$?\par\smallskip
+\emph{Supplied-tolerance variant:} the input also contains
+$\varepsilon_0\in\QQ_{>0}$, and the question is whether a reconfiguration
+sequence at tolerance~$\varepsilon_0$ exists.
+\end{minipage}}
+\end{center}
+
+\begin{lemma}[One change per profile step]\label{lem:covers}
+If $q$ covers $p$, then $q$ differs from $p$ in exactly one of the
+following: the table support; the held word tests; the held value tests;
+the partition at one level. If the held value tests differ, $q$ holds
+exactly one more value test than~$p$.
+\end{lemma}
+
+Appendix~\ref{app:tractable-proofs} proves the lemma by building an attained
+profile, above $p$ and at most~$q$, that changes one part. So every step has one of six types: numerical; support;
+word-test; value-test; partition at a non-final level; partition at the
+final level. Only a word-test cover can add more than one test. In that
+case no admissible set of word tests lies strictly between the two held
+word-test sets.
+
+\begin{theorem}[Directed criterion]\label{thm:directed}
+Fix a shared-probe model in the single-word class, and let $A$ and $B$ be
+feasible rational configurations. Then $B$ is finely reachable from $A$ if
+and only if $p_A\preceq p_B$ and $\SC_{p_A}(\alpha_A)=\SC_{p_A}(\alpha_B)$,
+where both signed cores are computed from the eigenvalue constraints
+$\Phi_{p_A}$ of the source profile, including the reversal equations. Fine
+Reachability with profile steps in this class is P-complete under
+deterministic log-space many-one reductions, and both answers have
+polynomial-size certificates, checkable in polynomial time, that include
+the order comparison. For models in which exactly one word test is
+word-against-pair and all others are word-against-word, Fine Reachability
+with profile steps is PSPACE-hard under polynomial-time many-one
+reductions.
+\end{theorem}
+
+Thus profile steps add only the order condition $p_A\preceq p_B$, and both
+cores come from the source's constraints; the sign example below shows why
+the target's constraints would not do.
+
+\begin{proof}[Proof outline]
+Steps never lower the profile, so every later configuration passes the
+tests of~$p_A$, and profile steps preserve~$\alpha$; necessity then follows as
+for Theorem~\ref{thm:fixed-profile}. For sufficiency, combine the target's
+label probabilities and eigenvalues with the source register at~$p_A$, and
+reach that configuration by Theorem~\ref{thm:fixed-profile}. Then climb a
+saturated chain of attained profiles at these values, interpolating to the
+upper register at the lower profile before each cover with unchanged
+support. Appendix~\ref{app:tractable-proofs} gives the details and proves
+the complexity claims.
+\end{proof}
+
+In the sign example, $\Phi_{p_A}$ gives only $\eta_z=0$, so $y$ peels and
+both signed cores are $z$ alone: $B$ is finely reachable from~$A$, through
+$y=0$. At this calibration-only profile, every feasible eigenvalue vector
+has signed core $\{z\}$ with positive sign. Thus every feasible target at
+or above that profile is finely reachable from any feasible source there,
+by Theorem~\ref{thm:directed}. Using the target's constraints for both cores would add
+$2\eta_y=2\eta_z=0$, incorrectly ruling out fine reachability from $A$ to
+$B$. Let $A^+$ hold the test at the parameter vector of~$A$. From $A^+$ the
+cores differ in the sign of~$y$, so $B$ is not finely reachable; the exact
+threshold $1/8$ of Section~\ref{sec:question} is for this pair. No
+sequence leads from $A^+$ back to $A$ at any tolerance: reachability is
+between configurations, not parameter vectors.
+
+The same sign obstruction persists in a model with a nontrivial register and
+four labels. On the staged example's base, register values and labels, take
+label probabilities $1/4$ and the common full-support profile holding
+$\mathsf{yy}\sim\mathsf{zz}$ and $z=1/4$. Take eigenvalues
+$(x,y,z,f)=(-1/8,\pm1/4,1/4,1/8)$, the register redrawn from $\nu$ at every
+step, and one block at every level. Then Lemma~\ref{lem:transfer}(a), with
+$N=8$ and $\delta=1/8$, excludes every sequence between the two signs at
+tolerance $1/272$, a sufficient tolerance rather than the exact threshold.
+At the same profile, a direct step between these endpoints changes a table
+entry by at most $1/64$, so it is allowed at any tolerance above $1/64$.
+
+Both conditions of Theorem~\ref{thm:directed} can be evaluated from the
+full-state labeled transition tables, decision availability at each level,
+and held-test membership recorded in Remark~\ref{rem:readback}
+(Appendix~\ref{app:tractable-proofs}).
+
+The ordinary and signed row sums in Lemma~\ref{lem:transfer}(a) give $\theta_m$ and $\theta_m\alpha_{mi}$. Dividing by the positive label probability yields $\alpha_{mi}$, so the tables determine both types of value test; Appendix~\ref{app:tractable-proofs}
+reconstructs the rest of the configuration.
+
+% ---------------------------------------------------------------------------
+\subsection{The algebraic form, first half, and the circuit transfer}\label{sec:circuit-transfer}
+
+Section~\ref{sec:algorithm} and Theorem~\ref{thm:core} give the upper
+bound in Corollary~\ref{cor:algebraic}, under the promise that $\FQ$ is
+bounded. For hardness, the transducer of Section~\ref{sec:p-hardness} emits
+only the eigenvalue tests, budgets $|x_m|\le1/2$ and endpoint
+eigenvalue vectors; the resulting instances meet the promises
+(Appendix~\ref{app:tractable-proofs}). By Corollary~\ref{cor:real}, which
+needs no boundedness, these instances also give the P-hardness in
+Corollary~\ref{cor:real-complexity}.

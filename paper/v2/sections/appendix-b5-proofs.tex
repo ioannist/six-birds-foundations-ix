@@ -1,0 +1,448 @@
+% Appendix: Proofs for Section 5 (drafted 2026-11-23, Phase 4 unit 4).
+% Holds the full NCL finite-step argument (OBJECTIONS item 3: both
+% directions, every feasible step below the cutoff, several or negative
+% summands, the common represented orientation, mixtures legal,
+% preload/toggle/unload, loops counting twice), the control witness of
+% Remark 5.7 (rem:control), the algebraic and real NCL transfers, the rational-root
+% compiler and the fixed quartic layout. The Heintz-Roy-Solerno upper
+% bound is the last subsubsection (moved here from appendix-b-proofs.tex).
+% Sources: lean/SingleAdditiveLicence.md sections 1-4 and 7;
+% lean/BoundaryCorollaries.md sections 1, 2 and 4; lean/BoundedProbes.md
+% sections 1 and 3; lean/ComplexityBoundary.md section 3.
+% Lean (table only): ConstraintLogic legal_of_represents,
+% flips_of_represents, common_orientation, represents_corner,
+% Graph.flip_segments_lawful; SingleAdditiveLicence ncl_chain_iff,
+% ncl_fine_iff, ncl_endpoints_distinct, control_replacement, Control.fine,
+% Control.verdict_changes; AlgebraicConstraintLogic chain_of_flips,
+% flips_of_chain, fine_iff_flips; RealAlgebraicBoundary
+% real_path_iff_flips, flips_of_real_path; ResponseBudgets (lift_chain,
+% decode_chain, fine_iff_box, no_native_chain_of_selector, square_rows);
+% QuarticSelector (given a RowRealization).
+
+\subsection{Proofs for Section~\ref{sec:hard}}\label{app:hard-proofs}\label{app:ncl-proofs}
+
+% ---------------------------------------------------------------------------
+\subsubsection{Size of the construction}\label{app:ncl-size}
+
+% compressed 2026-11-24: (a) the label count and one-value register, given
+% in Section 5.2, are not re-listed; (b) the size bound is computed in one
+% sentence from the listed counts (entry count, denominator, numerator
+% length).
+The construction has $|I|=|E|+1$ probes,
+$|E|+2\le|X|<2(|E|+2)$, $2|E|+1$ word tests and $|I|+|E||I|+|V|$ value
+tests. As $2^d-1\ge|I|$, listing $X$ and its first $|I|$ nonzero points in
+binary order gives the~$a_i$, and $\chi_i(g)=(-1)^{a_i\cdot g}$ takes
+$O(d|I||X|)$ Boolean operations. For
+distinct $a_i,a_{i'}$ the nonzero character $\chi_i\chi_{i'}$ pairs points
+of opposite sign, so the probes are balanced and orthogonal. At both
+endpoints the eigenvalues have denominators dividing $8|I|$ and the label
+probabilities are $\delta$ or~$2\delta$. Over the common denominator
+$8|I||X|(|M|+1)$, each of the $|M||X|^2$ entries
+$\theta_m(1+\sum_i\alpha_{mi}\chi_i(g)\chi_i(h))/|X|$ therefore has a
+numerator summing $O(|I|)$ integers of binary length
+$O(\log(2+|E|+|V|))$. With
+$1/\varepsilon_0=(|M|+1)\cdot4|I|\cdot(2|X|+1)$, the output has binary
+length $O((|E|+|V|+1)(|E|+1)^2\log(2+|E|+|V|))$ and is computed in
+polynomial time.
+
+% ---------------------------------------------------------------------------
+\subsubsection{The finite-step argument}\label{app:ncl-transfer}
+
+% compressed 2026-11-24: (e) sentences merged in the set-up, (M), (J), (L)
+% and both lemma proofs. Every element of OBJECTIONS item 3 is kept: both
+% directions, every feasible step below epsilon_0, several or negative
+% summands, the common represented orientation, mixtures legal,
+% preload/toggle/unload, and loops.
+Configurations here are feasible at the profile~$p$ of the construction,
+so Lemma~\ref{lem:feasible} applies. For such $A$ and $e\in E$, let $C_A(e)\subseteq\{0,1\}$ contain $0$ if $x_{A,e}\neq0$ and $1$
+if $y_{A,e}\neq0$; it is nonempty by~\eqref{eq:load}. Thus $A$ represents
+$\sigma$ exactly when $\sigma(e)\in C_A(e)$ for every~$e$, so its
+represented orientations are all mixtures, one choice per edge, of the
+sets~$C_A(e)$.
+
+\emph{(M) Every represented orientation is legal.} Let $A$ represent
+$\sigma$, and fix~$v$. Each edge $e$ with tail $v$ under $\sigma$ has the
+end $v_e^{\sigma(e)}=v$ available, so its selector equation
+in~\eqref{eq:selector} gives $\alpha_{\mathsf t_ve}=\wt(e)/8$. Distinct
+edges give distinct coordinates, and a loop at $v$ has one coordinate and
+one tail, although it contributes twice to~$W(v)$. Summing,
+\eqref{eq:vertex-budget} gives the tails at~$v$ weight at most $W(v)-2$,
+so the heads carry at least two. This bound uses neither the signs of the
+summands nor the other coordinates of~$\mathsf t_v$, which may carry
+unused charge.
+
+\emph{(J) Represented orientations are joined inside one configuration.}
+If $A$ represents $\rho$ and $\rho'$, change the edges where they differ one
+at a time. Each intermediate orientation agrees at every edge with $\rho$
+or~$\rho'$, so $A$ represents it and it is legal by~(M), and consecutive
+ones differ by one flip.
+
+\emph{(L) Lifts.} At $A_\sigma$ one summand vanishes at each edge, so
+$A_\sigma$ represents only~$\sigma$. For legal $\sigma$, $A_\sigma$ meets
+Lemma~\ref{lem:feasible}. Each tail's vertex label carries the charge and
+the other summand is zero, so the selector equations hold. The vertex
+label at $v$ uses its tail weight divided by~$8$ of the edge-probe budget,
+whose limit is $(W(v)-2)/8$. The
+summand labels spend at most $|I|k=1/4$, the load label $1/8$, and each
+selector at most~$1/4$. So distinct legal orientations give distinct
+feasible endpoints.
+
+\begin{proof}[Proof of Lemma~\ref{lem:decode}]
+Let $e\in E$. If $C_A(e)\cap C_B(e)=\emptyset$, the two sets are opposite
+singletons, say $\{0\}$ and~$\{1\}$; then $y_{A,e}=0$, so $x_{A,e}=k$
+by~\eqref{eq:load}, while $x_{B,e}=0$, contradicting
+$|x_{A,e}-x_{B,e}|<k$. Choosing $\rho(e)\in C_A(e)\cap C_B(e)$ at each edge
+independently gives an orientation $\rho$ represented by both, whatever
+the other coordinates do, whether one or many change, and whatever the
+signs of the summands.
+
+Now let $A_\sigma=B_0,B_1,\dots,B_n=A_\tau$ satisfy the bound at each step.
+If $n=0$, then $A_\sigma=A_\tau$ and $\sigma=\tau$ by~(L). Otherwise choose
+$\rho_s$ represented by $B_{s-1}$ and $B_s$ $(1\le s\le n)$, and put
+$\rho_0=\sigma$ and $\rho_{n+1}=\tau$; by~(L), $\rho_1=\sigma$ and
+$\rho_n=\tau$. Each $B_s$ $(0\le s\le n)$ represents $\rho_s$ and
+$\rho_{s+1}$, so (J) joins them by legal flips, possibly several within
+the one configuration~$B_s$, and concatenation gives legal flips from
+$\sigma$ to~$\tau$.
+\end{proof}
+
+% compressed 2026-11-24: (e) sentences merged; the vertex-budget argument
+% is stated as one sentence tracking each total. The preload, toggle and
+% unload segments, the loop case, every feasibility check and the explicit
+% subdivision bound are kept.
+\begin{proof}[Proof of Lemma~\ref{lem:lift}]
+Let $f$ be the flipped edge, with $\sigma(f)=0$ (the other case is
+symmetric), so $a=v_f^0$ is the old tail and $b=v_f^1$ the new one. The
+lifts $A=A_\sigma$ and $A'=A_\tau$ differ only in $(x_f,y_f)$, which is
+$(k,0)$ at $A$ and $(0,k)$ at~$A'$, and, if $a\neq b$, in
+$(\alpha_{\mathsf t_af},\alpha_{\mathsf t_bf})$, which is $(\wt(f)/8,0)$ at
+$A$ and $(0,\wt(f)/8)$ at~$A'$. Let $A^+$ be $A$ with
+$\alpha_{\mathsf t_bf}=\wt(f)/8$, and $A'^+$ be $A'$ with
+$\alpha_{\mathsf t_af}=\wt(f)/8$. At fixed label probabilities and
+register, move affinely in the eigenvalues from $A$ to $A^+$ (preload),
+then to $A'^+$ (toggle, moving $(x_f,y_f)$ from $(k,0)$ to $(0,k)$), then
+to $A'$ (unload). For a loop, $a=b$, the charge stays $\wt(f)/8$, and the
+preload and unload are constant.
+
+Every point meets Lemma~\ref{lem:feasible}. The moved coordinates are not
+calibrated. The load equation holds, with $x_f,y_f\in[0,k]$ on the toggle,
+so the budgets of $\mathsf x$ and $\mathsf y$ stay at most $|I|k$. The
+selector equations at~$f$ hold: on the preload, $y_f=0$ and the charge at
+$a$ is present; on the toggle, both charges are; and on the unload, $x_f=0$
+and the charge at $b$ is present. Other edges are unchanged, so only the
+vertex budgets at $a$ and $b$ change. The total at $b$ rises along the
+preload from its value at $A$ to that at~$A'$; the total at $a$ falls
+along the unload from its value at $A$ to that at~$A'$; and the toggle
+fixes all charges. So each total stays between its two endpoint totals,
+which satisfy~\eqref{eq:vertex-budget} by~(L).
+
+Every entry $P_m((g,r),(h,r))=\theta_mQ_m(g,h)$ is affine in the
+eigenvalues. On each segment every label changes at most one eigenvalue,
+by at most $1/4$, so dividing each segment into
+$n\ge1/\varepsilon$ equal parts gives rational feasible configurations
+at~$p$ whose consecutive entries differ by at most $1/(4n)<\varepsilon$.
+\end{proof}
+
+% compressed 2026-11-24: (c) the eigenvalue-change estimate, which repeated
+% the signed row sum of Lemma transfer(a) (sum_h chi_i(h) P_m = theta_m
+% alpha_mi chi_i(g), |X| terms, divide by delta), now cites Lemma
+% transfer(a) with N=|X|; since 1/epsilon_0 has the factor 2|X|+1, that
+% bound is already below k. (e) merges. The three-way equivalence is kept.
+\begin{proof}[Proof of Lemma~\ref{lem:cutoff}]
+First, a step below $\varepsilon\le\varepsilon_0$ changes every eigenvalue
+by less than~$k$: with the one-value register, $N=|X|$ in
+Lemma~\ref{lem:transfer}(a), which bounds the change by
+$2|X|\varepsilon_0/\delta=2|X|k/(2|X|+1)<k$.
+
+Along legal flips $\sigma=\rho_0,\dots,\rho_n=\tau$, concatenating the
+sequences of Lemma~\ref{lem:lift} (empty if $n=0$) gives fine reachability
+of $A_\tau$ from~$A_\sigma$, hence a sequence at~$\varepsilon$. Conversely,
+a sequence at $\varepsilon\le\varepsilon_0$ is one at $\varepsilon_0$, all
+at~$p$ (Remark~\ref{rem:inputs}(ii)); by the first paragraph its
+consecutive summands differ by less than~$k$, and Lemma~\ref{lem:decode}
+gives legal flips from $\sigma$ to~$\tau$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+\subsubsection{The control of Remark~\ref{rem:control}}\label{app:ncl-control}
+
+% compressed 2026-11-24: (c) the closing subdivision cites rational
+% subdivision; (d) the closing sentence "In the original instance, Lemma
+% cutoff gives the verdict no ..." is cut, as Remark rem:control states it;
+% (d) the K_{3,3} paragraph no longer repeats the remark's AND-vertex
+% count ("each vertex meets one matching edge of weight two and two edges
+% of weight one"); it keeps the inflow computation, the no-legal-flip check
+% and distinctness.
+The replacement test $\mathsf{uu}\sim\mathsf{uu}$ passes for every parameter
+vector, and all other inputs, held tests and admissible sets are
+unchanged, so $A_\sigma$ and $A_\tau$ stay feasible at the same profile.
+Fix their label probabilities, $2\delta$ at $\mathsf u$ and $\delta$
+elsewhere, and the register. For rational $t\in[0,1]$, let $A_\sigma(t)$
+be $A_\sigma$ with $x_i,y_i$ multiplied by $t$ at every probe, the reserve
+included. It is feasible in the replacement: the selector tests keep equal
+word probabilities, their probe equations scale by~$t$, the summand
+budgets decrease, and no calibration involves $\mathsf x$ or~$\mathsf y$.
+At $t=0$ every selector equation reads $0=0$, so the
+$\alpha_{\mathsf t_ve}$ $(e\in E)$ move affinely from their values at
+$A_\sigma$ to those at $A_\tau$ within the convex budgets, with
+$\alpha_{\mathsf t_v\ast}$ fixed by its calibration. Finally, follow
+$A_\tau(t)$ from $t=0$ to~$1$. These segments are affine in the
+eigenvalues at fixed label probabilities and register, so rational
+subdivision gives sequences at every positive
+tolerance.
+
+
+% ---------------------------------------------------------------------------
+\subsubsection{The algebraic and real transfers of Section~\ref{sec:real-ncl}}\label{app:ncl-algebraic}
+
+% compressed 2026-11-24: (c) the decoding over R (common orientation for
+% steps below one, then (M), (J), (L) as in the proof of Lemma decode) is
+% stated once in the first paragraph and cited by both converses, rational
+% and real, instead of being restated; (e) sentences merged. Both
+% directions of both transfers are kept.
+In~\eqref{eq:ncl-system}, $|x_{e0}|,|x_{e1}|\le1$ and $x_{e0}+x_{e1}=1$
+force $x_{eb}\in[0,1]$, and $|z_{ve}|\le W(v)-2\le4$, so the real, hence
+the rational, feasible set is bounded. Side $b$ of $e$ is available at a
+feasible point if $x_{eb}\neq0$; every edge has an available end, and an
+orientation is represented if every tail is available. (M), (J) and (L)
+hold with the same proofs over~$\RR$, with the charge $\wt(e)$ for
+$\wt(e)/8$ and the budget $W(v)-2$ for $(W(v)-2)/8$; so the endpoint of a
+legal orientation is feasible and represents only it. Two feasible points
+with $|x_{e0}-x'_{e0}|<1$ at every edge represent a common orientation, by
+the proof of Lemma~\ref{lem:decode} with $k=1$. So, as there, real feasible
+points from the endpoint of $\sigma$ to that of~$\tau$ with consecutive
+sup distances below one give legal flips from $\sigma$ to~$\tau$.
+
+Take a flip from side~$0$ to side~$1$, with old and new tails $a$
+and~$b$. If $a\ne b$, raise $z_{bf}$ to $\wt(f)$, move the summands from $(1,0)$ to
+$(0,1)$, and lower $z_{af}$ to~$0$; if $a=b$, keep $z_{af}=\wt(f)$ and move
+only the summands. Reverse these segments for a flip from side~$1$ to
+side~$0$. The checks are those of the proof of Lemma~\ref{lem:lift}, with
+unscaled charges and unit summands, and the coordinates are affine in the
+parameter, so rational subdivision gives feasible rational sequences with
+sup-norm steps below any $\varepsilon>0$. Conversely, fine connectivity gives such a sequence with
+steps below~$1$, hence legal flips. So the endpoints are finely connected
+exactly when legal flips lead from $\sigma$ to~$\tau$, and the promises of
+Corollary~\ref{cor:algebraic} hold. The system has $2|E|+|V||E|$
+coordinates, $2|E|$ binomial tests, $|E|$ normalized affine trinomials and
+$2|E|+|V|$ budgets. The system and endpoints are written in polynomial
+time from the weights, capacities $W(v)-2$, and $0$ and~$1$.
+
+For real path components: the tests and budgets are continuous, so the
+real feasible set is closed, and each segment, feasible at rational
+parameters, is feasible on its whole real interval; so legal flips give a
+piecewise-linear real path. Conversely, a continuous
+path $\gamma:[0,1]\to\FR$ joining the endpoints is uniformly continuous,
+so for some $n$ the samples $\gamma(s/n)$, $0\le s\le n$, have consecutive
+sup distances strictly below one, and give legal flips as above. Hence
+real path-component membership on these bounded instances is
+PSPACE-hard.
+
+% ---------------------------------------------------------------------------
+\subsubsection{Proof of Theorem~\ref{thm:rational-roots}}\label{app:rational-roots}
+
+% compressed 2026-11-24: (e) sentences merged in all four parts; (c) the
+% transfer cites rational subdivision. Every gadget, inequality, label,
+% calibration, budget check and size count is kept.
+\emph{The gated system.} Build each coefficient of $f$ from its binary
+digits by addition and doubling from $0$ and~$1$, negating for its sign,
+raise each variable to its binary exponents by repeated squaring, and
+multiply and sum. This gives $O(\mathcal L+1)$ gates, to which every input
+assignment extends uniquely, the last evaluating~$f$. With the
+homogenized gate equations of Section~\ref{sec:rational-roots}, a gated
+residual is $s(2-s)$ times the residual of a gate equation, of the output
+equation $z_\gamma=0$, or of $\xi^2-2-\zeta^2\psi$. At a rational feasible
+point with $0<s<2$, the switch factor is nonzero, so the ungated residuals
+vanish. If $\zeta=0$, the slack equation would give $\xi^2=2$, which has
+no rational solution. Thus $\zeta>0$. Dehomogenizing the gate and output
+equations shows that $v_\gamma=z_\gamma/\zeta$ satisfies the original
+gate equations with output zero. Conversely, extend a rational root $v$ to the gates, put
+$\zeta=(1+\sum_\gamma|v_\gamma|)^{-1}$ and
+$z_\gamma=\zeta v_\gamma\in[-1,1]$, choose rational $\xi$ strictly between
+$\sqrt2$ and $\sqrt2+\zeta^2/4$, and put $\psi=(\xi^2-2)/\zeta^2$. Then
+$1<\xi<2$ and, as $\xi+\sqrt2<4$, $0<\xi^2-2<\zeta^2$, so $0<\psi<1$, and
+these values satisfy every equation for all~$s$. Every residual vanishes on
+the faces $s\in\{0,2\}$, so they are full boxes, and affine segments
+inside them join the supplied endpoints to the ends of the segment
+$s\in[0,2]$. Without a rational root, every rational feasible
+point lies on a face.
+
+\emph{Inequalities.} Normalize affinely: $z_\gamma=2t-1$, $\zeta=2t$,
+$s=2t$, $\xi=2t+1$ and $\psi=2t-1$. Expand each residual, of bounded
+degree with boundedly many terms per gate, giving each partial product its
+own coordinate in $[0,1]$. Impose each product $t''=tt'$ by
+$\bar t=(t+t')/2$, the squares $t^2$, $t'^2$, $\bar t^2$ and the affine
+equality $2t''=4\bar t^2-t^2-t'^2$, which determine $t''$ uniquely. This
+leaves affine equalities and squares $t'=t^2$ in $O(\mathcal L+1)$ coordinates of
+$[0,1]$, of bounded arity with bounded-length coefficients, with unique
+polynomial lifts on solutions and the switch coordinate $t_s=s/2$
+unchanged. Write an affine equality as $\sum_jc_jv_j=c_0$ with $c_j\ge0$
+and each $v_j$ either $t_j$ or $1-t_j$. Impose $\sum_jc_jv_j\le c_0$
+and $\sum_jc_j(1-v_j)\le\sum_jc_j-c_0$; both bounds are nonnegative because
+the lifted endpoints below satisfy the equality. Impose $t'=t^2$ by
+$t^2+(1-t')\le1$ and $(1-t)+t(1-t)+t'\le1$, that is, $t^2\le t'$ and
+$t'\le t^2$, as $(1-t)+t(1-t)=1-t^2$. Read repeated occurrences of a
+coordinate from copies $t_i$ with $t_i+(1-t_j)\le1$ and
+$t_j+(1-t_i)\le1$, and add $|t_j|\le1$ and $|1-t_j|\le1$ for each~$j$.
+Every inequality is then
+$\sum_jc_{\rho j}|t_j^{a_j}(1-t_j)^{b_j}|\le c_\rho$ with
+$c_{\rho j},c_\rho\ge0$, $a_j+b_j\le2$ and at most one term per coordinate.
+The endpoints have $t_s=0$ and $t_s=1$, respectively, and every other
+normalized source coordinate zero. Their gadget coordinates follow in the
+fixed order of partial products, squares and copies; the construction below
+gives their label probabilities and eigenvalues.
+
+\emph{The model.} Let $J$ index the coordinates and copies. Take probes
+$I=J\sqcup\{\ast\}$ on the binary base of Section~\ref{sec:construction}
+for $|I|$ probes, a one-value register, only level~$0$, identity reversal,
+$\kappa=1/2$, $H=4$, $\delta=1/(|M|+1)$ and $k=1/(4|I|)$. The labels are
+$\mathsf u,\mathsf x,\mathsf y$, a pad $\mathsf p$, an indicator
+$\mathsf o_j$ for each $j\in J$, and for each inequality $\rho$ a label
+$\mathsf r_\rho$ and coefficient labels $\mathsf c_{\rho j}$ $(j\in J)$.
+Put $\omega_\rho=1/(2(1+c_\rho+\sum_jc_{\rho j}))$, with $c_{\rho j}=0$ and
+$a_j=b_j=0$ for $j$ outside the inequality. The calibrations are $u_i=k/2$
+and $\alpha_{\mathsf pi}=k$ at every probe; $x_\ast=k$;
+$\alpha_{\mathsf o_ji}=k$ if $i=j$ and $0$ otherwise;
+$\alpha_{\mathsf c_{\rho j}i}=\omega_\rho c_{\rho j}$ if $i=j$ and $0$
+otherwise; and $\alpha_{\mathsf r_\rho\ast}=1/2-\omega_\rho c_\rho$. The
+word tests are $\mathsf u\sim\{\mathsf x,\mathsf y\}$ and, for every
+inequality~$\rho$ and $j\in J$, the test of
+Section~\ref{sec:rational-roots}, of length $2+a_j+b_j\le4$. The only
+admissible set is the full list, and the endpoints are the lifts of the two
+corners, at the common full-support profile with the unique level-zero
+partition and every test held.
+
+As in Lemma~\ref{lem:engine} and Proposition~\ref{prop:length-one}, a
+feasible configuration has $\theta_{\mathsf u}=2\delta$, every other label
+probability~$\delta$ and $x_i+y_i=k$; so $y_\ast=0$, and with $t_j=x_j/k$,
+$y_j=k(1-t_j)$. The single-word tests avoid $\mathsf u$, so their words
+have equal probabilities; at probes $i\neq j$ both sides vanish, and at
+$j$ cancelling $k$ gives
+$\alpha_{\mathsf r_\rho j}=\omega_\rho c_{\rho j}t_j^{a_j}(1-t_j)^{b_j}$. As
+$\omega_\rho c_\rho<1/2$, the budget of $\mathsf r_\rho$ is exactly
+inequality~$\rho$. The other budgets hold whenever $t\in[0,1]^J$:
+$\mathsf x$ and $\mathsf y$ spend at most $|I|k=1/4$, $\mathsf p$ also
+$1/4$, $\mathsf u$ spends $1/8$, and $\mathsf o_j$ and $\mathsf c_{\rho j}$
+at most $1/2$. So the feasible configurations at the common profile
+correspond exactly to the solutions $t\in[0,1]^J$ of the inequalities,
+through eigenvalues polynomial in~$t$.
+
+\emph{Transfers and size.} If $f$ has a rational root, the three segments
+lift through the gadgets and the model to configurations with eigenvalues
+polynomial in the segment parameter and rational at rational parameters.
+The tables are affine in the eigenvalues, so rational subdivision gives
+sequences at every positive tolerance. If
+$f$ has none, every feasible rational configuration has $t_s\in\{0,1\}$,
+while the endpoints have $t_s=0$ and $t_s=1$. A sequence at
+$\varepsilon\le\varepsilon_0=\delta k/(2|X|+1)$ would contain a step
+changing $x$ at the probe of $t_s$ by~$k$, which Lemma~\ref{lem:transfer}(a) excludes, since the register has one value and $2|X|\varepsilon_0/\delta<k$. There are $O(\mathcal L+1)$ coordinates,
+copies and inequalities, and one word test and coefficient label per
+inequality and coordinate, so $O((\mathcal L+1)^2)$ of each and $O((\mathcal L+1)^3)$
+calibration entries. All constants and endpoint coordinates have
+polynomial binary length, $|X|<2(|I|+1)$, and
+$1/\varepsilon_0=(|M|+1)\cdot4|I|\cdot(2|X|+1)$, so the map runs in
+polynomial time and never computes a root.
+
+% ---------------------------------------------------------------------------
+\subsubsection{Proof of Corollary~\ref{cor:quartic}}\label{app:quartic}
+
+% compressed 2026-11-24: (a) the two gated equations are cited from the
+% proof idea of Corollary quartic instead of being restated; (e) merges.
+% The slot layout, the counts, the corner lift, the calibration length,
+% padding, slopes and the conditional composition are kept.
+Let $f(v)=\sum_{|a|\le4}c_av^a$ in $N$ variables, listing every exponent
+vector of total degree at most four, with zero coefficients kept. In the
+box $z\in[-1,1]^N$, $\zeta\in[0,2]$, $\xi\in[1,3]$, $\psi\in[-1,1]$,
+$s\in[0,1]$, take the two gated equations of the proof idea of
+Corollary~\ref{cor:quartic}, and the endpoints with $s=0$ and $s=1$ and
+every other normalized coordinate zero. Both faces are feasible. At a
+rational point with $0<s<1$, $\zeta\neq0$ as before, and
+$F(\zeta v,\zeta)=\zeta^4f(v)$ gives the root $v=z/\zeta$; conversely a
+root gives the three segments of Appendix~\ref{app:rational-roots}, with
+$z=\zeta v$.
+
+After normalization both residuals have degree at most six in the $N+4$
+coordinates. Compute the monomial slots of degrees one to six in these
+coordinates by consecutive products in a fixed order, each through the
+gadget of Appendix~\ref{app:rational-roots}. Two final affine
+equalities set the constant term plus the weighted sum of the slots to
+zero, with weights determined by the $c_a$; a zero coefficient keeps its
+slot. Convert to inequalities as before, with a distinct copy for every
+term occurrence, including those with zero coefficient, and with the two
+copies of $t$ in the second square inequality. With $U$ products, $H'$
+nonconstant slots and $C=29U+4H'$ term occurrences, there are $N+4+5U+C$
+coordinates and copies and $2(5U+2)+2C$ inequalities besides the box
+inequalities, all depending only on~$N$. So the numbers of probes, labels,
+base states, word tests and value tests of the model of
+Appendix~\ref{app:rational-roots} depend only on~$N$, as do $\delta$, $k$,
+$|X|$ and $\varepsilon_0$. Its single-word tests have length
+$2+a_j+b_j\le4$, the pure and mixed square terms having degree two.
+
+The polynomial assignment lifts both face corners. The layout contains the
+product $s\cdot s$, whose gadget values at $s=1$ are all one. Both corners
+satisfy the two gated residuals, and the assignment satisfies every
+product, square and copy constraint, so the compiler produces two feasible
+configurations at the common profile. Each calibration takes a number of
+rational operations on the coefficients bounded in terms of~$N$, so it has
+binary length $O_N(\mathcal L+1)$ for input length~$\mathcal L$; a sparse input is
+padded to the dense layout in polynomial time. The transfers are
+those of Appendix~\ref{app:rational-roots}, at the same endpoints and the
+fixed tolerance~$\varepsilon_0$. The slopes of the lift are bounded on
+each segment, as every product of unit factors varies by at most its
+degree times the parameter change. Composing with a fixed~$N$ from
+the Bhargava--Burungale quartic theorem~\cite[Corollary~1.2(3)]{bhargavaburungale}, if it
+holds, gives the conditional undecidability.
+
+% ---------------------------------------------------------------------------
+\subsubsection{The upper bound of Corollary~\ref{cor:real-complexity}}\label{app:hrs}
+
+% compressed 2026-11-24: (e) sentences merged in all four paragraphs; the
+% space bound, the degree-two translation, the unique lifts, the singleton
+% endpoints, the parity count (also for coinciding endpoints) and the
+% path-component step are kept.
+\begin{proof}[Proof of the PSPACE upper bound in Corollary~\ref{cor:real-complexity}]
+The algorithm of Heintz, Roy and Solern\'o~\cite[Section~1.1, Main
+Theorem]{heintzroysolerno1994components} takes a quantifier-free formula
+with dense integer coefficient vectors and outputs one formula per
+semialgebraically connected component. It runs in deterministic Turing space
+$(n\log D\,\sigma)^{O(1)}$ for $n$ variables, binary coefficients of
+length at most~$\sigma$, and $D$ the sum of the total degrees of the input
+polynomials. The input is dense, so writing out the original polynomials
+can take exponential size; we first translate in polynomial time to an
+explicit input of degree two.
+
+\emph{Degree two.} Compute each monomial by repeated squaring and
+multiplication (using~$1$ for the empty product), with an auxiliary
+variable and equation $w=uv$ per gate. The gate count is linear in the
+exponents' binary lengths and the number of factors. Each binomial test
+compares its two monomial outputs by its coefficient~$c$. Auxiliary
+variables $u_j\ge0$ with $u_j^2=x_j^2$ give $u_j=|x_j|$ uniquely, so each
+budget becomes linear. Keep the equations $x_j+y_j=1$ and clear rational
+denominators in each atom. The numbers of variables and atoms and the
+binary lengths of the coefficients are polynomial, so even dense
+coefficient vectors of total degree two have polynomial size.
+
+\emph{Lifts and endpoints.} Every original feasible point has exactly one
+lift, with auxiliary coordinates continuous in the original ones, so
+projection is a homeomorphism from the lifted locus $G$ onto the original
+real feasible set, matching path components. Conjoining
+the formula of $G$ with $x=a$ specifies the lift of an endpoint $a$ as a
+singleton, without writing out its coordinates, which can have
+exponentially many binary digits.
+
+\emph{Parity.} For the two singleton lifts $A$ and~$B$, apply the
+component algorithm to
+\[
+  (G\times\{0,1\})\ \cup\ \bigl((A\cup B)\times[0,1]\bigr),
+\]
+which has a polynomial-size formula from the same descriptions. If $G$ has
+$c$ components, the vertical intervals merge one pair of copies when the
+endpoints share a component and two pairs otherwise. So the output count
+is $2c-1$ in the yes case and $2c-2$ in the no case, also when the endpoints
+coincide. Its parity is tallied in polynomial space while the component
+descriptions are streamed. Over~$\RR$ each connected component of a
+semialgebraic set is semialgebraically path
+connected~\cite[Theorems~5.22 and~5.23]{basupollackroy2006book}, so
+connected and path components coincide. No step uses a bound on the
+feasible set.
+\end{proof}

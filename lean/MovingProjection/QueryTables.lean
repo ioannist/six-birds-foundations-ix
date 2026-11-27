@@ -120,11 +120,6 @@ abbrev TableChain (ε : ℚ) :=
   Relation.ReflTransGen (fun a b : D.TableSpace n =>
     NativeReadouts.elementary (D.attained n) ε a.val.readBack b.val.readBack)
 
-abbrev TableOmitting (e : Effect) (ε : ℚ) :=
-  Relation.ReflTransGen (fun a b : D.TableSpace n =>
-    NativeReadouts.elementary (D.attained n) ε a.val.readBack b.val.readBack ∧
-      ¬ a.val.readBack.detects b.val.readBack e)
-
 theorem table_chain_iff (ε : ℚ) (a b : D.protocol.State n) :
     D.TableChain ε (D.record a) (D.record b) ↔ D.protocol.Chain ε a b := by
   apply chain_equiv D.record _ a b
@@ -132,21 +127,6 @@ theorem table_chain_iff (ε : ℚ) (a b : D.protocol.State n) :
   change NativeReadouts.elementary (D.attained n) ε
       (D.tables a).readBack (D.tables b).readBack ↔ _
   simpa using D.elementary_iff_step ε a b
-
-theorem table_omitting_iff (e : Effect) (ε : ℚ) (a b : D.protocol.State n) :
-    D.TableOmitting e ε (D.record a) (D.record b) ↔ D.protocol.Omitting e ε a b := by
-  apply chain_equiv D.record _ a b
-  intro a b
-  change (NativeReadouts.elementary (D.attained n) ε (D.tables a).readBack (D.tables b).readBack ∧
-    ¬ (D.tables a).readBack.detects (D.tables b).readBack e) ↔ _
-  rw [D.tables_readBack, D.tables_readBack]
-  constructor
-  · rintro ⟨he,hn⟩
-    obtain ⟨k,hk⟩ := (D.elementary_iff_step ε a b).mp he
-    exact ⟨k,fun h => hn ((D.detected_iff_label hk e).mpr h.symm),hk⟩
-  · rintro ⟨k,hn,hk⟩
-    exact ⟨(D.elementary_iff_step ε a b).mpr ⟨k,hk⟩,
-      fun h => hn ((D.detected_iff_label hk e).mp h).symm⟩
 
 theorem table_factorization_iff (a b : D.protocol.State n) :
     (∀ ε : ℚ, 0 < ε → D.TableChain ε (D.record a) (D.record b)) ↔ D.protocol.Factorable a b :=

@@ -1,0 +1,14 @@
+# latexmk configuration for the v2 manuscript.
+# Build from this directory with:  latexmk
+$pdf_mode = 1;
+$out_dir  = 'build';
+@default_files = ('main.tex');
+$pdflatex = 'pdflatex -interaction=nonstopmode -file-line-error %O %S';
+# The working bibliography is ../prep/references_v2.bib. A copy synced at
+# each commit sits in this directory so that a clean checkout (without
+# paper/prep) still builds. bibtex runs inside build/, so ../prep is
+# searched first and this directory second.
+use Cwd 'abs_path';
+my $here = abs_path('.');
+my $prep = abs_path('../prep');
+ensure_path('BIBINPUTS', $prep, $here);

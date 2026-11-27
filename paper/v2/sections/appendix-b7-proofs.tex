@@ -1,0 +1,453 @@
+
+\subsection{Proofs for Section~\ref{sec:exactness}}\label{app:exactness-proofs}
+
+In Propositions~\ref{prop:one-probe}, \ref{prop:zero-probe-fermat},
+\ref{prop:separation}(c) and~\ref{prop:one-state} the register has one
+value, so $L_m=1$ satisfies every register condition. Every table entry
+is positive ($\theta_m\ge\delta>0$, $Q_m>0$), and feasibility at a profile
+means the probability floor, normalization, the budget and the held
+tests. Without probes every base kernel is
+uniform, so $P_m((g,r),(h,r'))=\theta_m\,L_m(g,h;r,r')/|X|$, and by
+Lemma~\ref{lem:compile} whether a parameter vector passes a held test
+depends only on~$\theta$.
+
+% ---------------------------------------------------------------------------
+\subsubsection{Real versus rational reachability}\label{app:real-rational}
+
+\begin{proof}[Proof of Proposition~\ref{prop:one-probe}]
+By Lemma~\ref{lem:compile}(b), the word-against-pair test gives
+$\theta_{\mathsf u}=\theta_{\mathsf x_4}+\theta_{\mathsf y_4}\ge2/9$. The
+other seven labels have probability at least $1/9$, so normalization forces
+$\theta_{\mathsf u}=2/9$ and all others to be $1/9$. By
+Lemma~\ref{lem:compile}(a), the other probe equations give
+$\alpha_{\mathsf x_2}=4x^2$, $\alpha_{\mathsf x_4}=4\alpha_{\mathsf
+x_2}^2=64x^4$, $\alpha_{\mathsf y_2}=4y^2$ and $\alpha_{\mathsf
+y_4}=64y^4$. The probe equation of the word-against-pair test reads
+$(2/9)(1/8)=(64/9)(x^4+y^4)$, or $x^4+y^4=4^{-4}$. Conversely, each
+point of this quartic gives eigenvalues in $[-1/4,1/4]$, within the
+budget, passing every held test. The
+points $((1-\sigma)^{1/4}/4,\sigma^{1/4}/4)$, $0\le\sigma\le1$, give the
+real path. By Fermat's theorem for exponent four, applied to
+$(4x)^4+(4y)^4=1$, the feasible configurations are the four with $(x,y)$
+in $\{(\pm1/4,0),(0,\pm1/4)\}$. With the probe~$\chi$, the diagonal entry
+is $P_{\mathsf x}((g,r),(g,r))=\theta_{\mathsf x}(1+x)/2=(1+x)/18$. Sequences
+stay at the profile (Remark~\ref{rem:inputs}(ii)), and a step leaving $x=1/4$ for
+$x\in\{0,-1/4\}$ changes this entry by at least $1/72$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:zero-probe-fermat}]
+By Lemma~\ref{lem:compile}, the held tests read
+\[
+  \theta_{\mathsf u}=\theta_{\mathsf x_4}+\theta_{\mathsf y_4},\qquad
+  \theta_{\mathsf x_4}\theta_{\mathsf h}^3=\theta_{\mathsf x}^4,\qquad
+  \theta_{\mathsf y_4}\theta_{\mathsf h}^3=\theta_{\mathsf y}^4,\qquad
+  \theta_{\mathsf u}=17\,\theta_{\mathsf h}.
+\]
+Dividing by $\theta_{\mathsf h}>0$ and normalizing gives $x^4+y^4=17$ and
+\[
+  (\theta_{\mathsf u},\theta_{\mathsf h},\theta_{\mathsf x},\theta_{\mathsf
+  y},\theta_{\mathsf x_4},\theta_{\mathsf y_4})=(17,1,x,y,x^4,y^4)/(35+x+y).
+\]
+Conversely, positive rational solutions give values passing every held
+test, feasible exactly when each is at least $1/40$.
+At $(1,2)$ and $(2,1)$ the normalizer is $38$ and the least numerator
+is~$1$, so the least label probability is $1/38$, and $A$ and $B$ exist
+and are unique. Along $1\le x\le2$ with $y=(17-x^4)^{1/4}$, also
+$1\le y\le2$, so the normalizer is at most $39$, each numerator is at
+least~$1$, every label probability exceeds $1/40$, and these real
+parameter vectors form the required path.
+
+Finally, Proposition~\ref{prop:zero-probes}(b) applies with
+$w_0=\mathsf u$, $w_1=\mathsf x_4$ and $w_2=\mathsf y_4$. A vector $v$
+lies in $\ker\Psi$ exactly when $v_{\mathsf u}=v_{\mathsf h}$,
+$v_{\mathsf x_4}=4v_{\mathsf x}-3v_{\mathsf h}$ and $v_{\mathsf
+y_4}=4v_{\mathsf y}-3v_{\mathsf h}$, so $(f\cdot v,g\cdot v)=(4(v_{\mathsf
+x}-v_{\mathsf h}),4(v_{\mathsf y}-v_{\mathsf h}))$ and
+$(f,g)(\ker_{\mathbb Z}\Psi)=4\mathbb Z^2$. Hence $d_0=d_1=d_\infty=4$,
+with $3/4<1$, while $t=x^4/17$ is $1/17$ at $A$ and $16/17$ at~$B$. So $B$
+is not finely reachable from~$A$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+\subsubsection{The separation cutoff}\label{app:separation}
+
+\begin{proof}[Proof of Proposition~\ref{prop:separation}]
+Write $\Pi=n!\,D_0^{\,n}$, so $D=1+D_1n\Pi+D_1n^3\Pi^2D_0$. By the choice
+of~$D_1$, $2^{-D_1}\le|c|\le2^{D_1}$ for every nonzero coefficient~$c$ and
+$\kappa_\beta\le2^{D_1}$ for every budget.
+
+\emph{Radius.} Let $x\in\FQ$ have support~$S$, let $G\subseteq S$ be the
+coordinates lying in some budget, and put $\lambda_j=\log_2|x_j|$
+for $j\in S$. Each budget meeting $S$ has $\kappa_\beta>0$, so
+$\lambda_j\le D_1$ on~$G$. A test active on $S$ has both monomials nonzero
+at~$x$, so its coefficient $c_\iota$ is nonzero and
+$(\Delta_S\lambda)_\iota=\log_2|c_\iota|$ has absolute value at
+most~$D_1$. Fix $i\in S$. An integral $w\in\RR^S$ with $\Delta_Sw=0$,
+$w_j\le0$ on $G$ and $w_i\ge1$ would give rational points with coordinates
+$x_j\varsigma^{-w_j}$ on $S$ and $0$ off~$S$. As rational
+$\varsigma\downarrow0$, they satisfy every test (as in the proof of
+Lemma~\ref{lem:restriction}(a)) and every budget but have $|x_i|\to\infty$,
+against boundedness. %
+Any real direction with $w_i>0$ could be scaled to satisfy $w_i\ge1$. The
+resulting rational linear system would then have a rational solution, and
+clearing denominators would give an integral direction. Hence no such real
+$w$ with $w_i>0$ exists. By Farkas' lemma, $e_i$ is a linear combination of
+the vectors $a-b$ of the tests active on~$S$ (restricted to~$S$), plus a
+nonnegative combination of the $e_j$ with $j\in G$.
+By Carath\'eodory's theorem, after splitting coefficients by sign, at
+most $n$ linearly independent generators suffice, and Cramer's rule bounds
+each coefficient by~$\Pi$. The inner product with $\lambda$ gives
+$\lambda_i\le nD_1\Pi$, so $|x_i|\le2^{nD_1\Pi}$ on~$\FQ$.
+
+\emph{Survivors.} Let $C=\core(S)\neq\emptyset$. Iterating
+Lemma~\ref{lem:restriction}(a) gives $\hat x\in\FQ$ with support $C$ that
+agrees with $x$ on~$C$. By Theorem~\ref{thm:certificates}(b), $C$ has a
+Gordan certificate $\mu$ with at most $n$ nonzero multipliers, each of
+absolute value at most~$\Pi$, so $v=\Delta_C^{\mathsf T}\mu$ is integral
+with $1\le v_i\le n\Pi D_0$ on~$C$. Taking logarithms at $\hat x$ of the
+tests with nonzero multipliers (coefficients $c_\iota$) gives
+\[
+  \sum_{i\in C}v_i\lambda_i=\sum_\iota\mu_\iota\log_2|c_\iota|\ge-nD_1\Pi .
+\]
+For each $i\in C$, bounding the other terms by the radius gives
+$v_i\lambda_i\ge-nD_1\Pi-n\cdot n\Pi D_0\cdot nD_1\Pi=-(D-1)$; since
+$v_i\ge1$, $|x_i|\ge2^{1-D}$ on $\core(\supp x)$.
+
+\emph{(a)} Let $x,x'\in\FQ$ with $\|x-x'\|_\infty<2^{-D}$. Each
+$i\in\core(\supp x)$ has $|x_i|\ge2^{1-D}>|x_i-x'_i|$, so $x'_i$ is
+nonzero with the sign of~$x_i$, and symmetrically. Both cores lie in
+$V=\supp x\cap\supp x'$, with the same signs. By
+Lemma~\ref{lem:restriction}(b), $V$ peels to $V\cap\core(\supp
+x)=\core(\supp x)$, which is irreducible (Lemma~\ref{lem:irreducible}), so
+it is $\core(V)$ by Lemma~\ref{lem:restriction}(c); likewise for~$x'$. So
+$\SC(x)=\SC(x')$; empty cores need no estimate.
+For the size, $\Pi\le(n+1)^nD_0^n$ and $D\le3D_1(n+1)^3\Pi^2D_0$, with
+$n,\log_2D_0\le\mathcal L$ and $D_1\le\mathcal L+1$, so $\log_2D$ is polynomial in~$\mathcal L$;
+and $2^D$ has $D+1$ binary digits.
+
+\emph{(b)} Steps never lower the profile, so along a sequence from $A$
+each eigenvalue vector is a feasible rational point of the bounded system
+$\Phi_{p_A}$ (Lemma~\ref{lem:compile}(a)). Profile steps keep this vector
+fixed (Definition~\ref{def:profile-steps}), whereas numerical steps move
+it by less than $2^{-D}$ (Lemma~\ref{lem:transfer}(a), as in the necessity
+proof of Theorem~\ref{thm:fixed-profile} with $\varepsilon_\alpha=2^{-D}$).
+By~(a), $\SC_{p_A}$ never changes.
+
+\emph{(c)} The feasible rational points have $x_i=2^{-2^i}$ and
+$z=\pm2^{-2^s}$, at distance $2\cdot2^{-2^s}$. On the full support, the
+calibration $x_0=1/2$ forces $\eta_{x_0}=0$, then
+$\eta_{x_{i+1}}=2\eta_{x_i}=0$ and $2\eta_z=2\eta_{x_s}=0$. Thus the full
+support is irreducible and the signed cores differ at~$z$, while the
+encoding has length polynomial in~$s$. The model uses a binary base with
+one probe and one register value, self-reversed labels
+$\mathsf h,\mathsf x_0,\dots,\mathsf x_s,\mathsf z$, $\delta=1/(s+3)$,
+$\kappa=3/4$ and $H=2$. Its full-support level-$0$ profile holds
+$\alpha_{\mathsf h}=1/2$, $\alpha_{\mathsf x_0}=1/4$ and the word tests
+$\mathsf x_{i+1}\mathsf h\sim\mathsf x_i\mathsf x_i$ $(0\le i<s)$ and
+$\mathsf{zz}\sim\mathsf x_s\mathsf x_s$, which form the only admissible
+set. The probability floor forces every label probability to be $1/(s+3)$,
+so the probe equations give $\alpha_{\mathsf x_{i+1}}/2=\alpha_{\mathsf
+x_i}^2$, whence $\alpha_{\mathsf x_i}=x_i/2$ and $\alpha_{\mathsf z}=z/2$
+for the two points. Both points are feasible. The corresponding weight equations force all
+weights to be zero on the full support, so the signed cores differ
+at~$\mathsf z$. Their tables differ only for~$\mathsf z$, by
+$\theta_{\mathsf z}\cdot2\cdot2^{-2^s-1}/2=2^{-2^s-1}/(s+3)$.
+\end{proof}
+
+\emph{A binary-exponent variant.}
+With binary exponents, the three-coordinate system $x_0=1/2,\
+x_1=x_0^{2^b},\ z^2=x_1^2$, with the same coordinate budgets, has encoding
+length $O(b)$ excluding the endpoints. Its two points have different
+signed cores and gap $2^{1-2^b}$. Any positive rational separation cutoff
+for them has a denominator of at least $2^b$ binary digits. Indeed
+$z=\pm x_1=\pm2^{-2^b}$, the weights of~(c) give irreducibility, and a
+cutoff $p/q\le2^{1-2^b}$ with $p\ge1$ has $q\ge2^{2^b-1}$, so $q$ has at least $2^b$ binary digits.
+
+% ---------------------------------------------------------------------------
+\subsubsection{Zero probes}\label{app:zero-probes}
+
+Without probes, fix a model with exactly one word-against-pair test
+$w_0\sim\{w_1,w_2\}$, feasible rational configurations $A$ and~$B$, and
+$t_C=\theta_C(w_1)/\theta_C(w_0)$ for $C=A,B$. For a profile~$p$, let
+$\Theta_p$ be the set of rational $\theta$ satisfying the probability
+floor, normalization and the tests held at~$p$. Let $\Psi$ have one row
+$(|w|_m-|w'|_m)_{m\in M}$ for each word-against-word test $w\sim w'$ and
+probability-ratio test $\theta(w)=c\,\theta(w')$ held at~$p_A$. Let $f,g$
+be the label counts of $w_1,w_2$ minus those of~$w_0$, and put
+$(f,g)\colon v\mapsto(f\cdot v,g\cdot v)$. When $(f,g)(\ker_\RR\Psi)$ has
+dimension two, let $d_0,d_1,d_\infty$ be the orders of $(1,0),(0,1),(1,1)$
+in $\mathbb Z^2/(f,g)(\ker_{\mathbb Z}\Psi)$.
+
+\begin{proposition}[Zero probes: two decidable cases]\label{prop:zero-probes}
+In this setting:
+\begin{enumerate}
+\item[(a)] if $p_A$ does not hold the word-against-pair test, then $B$ is
+finely reachable from $A$ if and only if $p_A\preceq p_B$;
+\item[(b)] if $p_A$ holds it, and either $(f,g)(\ker_\RR\Psi)$ has
+dimension at most one, or it has dimension two and
+$1/d_0+1/d_1+1/d_\infty<1$, then $B$ is finely reachable from $A$ if and
+only if $p_A\preceq p_B$ and $t_A=t_B$.
+\end{enumerate}
+On binary inputs, the case distinction and the criterion in~(b) are
+polynomial-time.
+\end{proposition}
+
+\begin{proposition}[Zero probes: the remaining case]\label{prop:zero-probe-closure}
+In the setting of Proposition~\ref{prop:zero-probes}, suppose $p_A$ holds
+the word-against-pair test and $(f,g)(\ker_\RR\Psi)$ has dimension two.
+Let $\mathcal V=\{\theta(w_1)/\theta(w_0):\theta\in\Theta_{p_A}\}$. Then
+$B$ is finely reachable from $A$ if and only if $p_A\preceq p_B$ and
+$\overline{\mathcal V}$ contains the closed interval between $t_A$
+and~$t_B$.
+\end{proposition}
+
+\emph{(Z) Reduction to label probabilities.} %
+If $p_A\npreceq p_B$, there is no sequence. Otherwise the target passes the
+source tests, so $\theta_B\in\Theta_{p_A}$ and
+Theorem~\ref{thm:projected-components}(a) applies. By
+Theorem~\ref{thm:projected-components}(a), $B$ is finely reachable from $A$
+if and only if $p_A\preceq p_B$ and $A_B$ is finely reachable from~$A$;
+these share $p_A$ and~$L_A$. The row sums of the
+projected tables give~$\theta$ (Appendix~\ref{app:acquisition-proofs},
+(T3)), so a sequence from $A$ to $A_B$ at tolerance $\varepsilon$ gives one
+in $\Theta_{p_A}$ from $\theta_A$ to $\theta_B$ with steps below
+$N\varepsilon$, $N=|X||R|$. Conversely, by the table formula, a sequence
+in $\Theta_{p_A}$ with steps below~$\varepsilon$, kept at $L_A$, is one at
+tolerance~$\varepsilon$. So $B$ is finely reachable from $A$ exactly when
+$p_A\preceq p_B$ and $\theta_A,\theta_B$ are finely connected
+in~$\Theta_{p_A}$, which contains $\theta_B$ as $p_B$ holds the tests
+of~$p_A$.
+
+\emph{(G) Homogeneous equations.} Any two points of a set of rational
+label-probability vectors cut out by the probability floor, normalization
+and equations $\theta(w)=c\,\theta(w')$ with $|w|=|w'|$ and $c>0$ are
+finely connected in it, by the proof of Lemma~\ref{lem:transfer}(c).
+
+\begin{proof}[Proof of Proposition~\ref{prop:zero-probes}]
+(a) Here $\Theta_{p_A}$ is as in~(G), so (Z) gives the claim.
+
+(b) For $\theta\in\Theta_{p_A}$ put $y_m=\log(\theta_m/\theta_{A,m})$.
+Then $\Psi y=0$, and the two ratios $t_Ae^{f\cdot y}$ and $(1-t_A)e^{g\cdot y}$ of $w_1,w_2$
+to $w_0$ sum to one. If
+$(f,g)(\ker_\RR\Psi)=0$, the ratio is constant. If it is a line spanned by
+$(\phi_0,\phi_1)\neq0$, then $(f\cdot y,g\cdot
+y)=\varsigma(\phi_0,\phi_1)$ and
+$t_Ae^{\phi_0\varsigma}+(1-t_A)e^{\phi_1\varsigma}=1$; the left side is
+strictly convex in~$\varsigma$, so the ratio takes at most two values. In
+the hyperbolic case, let $P_0$ be the primes dividing a numerator or
+denominator of $t_A$ or $1-t_A$, and $\Lambda=(f,g)(\ker_{\mathbb Z}\Psi)$.
+The $\ell$-adic valuations of $\theta_m/\theta_{A,m}$ form a vector in
+$\ker_{\mathbb Z}\Psi$, so for $\ell\notin P_0$ the valuation pair of
+$(t,1-t)$ lies in~$\Lambda$. Write
+$t=n_1/n_3$ and $1-t=n_2/n_3$ with $n_1+n_2=n_3$ positive and pairwise
+coprime. A prime $\ell\notin P_0$ dividing $n_1$, $n_2$ or $n_3$
+contributes $(v_\ell(n_1),0)$, $(0,v_\ell(n_2))$ or
+$(-v_\ell(n_3),-v_\ell(n_3))$ to~$\Lambda$, so the exponent is a multiple
+of $d_0$, $d_1$ or~$d_\infty$. Hence $n_1=c_1(n'_1)^{d_0}$,
+$n_2=c_2(n'_2)^{d_1}$ and $n_3=c_3(n'_3)^{d_\infty}$, where $c_1,c_2,c_3$
+are supported on $P_0$ with exponents below the respective orders and
+$n'_1,n'_2,n'_3$ share no common factor. Only finitely many coefficient
+triples $(c_1,c_2,c_3)$ arise. For each fixed coefficient triple, Darmon
+and Granville~\cite[Theorem~2]{darmongranville} give finitely many proper
+solutions $(n'_1,n'_2,n'_3)$, since $1/d_0+1/d_1+1/d_\infty<1$.
+
+In both cases the ratio takes finitely many values on~$\Theta_{p_A}$ and is
+uniformly continuous, as $\theta(w_0)\ge\delta^{|w_0|}$, so if
+$t_A\neq t_B$ small steps cannot change it, and (Z) gives necessity. If
+$t_A=t_B$, the vectors of $\Theta_{p_A}$ with $\theta(w_1)=t_A\theta(w_0)$
+and $\theta(w_2)=(1-t_A)\theta(w_0)$, which imply the word-against-pair
+test, form a set as in~(G) containing $\theta_A$ and~$\theta_B$; (G) and
+(Z) give sufficiency.
+
+For the running time, $\dim(f,g)(\ker_\RR\Psi)$ is the rank of $\Psi$
+with $f,g$ adjoined minus that of~$\Psi$. Smith forms with multipliers are computed in polynomial
+time~\cite[Theorems~4--5 and the rectangular extension following
+Theorem~5]{kannanbachem}. %
+The right multiplier of the Smith form of $\Psi$ gives an integral kernel
+basis. Apply $(f,g)$ to this basis, and take the Smith form of the
+resulting two-row generator matrix. Its left multiplier $W$ sends the image
+lattice $\Lambda$ to the diagonal lattice with invariant factors
+$s_1,s_2$, so $\mathbb Z^2/\Lambda\cong\mathbb Z/s_1\times\mathbb Z/s_2$,
+and the order of $e$ is
+$\operatorname{lcm}_i\bigl(s_i/\gcd(s_i,(We)_i)\bigr)$. The ratios
+$t_A,t_B$ are compared exactly, and no step factors a prime.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:zero-probe-closure}]
+The probability floor gives $\theta(w_1),\theta(w_2)\ge\delta^{|w_0|}$,
+and $\theta(w_0)\le1$, so both $t$ and $1-t$ are uniformly bounded away
+from zero. By~(Z) it suffices to show that $\theta_A$ and $\theta_B$ are
+finely connected in $\Theta_{p_A}$ exactly when $\overline{\mathcal V}$
+contains the interval $I$ between $t_A$ and~$t_B$. Fix a label $m_0$, let
+$\mathcal Z=\{z\in\RR^M:z_{m_0}=0,\ \Psi z=0\}$, and map $z$ to the
+normalization of $(\theta_{A,m}e^{z_m})_m$, a homeomorphism onto the
+normalized positive real vectors satisfying the held homogeneous tests. The
+probability floor becomes the convex set
+\[
+  K=\Bigl\{z\in\mathcal Z:\ \sum_\ell\frac{\theta_{A,\ell}}{\theta_{A,m}}\,e^{z_\ell-z_m}\le\frac1\delta\ \text{ for every }m\Bigr\},
+\]
+which is compact. On the open segment between distinct points of $K$,
+every inequality is strict: for each~$m$, some $z_\ell-z_m$ differs
+between the endpoints, which agree at~$m_0$, and that term is strictly
+convex. Put $\pi(z)=(f\cdot z,g\cdot z)$, which maps $\mathcal Z$ onto
+$\RR^2$: every defining vector of $\Psi$, as well as $f,g$, annihilates
+constants, so fixing $z_{m_0}=0$ leaves the rank-two image unchanged. Also
+put $\gamma(t)=(\log(t/t_A),\log((1-t)/(1-t_A)))$. The
+word-against-pair test says $\pi(z)=\gamma(t)$ with $t=t_Ae^{f\cdot z}$. The
+closure $F$ in $K$ of the image of $\Theta_{p_A}$ is compact, and the
+ratio maps it onto $\overline{\mathcal V}$.
+
+\emph{Full fibers.} For $t\in\overline{\mathcal V}$, the fiber
+$F_t=F\cap\pi^{-1}(\gamma(t))$ is the whole real fiber
+$K_t=K\cap\pi^{-1}(\gamma(t))$. If $\gamma(t)$ lies on the boundary of
+$\pi(K)$, then $K_t$ has at most one point, since the midpoint of two would
+be interior to $K$ and $\pi$ is open; and $F_t\neq\emptyset$.
+If $\gamma(t)$ is interior to $\pi(K)$, then $K$ has interior, since a
+midpoint of two distinct points satisfies every probability-floor
+inequality strictly. Start with an interior point $z_1$. If
+$\pi(z_1)=\gamma(t)$, it is the desired lift. Otherwise extend the
+projected segment slightly beyond $\gamma(t)$ within $\pi(K)$, lift its far
+endpoint and interpolate back. Convex interpolation with this interior lift
+makes interior points dense in~$K_t$. For such an interior $z^*\in K_t$
+and $t_j\in\mathcal V$ with $t_j\to t$, a fixed linear right inverse $\rho$
+of $\pi$ gives, for large~$j$, interior points
+$z^*+\rho(\gamma(t_j)-\gamma(t))$ over $\gamma(t_j)$. Take
+$\theta^{(j)}\in\Theta_{p_A}$ with ratio~$t_j$. The real fiber of
+$\mathcal Z$ over $\gamma(t_j)$ is the log image of $\theta^{(j)}$ plus a
+rational subspace, the common kernel of $\Psi$, $f$, $g$ and $z_{m_0}$, with
+integral basis $u_1,\dots,u_r$. Multiplying $\theta^{(j)}$ by
+$\prod_iq_i^{u_i}$ with positive rationals $q_i$ and normalizing keeps every held equation and the ratio. In log
+coordinates the twists add $\sum_i\log(q_i)u_i$. %
+Since $\log\mathbb Q_{>0}$ is dense in~$\RR$, for each sufficiently large~$j$
+choose a twist whose log image is inside $K$ and within $1/j$ of the
+translated interior point. These log images come from $\Theta_{p_A}$ and
+converge to~$z^*$. Thus $z^*\in F$, and closedness of $F$ gives
+$K_t\subseteq F$ by density of the interior lifts in~$K_t$.
+
+\emph{Components.} Each $F_t$ is convex, hence connected. If
+$I\subseteq\overline{\mathcal V}$, the compact set of points of $F$ with
+ratio in $I$ is connected, since each fiber is connected and a separation would give two disjoint compact ratio images covering~$I$. Conversely,
+the ratio maps a connected subset of $F$ containing the images of
+$\theta_A$ and $\theta_B$ onto an interval containing~$I$. So the two
+images share a component of $F$ exactly when
+$I\subseteq\overline{\mathcal V}$, and Lemma~\ref{lem:compact-chain},
+applied to $\Theta_{p_A}$ in its compact closure, finishes the proof.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+\subsubsection{The one-state subclass}\label{app:one-state}
+
+% Sources: ComplexityBoundary.md section 2.2 (cubical realization,
+% compilation, tractable restrictions) and section 3 (gate normalization,
+% gated box, templates). Scoped symbols: the cube set Q_cube, counts
+% n_v, n_c, n_e, k_0, the node bound Omega, K (delta = 1/K).
+\begin{proof}[Proof of Proposition~\ref{prop:one-state}]
+(a) \emph{Source.} Deciding whether two satisfying assignments of a 3-CNF
+formula are joined by single-variable flips through satisfying assignments
+is PSPACE-complete~\cite[Lemma~3.6]{gopalan}. Map instances with equal
+assignments to a fixed yes-instance with two distinct adjacent satisfying
+assignments, and delete tautological clauses. Let $\mathcal Q$ be the set
+of rational points of $[0,1]^{n_{\mathrm v}}$ at which every clause has a
+true literal, $x_i$ being true at $x_i=1$ and $\neg x_i$ at $x_i=0$. For
+$x\in\mathcal Q$, every vertex of the smallest closed face containing $x$
+satisfies the formula.
+Conversely, if a clause has no true fixed literal on a face, its remaining
+literals can all be made false at a corner, because the clause is
+non-tautological. Thus $\mathcal Q$ is exactly the set of rational points
+in the union of faces of Schnider and Weber's induced cubical
+complex~\cite[Definition~4]{schniderweber}. The rational points on the segment of a satisfying flip lie in~$\mathcal Q$. Two points of $\mathcal Q$ at sup distance
+below one fix no coordinate to opposite values, so their smallest faces
+share a vertex; all corners of a face are flip-connected. So steps below
+one preserve the Boolean flip class, and flip-connected assignments are
+joined at every tolerance.
+
+\emph{Compiler.} Let $\delta=1/K$.
+Use maximum word length $H=2$ and give each emitted test its own name.
+The sole admissible word-test set is the full catalogue. Use no value tests
+and give both endpoints the full-support, level-zero profile holding the
+whole catalogue. With singleton base and register and positive label
+probabilities, every feasible configuration has that support and register
+partition. Thus the compiled label-probability vectors are exactly the
+feasible configurations at the common profile.
+The labels are two references of probability $2^j\delta$ at each level
+$j=0,\dots,k_0$, a pair of probabilities $\delta(1+2x_i)$, $\delta(3-2x_i)$
+per coordinate, and, per distinct node of the clause expressions, two
+copies of an output--complement pair with sum $2^{k_0}\delta$. %
+Pad all rate equalities and sums with the first level-zero reference~$r$.
+Equate the two references at each level, and for each positive level
+equate its first reference to the sum of the two references at the
+preceding level. Equate each coordinate-pair sum to a level-two reference
+and each output--complement pair sum to a level-$k_0$ reference. For every
+expression node, equate its two output labels and impose its defining
+equation on the first output label. A constant uses~$r$, and a leaf uses
+its coordinate label. A sum uses the first output copy of the left child
+and the second of the right child, so its two right-hand words are
+distinct even for repeated children. For a product with output~$z$ and
+child outputs $a,b$, compare $zr$ with~$ab$.
+For each clause, equate the output labels of its two positive expression
+trees: the product of the factors $(3-2x_i)-1$ for its positive literals
+and $(1+2x_i)-1$ for its negative ones, written as a difference of positive trees by $(P-Q)(P'-Q')=(PP'+QQ')-(PQ'+QP')$. Their difference is the product of the indicated literal factors. %
+The bound of a node is its value when every coordinate leaf is replaced
+by~$3$ and constant leaves are kept at~$1$. Start a clause product with the
+pair $(1+1,1)$. Each additional literal multiplies the maximum bound by at
+most~$4$ and changes the total size $s$ of the two trees to $2s+10$.
+Starting at bound $2$ and size $4$, width at most three gives bound $128$
+and at most $102$ nodes. Take $\Omega$ to be the maximum of zero and all
+node bounds, and put $k_0=\max(2,\lceil\log_2(\Omega+1)\rceil)$; for width
+three, $\Omega\le128$, $k_0\le8$, and $n_{\mathrm c}$ clauses have
+$n_{\mathrm e}\le102n_{\mathrm c}$ nodes.
+There are $2(k_0+1)+2n_{\mathrm v}+4n_{\mathrm e}$ labels,
+$2k_0+1+n_{\mathrm v}+4n_{\mathrm e}+n_{\mathrm c}$ word tests and
+$K=2(2^{k_0+1}-1)+4n_{\mathrm v}+2^{k_0+1}n_{\mathrm e}$. The reference
+equations and normalization make the level-$0$ probability~$\delta$, and
+induction over the nodes, whose values lie in $[1,2^{k_0}-1]$, gives a
+bijection between $\mathcal Q$ and the feasible configurations. As
+$x_i=(\theta/\delta-1)/2$ for the first label of its pair, a step below
+$2\delta\tau$ moves the cube point by less than~$\tau$, and the inverse is
+Lipschitz; so tolerances at most $2\delta$ preserve the flip class. %
+The lift is polynomial in the cube coordinates and hence Lipschitz on the
+compact cube, so rational subdivisions of satisfying flip segments lift at
+every positive tolerance. At Boolean endpoints every label probability is
+an integer multiple of $1/K$. Since $k_0$ is bounded,
+$K=O(1+n_{\mathrm v}+n_{\mathrm c})$. Because each test uses a constant
+number of label names and one entry lists the full catalogue as the
+admissible set, the output has binary length
+$O((1+n_{\mathrm v}+n_{\mathrm c})\log(2+n_{\mathrm v}+n_{\mathrm c}))$
+and is written in polynomial time.
+
+(b) Length-one tests give linear equations. Linear held equations make the
+feasible set convex, so rational points of the segment from $\theta_A$ to
+$\theta_B$ give sequences at every tolerance. If every held word test
+is word-against-word, (G) of Appendix~\ref{app:zero-probes} applies. With
+one base state and one register value, the nonconvex example in
+Section~\ref{sec:zero-probes} has exactly two feasible label-probability
+vectors, so every tolerance at most their distance blocks a switch.
+
+(c) In cube coordinates, the switch construction of
+Section~\ref{sec:rational-roots} has $s=2x_s$, $\zeta=2x_\zeta$,
+$z_\gamma=2x_\gamma-1$, $\psi=2x_\psi-1$ and $\xi=1+2x_\xi$. Each
+gated residual is a difference of positive trees in the leaves $1$,
+$A_i=1+2x_i$ and $3-2x_i$, compiled as in~(a).
+Use $(1+1,1)$ for $1$, $(A_i,1)$ for $2x_i$, coordinatewise addition, and
+pair swap for negation. Associate the slack residual as
+$\xi^2-(2+(\zeta\zeta)\psi)$. A pair product adds at most two to the
+maximum depth, and a sum adds at most one. Pair bounds add under sums and
+at most double the product under products. The pairs for
+$z_\gamma,\psi,\xi$ have bound at most~$5$, those for $s,\zeta$ at
+most~$3$, and that for $2$ at most~$4$. The switch factor has bound at
+most $2\cdot3(4+3)=42$, each residual at most $234$, and each gated output
+at most $2\cdot42\cdot234=19656$. Trees have depth at most $8$ and at most
+$1022$ nodes, so $k_0\le15$ and $K=O(\mathcal L+1)$. The endpoints are the vertices
+with $x_s\in\{0,1\}$ and all other coordinates~$0$, feasible since the
+switch factor vanishes. If $f$ has a rational zero, with gate
+values~$v_\gamma$, put $\zeta=(1+\sum_\gamma|v_\gamma|)^{-1}$,
+$z_\gamma=\zeta v_\gamma$, $\xi$ rational in
+$(\sqrt2,\sqrt2+\zeta^2/4)$ and $\psi=(\xi^2-2)/\zeta^2$, so $1<\xi<2$ and
+$0<\psi<1$. Every residual then vanishes for every~$s$ and the end faces
+are full boxes, so lifting three rational segments joins the endpoints at
+every tolerance. Otherwise no feasible
+rational point has $0<s<2$ (Section~\ref{sec:rational-roots}), and a step
+from $x_s=0$ to $x_s=1$ changes a table by at least $2\delta$. Over $\RR$,
+the point $\zeta=0$, $z_\gamma=0$, $\psi=0$, $\xi=\sqrt2$ satisfies the
+gated equations for every~$s$. A real feasible point with $0<s<2$ reaches an end face by varying $s$ alone. The end faces are boxes, so the real gated set is path-connected. The compiler's induction works over the reals as well, so its continuous image, the real feasible set, is path-connected. The output is polynomial, as in~(a), with $O(\mathcal L+1)$ gates and a fixed-size template per residual.
+\end{proof}
